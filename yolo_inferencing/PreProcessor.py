@@ -7,6 +7,7 @@ class PreProcessor:
         pass
     def process(self, image_ori):
         image = cv2.resize(image_ori, (320, 416))
-        image = (1.0 / 255.0) * image.transpose((2, 0, 1))
+        # image = (1.0 / 255.0) * image.transpose((2, 0, 1))
+        image = image.transpose((2,0,1))
         return image
 
