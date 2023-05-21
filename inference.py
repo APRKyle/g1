@@ -17,11 +17,13 @@ pop = PostProcessor(iou_threshold = 0.3, class_threshold = 0.1,
 ep.initalize()
 
 
-
+import time
 
 
 image_data = prp.process(image)
+t = time.time()
 output = ep.process(image_data)
+print(time.time() - t)
 import numpy as np
 np.save('output0.npy', output[0])
 np.save('output1.npy', output[1])
