@@ -22,7 +22,9 @@ ep.initalize()
 
 image_data = prp.process(image)
 output = ep.process(image_data)
-
+import numpy as np
+np.save(output[0], 'output0.npy')
+np.save(output[1], 'output1.npy')
 print(f'boxes shape: {output[0].shape}')
 print(f' masks shape: {output[1].shape}')
 boxes, masks, class_ids = pop.process(output)
