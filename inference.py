@@ -10,6 +10,7 @@ prp = PreProcessor()
 pop = PostProcessor(iou_threshold = 0.4, class_threshold = 0.4,
                  input_height = 416, input_width = 320, img_height = 416, img_width = 320,
                   num_masks = 32)
+ep.initalize()
 
 
 
