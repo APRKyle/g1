@@ -42,7 +42,7 @@ class PostProcessor:
         num_classes = boxes_data.shape[1] - self.num_masks - 4
         print(f' n_classes: {num_classes}')
         scores = np.max(predictions[:, 4:4 + num_classes], axis=1)
-        print(f' scores: {scores}')
+        print(f' scores: {np.unique(scores)}')
         predictions = predictions[scores > self.clas_threshold, :]
         scores = scores[scores > self.clas_threshold]
         box_predictions = predictions[..., :num_classes + 4]
