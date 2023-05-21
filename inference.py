@@ -19,4 +19,5 @@ print(f'IMAGE SHAPE: {image.shape}')
 
 image_data = prp.process(image)
 output = ep.process(image_data)
+print(output)
 boxes, masks = pop.process(output)
