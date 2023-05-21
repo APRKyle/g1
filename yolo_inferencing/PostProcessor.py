@@ -20,8 +20,8 @@ class PostProcessor:
 
     def process(self, output):
 
-        boxes_data = output[0]
-        masks_data = output[1]
+        boxes_data = output[1]
+        masks_data = output[0]
 
         boxes_data = np.reshape(boxes_data, (1, 116, 2730))
         masks_data = np.reshape(masks_data, (1,32,104,80))
