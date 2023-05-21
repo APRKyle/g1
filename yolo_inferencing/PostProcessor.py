@@ -20,8 +20,8 @@ class PostProcessor:
 
     def process(self, output):
 
-        boxes_data = output[1]
-        masks_data = output[0]
+        boxes_data = output[0]
+        masks_data = output[1]
 
         boxes_data = np.reshape(boxes_data, (1, 116, 2730))
         masks_data = np.reshape(masks_data, (1,32,104,80))
@@ -40,7 +40,9 @@ class PostProcessor:
 
         predictions = np.squeeze(boxes_data).T
         num_classes = boxes_data.shape[1] - self.num_masks - 4
+        print(f' n_classes: {num_classes}')
         scores = np.max(predictions[:, 4:4 + num_classes], axis=1)
+        print(f' scores: {scores}')
         predictions = predictions[scores > self.clas_threshold, :]
         scores = scores[scores > self.clas_threshold]
         box_predictions = predictions[..., :num_classes + 4]

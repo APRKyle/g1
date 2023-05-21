@@ -24,7 +24,7 @@ print(f'boxes shape: {output[0].shape}')
 print(f' masks shape: {output[1].shape}')
 boxes, masks, class_ids = pop.process(output)
 
-print(boxes)
+
 # boxes: 1,116, 4200
 # masks 1,32,80,160
 
