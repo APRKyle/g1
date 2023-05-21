@@ -20,6 +20,5 @@ print(f'IMAGE SHAPE: {image.shape}')
 image_data = prp.process(image)
 output = ep.process(image_data)
 
-print(f'boxes shape: {output[0].shape}')
-print(f' masks shape: {output[1].shape}')
 boxes, masks = pop.process(output)
+

@@ -23,6 +23,8 @@ class PostProcessor:
         boxes_data = output[0]
         masks_data = output[1]
 
+        boxes_data = np.reshape(boxes_data, (1, 116, 2730))
+        masks_data = np.reshape(masks_data, (1,32,104,80))
 
         boxes, scores, class_id, mask_predictions = self._process_boxes(boxes_data)
 
