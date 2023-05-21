@@ -22,7 +22,8 @@ class PostProcessor:
 
         boxes_data = output[0]
         masks_data = output[1]
-        print(f' boxes data: {boxes_data}')
+
+
         boxes, scores, class_id, mask_predictions = self._process_boxes(boxes_data)
 
 
