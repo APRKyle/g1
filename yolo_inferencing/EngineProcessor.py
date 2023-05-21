@@ -48,7 +48,9 @@ class EngineProcessor:
 
         cuda.memcpy_htod_async(self.cuda_inputs[0], self.host_inputs[0], stream)
         context.execute_v2(self.bindings)
+        print(self.cuda_outputs)
         cuda.memcpy_dtoh_async(self.host_outputs[0], self.cuda_outputs[0], stream)
+        cuda.memcpy_dtoh_async(self.host_outputs[1], self.cuda_outputs[1], stream)
         stream.synchronize()
 
         output = self.host_outputs
