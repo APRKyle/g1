@@ -5,7 +5,7 @@ from yolo_inferencing.EngineProcessor import EngineProcessor
 import cv2
 import numpy as np
 
-image = cv2.imread('/home/andrii/Gus2/asparagus.jpg')
+image = cv2.imread('/home/andrii/Gus2/asparagus.png')
 print(f'IMAGE SHAPE: {image.shape}')
 
 img_height, img_width = image.shape[:2]
