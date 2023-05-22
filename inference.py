@@ -9,7 +9,7 @@ print(f'IMAGE SHAPE: {image.shape}')
 img_height, img_width = image.shape[:2]
 
 
-ep = EngineProcessor('/home/andrii/Gus2/networks/yolo_w640_w480_c80/yolov8n-seg_h480_w640.onnx')
+ep = EngineProcessor('/home/andrii/Gus2/networks/yolo_w640_w480_c80/yolo.engine')
 prp = PreProcessor()
 pop = PostProcessor(iou_threshold = 0.3, class_threshold = 0.1,
                  input_height = 480, input_width = 640, img_height = 480, img_width = 640,
@@ -18,16 +18,17 @@ ep.initalize()
 
 
 import time
-
-
-image_data = prp.process(image)
-t = time.time()
-output = ep.process(image_data)
-print(time.time() - t)
-
-
-boxes, masks, class_ids = pop.process(output)
-
+tt = 0
+c = 0
+for i in range(10):
+    c+=1
+    image_data = prp.process(image)
+    t = time.time()
+    output = ep.process(image_data)
+    tt += (time.time() - t)
+    print(time.time() - t)
+    boxes, masks, class_ids = pop.process(output)
+print(f'total time: {tt} | average time: {tt/c}')
 
 # boxes: 1,116, 4200
 # masks 1,32,80,160
