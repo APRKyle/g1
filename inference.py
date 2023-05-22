@@ -35,7 +35,7 @@ try:
         image_data = prp.process(image)
         net_output = ep.process(image_data)
         boxes, masks, classid = pop.process(net_output)
-        print(classid)
+
         for b, m in zip(boxes, masks):
             b = list(map(lambda x: int(x), b))
             cv2.rectangle(image, (b[0], b[1]), (b[2], b[3]), (255, 0, 0), 1)
