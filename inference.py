@@ -22,15 +22,15 @@ ep.initalize()
 import time
 tt = 0
 c = 0
-
-c+=1
-image_data = prp.process(image)
-t = time.time()
-output = ep.process(image_data)
-tt += (time.time() - t)
-print(f' inference time : {time.time() - t}')
-boxes, masks, class_ids = pop.process(output)
-
+for i in range(10):
+    c+=1
+    image_data = prp.process(image)
+    t = time.time()
+    output = ep.process(image_data)
+    tt += (time.time() - t)
+    boxes, masks, class_ids = pop.process(output)
+    print(f' inference time : {time.time() - t}')
+print(f'total inference time: {tt} | average inference time: {tt/c}')
 
 for b, m in zip(boxes, masks):
     b = list(map(lambda x: int(x), b))
