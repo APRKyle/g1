@@ -63,12 +63,14 @@ def get_input_details(session):
     input_shape = model_inputs[0].shape
     input_height = input_shape[2]
     input_width = input_shape[3]
-
+    print(f' model input shape: {input_shape}')
     return input_height, input_width, input_names
 
 def get_output_details(session):
     model_outputs = session.get_outputs()
     output_names = [model_outputs[i].name for i in range(len(model_outputs))]
+    for output in model_outputs:
+        print(f'model output shape: {output.shape}')
 
     return output_names
 

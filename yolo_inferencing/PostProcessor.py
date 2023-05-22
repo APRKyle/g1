@@ -20,11 +20,11 @@ class PostProcessor:
 
     def process(self, output):
 
-        boxes_data = output[1]
-        masks_data = output[0]
+        boxes_data = output[0]
+        masks_data = output[1]
 
-        boxes_data = np.reshape(boxes_data, (1, 116, 4200))
-        masks_data = np.reshape(masks_data, (1,32,80, 160))
+        boxes_data = np.reshape(boxes_data, (1, 116, 6300))
+        masks_data = np.reshape(masks_data, (1,32,120, 160))
 
         boxes, scores, class_id, mask_predictions = self._process_boxes(boxes_data)
 
