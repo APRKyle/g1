@@ -40,10 +40,10 @@ class EngineProcessor:
 
     def deinitialize(self):
         for cuda_input in self.cuda_inputs:
-            cuda.mem_free(cuda_input)
+            cuda_input.free()
 
         for cuda_output in self.cuda_outputs:
-            cuda.mem_free(cuda_output)
+            cuda_output.free()
 
         self.host_inputs.clear()
         self.host_outputs.clear()
