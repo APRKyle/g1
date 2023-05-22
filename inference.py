@@ -36,7 +36,9 @@ try:
         output = ep.process(image_data)
         boxes, masks, classid = pop.process(output)
         tt+= time.time() - t
-        print(image)
+        print(type(image))
+        image = np.array(image)
+        print(image.shape)
         output.Render(image)
 
 except KeyboardInterrupt:
