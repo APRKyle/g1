@@ -27,7 +27,7 @@ for i in range(10):
     image, depthRS, depthNP = camera.getData()
 
     image_data = prp.process(image)
-    output = ep.process(image)
+    output = ep.process(image_data)
     boxes, masks, classid = pop.process(output)
 
 
