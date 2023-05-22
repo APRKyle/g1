@@ -48,7 +48,7 @@ class EngineProcessor:
         self.host_inputs.clear()
         self.host_outputs.clear()
 
-        self.engine.destroy()
+
 
     def process(self, image):
 

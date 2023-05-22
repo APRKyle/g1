@@ -2,7 +2,7 @@ from yolo_inferencing.PostProcessor import PostProcessor
 from yolo_inferencing.PreProcessor import PreProcessor
 from yolo_inferencing.EngineProcessor import EngineProcessor
 
-from cv_module.Camera import Camera
+from subs.Camera import Camera
 
 import cv2
 import numpy as np
