@@ -33,12 +33,10 @@ try:
         image, depthRS, depthNP = camera.getData()
 
         image_data = prp.process(image)
-        output = ep.process(image_data)
-        boxes, masks, classid = pop.process(output)
+        net_output = ep.process(image_data)
+        boxes, masks, classid = pop.process(net_output)
         tt+= time.time() - t
-        print(type(image))
-        image = np.array(image)
-        print(image.shape)
+
         output.Render(image)
 
 except KeyboardInterrupt:
