@@ -3,12 +3,12 @@ from yolo_inferencing.PreProcessor import PreProcessor
 from yolo_inferencing.EngineProcessor import EngineProcessor
 
 from subs.Camera import Camera
-
+from subs.VideoInterface import Output
 import cv2
 import numpy as np
 import time
 
-
+output = Output(ip = '192.168.1.232')
 camera = Camera()
 
 
@@ -22,20 +22,21 @@ ep.initalize()
 
 
 camera.initCamera()
+output.initOutput()
 
 c = 0
 tt = 0
-for i in range(10):
-    c+=1
-    t = time.time()
-    image, depthRS, depthNP = camera.getData()
+try:
+    while True:
+        c+=1
+        t = time.time()
+        image, depthRS, depthNP = camera.getData()
 
-    image_data = prp.process(image)
-    output = ep.process(image_data)
-    boxes, masks, classid = pop.process(output)
-    tt+= time.time() - t
-    print(f' inference time: {time.time() - t}')
+        image_data = prp.process(image)
+        output = ep.process(image_data)
+        boxes, masks, classid = pop.process(output)
+        tt+= time.time() - t
 
-print(f' averate inference time: {tt/c}')
-
-ep.deinitialize()
+except KeyboardInterrupt:
+    print(f' averate inference time: {tt/c}')
+    ep.deinitialize()
