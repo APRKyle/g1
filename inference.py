@@ -8,7 +8,7 @@ import cv2
 import numpy as np
 import time
 
-output = Output(ip = '192.168.1.232')
+output = Output(path = 'video.mp4')
 camera = Camera()
 
 
@@ -35,8 +35,15 @@ try:
         image_data = prp.process(image)
         net_output = ep.process(image_data)
         boxes, masks, classid = pop.process(net_output)
-        tt+= time.time() - t
 
+        for b, m in zip(boxes, masks):
+            b = list(map(lambda x: int(x), b))
+            cv2.rectangle(image, (b[0], b[1]), (b[2], b[3]), (255, 0, 0), 1)
+            p = np.where(m == 1)
+            x, y = p[0], p[1]
+            image[x, y, 1] = 200
+        if c >2:
+            tt += time.time() - t
         output.Render(image)
 
 except KeyboardInterrupt:
