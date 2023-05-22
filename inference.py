@@ -36,6 +36,7 @@ try:
         output = ep.process(image_data)
         boxes, masks, classid = pop.process(output)
         tt+= time.time() - t
+        output.Render(image)
 
 except KeyboardInterrupt:
     print(f' averate inference time: {tt/c}')
