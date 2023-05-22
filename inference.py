@@ -2,13 +2,13 @@ from yolo_inferencing.PostProcessor import PostProcessor
 from yolo_inferencing.PreProcessor import PreProcessor
 from yolo_inferencing.EngineProcessor import EngineProcessor
 
+from cv_module.Camera import Camera
+
 import cv2
 import numpy as np
 
-image = cv2.imread('/home/andrii/Gus2/asparagus.png')
-print(f'IMAGE SHAPE: {image.shape}')
 
-img_height, img_width = image.shape[:2]
+camera = Camera()
 
 
 ep = EngineProcessor('/home/andrii/Gus2/networks/yolo_asparagus/model.engine')
@@ -19,30 +19,12 @@ pop = PostProcessor(iou_threshold = 0.62, class_threshold = 0.75,
 ep.initalize()
 
 
-import time
-tt = 0
-c = 0
+
+camera.initCamera()
+
+
 for i in range(10):
-    c+=1
-    image_data = prp.process(image)
-    t = time.time()
-    output = ep.process(image_data)
-    tt += (time.time() - t)
-    boxes, masks, class_ids = pop.process(output)
-    print(f' inference time : {time.time() - t}')
-print(f'total inference time: {tt} | average inference time: {tt/c}')
+    image, depthRS, depthNP = camera.getData()
 
-for b, m in zip(boxes, masks):
-    b = list(map(lambda x: int(x), b))
-    cv2.rectangle(image, (b[0], b[1]), (b[2], b[3]), (255,0,0), 1)
-    p = np.where(m == 1)
-    x, y = p[0], p[1]
-    image[x, y, 1] = 200
-cv2.imwrite('output.jpg', image)
-
-
-# boxes: 1,116, 4200
-# masks 1,32,80,160
-
-# boxes shape: (266240,)
-#  masks shape: (316680,)
+    print(f' image shape: {image.shape}')
+    print(f' image type: {type(image)}')
