@@ -8,7 +8,7 @@ class EngineProcessor:
         self.engine_path = engine_path
 
         self.EXPLICIT_BATCH = 1 << (int)(trt.NetworkDefinitionCreationFlag.EXPLICIT_BATCH)
-        self.TRT_LOGGER = trt.Logger(trt.Logger.INFO)
+        self.TRT_LOGGER = trt.Logger(trt.Logger.ERROR)
 
         self.batch = 1
         self.host_inputs = []
@@ -37,6 +37,18 @@ class EngineProcessor:
             else:
                 self.host_outputs.append(host_mem)
                 self.cuda_outputs.append(cuda_mem)
+
+    def deinitialize(self):
+        for cuda_input in self.cuda_inputs:
+            cuda.mem_free(cuda_input)
+
+        for cuda_output in self.cuda_outputs:
+            cuda.mem_free(cuda_output)
+
+        self.host_inputs.clear()
+        self.host_outputs.clear()
+
+        self.engine.destroy()
 
     def process(self, image):
 

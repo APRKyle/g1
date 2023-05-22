@@ -26,5 +26,9 @@ camera.initCamera()
 for i in range(10):
     image, depthRS, depthNP = camera.getData()
 
-    print(f' image shape: {image.shape}')
-    print(f' image type: {type(image)}')
+    image_data = prp.process(image)
+    output = ep.process(image)
+    boxes, masks, classid = pop.process(output)
+
+
+ep.deinitialize()
