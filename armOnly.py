@@ -10,7 +10,7 @@ from subs.Communicator import Communicator
 
 import cv2
 import numpy as np
-import time
+import traceback
 
 output = Output(path = 'video.mp4')
 camera = Camera()
@@ -70,7 +70,7 @@ try:
         output.Render(image)
 
 except Exception as e:
-    print(f'Error: {e}')
+    traceback.print_exc()
     ep.deinitialize()
 # finally:
 #     ep.deinitialize()
