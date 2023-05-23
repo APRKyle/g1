@@ -50,6 +50,7 @@ class Communicator:
         if cords is not None:
 
             value = 'B' + str(int(cords[0])) + ' ' + str(int(cords[1])) + ' ' + str(int(cords[2])) + '\r'
+            print(f'value sent: {value}')
             self.arduino.write(bytes(value, 'utf-8'))
             self.ARM_IS_READY = False
 

@@ -34,7 +34,7 @@ class Pather:
         point = np.delete(point, -1)
         point[1] += 30
         point[2] -= 25
-        print(f' point after transformations: {point}')
+
         return point
 
 
