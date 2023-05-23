@@ -28,6 +28,7 @@ pather = Pather(camera = camera, min_lenght = 0, min_dist = 100000)
 ep.initalize()
 camera.initCamera()
 output.initOutput()
+coms.initComs()
 
 armReady = None
 # try:
