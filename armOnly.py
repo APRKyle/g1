@@ -19,7 +19,7 @@ coms   = Communicator()
 
 ep = EngineProcessor('/home/andrii/Gus2/networks/yolo_asparagus/model.engine')
 prp = PreProcessor()
-pop = PostProcessor(iou_threshold = 0.6, class_threshold = 0.8,
+pop = PostProcessor(iou_threshold = 0.75, class_threshold = 0.85,
                  input_height = 480, input_width = 640, img_height = 480, img_width = 640,
                   num_masks = 32)
 asparagusProcessor = AsparagusProcessor(topk = 0.06, botk = 0.06)
@@ -66,7 +66,7 @@ try:
             cv2.circle(image, (spear[1][0], spear[1][1]), 1, (0,0,255), 2)
             cv2.line(image, (spear[0][0], spear[0][1]), (spear[1][0], spear[1][1]), (255,0,0), 1)
 
-        #output.Render(image)
+        output.Render(image)
 
 except Exception as e:
     traceback.print_exc()
