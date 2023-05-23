@@ -22,15 +22,15 @@ class Pather:
 
     def _transformIntoRobot(self, coord):
         if np.any(coord):
-            point = coord.copy()
+            point = list(coord).copy()
             af_mat = np.array(self.rot_mat)
             trans_mat = np.array(self.trans_mat)
             trans_mat = trans_mat.reshape((-1, 1))
             tr = np.concatenate((af_mat, trans_mat), axis=1)
             tr = np.vstack((tr, [0, 0, 0, 0]))
-            print('las execution')
+
             point.append(1)
-            print('not executed')
+
             point = np.array(point).reshape((-1, 1))
             point = np.matmul(tr, point)
             point = np.delete(point, -1)
