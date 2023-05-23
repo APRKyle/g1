@@ -48,6 +48,7 @@ class Camera:
         return frame
 
     def _calculatePix3D(self, pix, depthFrame):
+        #Depth frame should be depthrs frame
         depth_intrin = depthFrame.profile.as_video_stream_profile().intrinsics
         depth = depthFrame.get_distance(pix[0], pix[1])
         coord = rs.rs2_deproject_pixel_to_point(depth_intrin, pix, depth)
