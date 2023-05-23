@@ -64,8 +64,8 @@ try:
 
         if spear is not None:
             print(f' spear: {spear}')
-            cv2.circle(image, (spear[0][1], spear[0][0]), 1, (0,255,0), 2)
-            cv2.circle(image, (spear[1][1], spear[1][0]), 1, (0,255,0), 2)
+            cv2.circle(image, (spear[0][0], spear[0][1]), 1, (0,255,0), 2)
+            cv2.circle(image, (spear[1][0], spear[1][1]), 1, (0,255,0), 2)
             cv2.line(image, (spear[0][1], spear[0][0]), (spear[1][0], spear[1][1]), (255,0,0), 1)
 
         output.Render(image)
