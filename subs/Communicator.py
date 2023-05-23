@@ -46,6 +46,7 @@ class Communicator:
         return string_input
 
     def _sendCoordsToArm(self, cords):
+        print(f' cords within send cords arm: {cords}')
         if cords is not None:
             value = 'B' + str(int(cords[0])) + ' ' + str(int(cords[1])) + ' ' + str(int(cords[2])) + '\r'
             self.arduino.write(bytes(value, 'utf-8'))

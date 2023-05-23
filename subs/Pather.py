@@ -21,7 +21,7 @@ class Pather:
         return efficientSpear
 
     def _transformIntoRobot(self, coord):
-        print(f'transform into robot spear: {coord}')
+
         point = list(coord).copy()
         af_mat = np.array(self.rot_mat)
         trans_mat = np.array(self.trans_mat)
@@ -34,6 +34,7 @@ class Pather:
         point = np.delete(point, -1)
         point[1] += 30
         point[2] -= 25
+        print(f' point after transformations: {point}')
         return point
 
 
