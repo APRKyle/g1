@@ -1,5 +1,5 @@
 import numpy as np
-sys.path.append('/usr/local/lib/python3.6/pyrealsense2')
+# sys.path.append('/usr/local/lib/python3.6/pyrealsense2')
 
 
 
