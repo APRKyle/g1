@@ -46,7 +46,7 @@ while True:
         cv2.rectangle(image, (b[0], b[1]), (b[2], b[3]), (0, 0, 160), 1)
         p = np.where(m == 1)
         x, y = p[0], p[1]
-        image[x, y, 1] = 200
+        image[x, y, 2] = 150
 
     if spear is not None:
         cv2.circle(image, (spear[0]), 1, (0,255,0), 2)
