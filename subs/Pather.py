@@ -32,8 +32,8 @@ class Pather:
         point = np.array(point).reshape((-1, 1))
         point = np.matmul(tr, point)
         point = np.delete(point, -1)
-        point[1] += 30
-        point[2] -= 25
+        point[1] += 0
+        point[2] -= 0
 
         return point
 
