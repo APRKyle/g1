@@ -50,6 +50,8 @@ class Pather:
 
             top = np.array(self.camera._calculatePix3D(spear[0], depthFrame))
             bot = np.array(self.camera._calculatePix3D(spear[1], depthFrame))
+            if np.all(bot == 0):
+                return False, None, None
             botArm = self._transformIntoRobot(bot)
             length = np.linalg.norm(top - bot)
             distance = np.linalg.norm(botArm)
