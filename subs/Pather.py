@@ -21,24 +21,21 @@ class Pather:
         return efficientSpear
 
     def _transformIntoRobot(self, coord):
-        if np.any(coord):
-            point = list(coord).copy()
-            af_mat = np.array(self.rot_mat)
-            trans_mat = np.array(self.trans_mat)
-            trans_mat = trans_mat.reshape((-1, 1))
-            tr = np.concatenate((af_mat, trans_mat), axis=1)
-            tr = np.vstack((tr, [0, 0, 0, 0]))
+        print(f'transform into robot spear: {coord}')
+        point = list(coord).copy()
+        af_mat = np.array(self.rot_mat)
+        trans_mat = np.array(self.trans_mat)
+        trans_mat = trans_mat.reshape((-1, 1))
+        tr = np.concatenate((af_mat, trans_mat), axis=1)
+        tr = np.vstack((tr, [0, 0, 0, 0]))
+        point.append(1)
+        point = np.array(point).reshape((-1, 1))
+        point = np.matmul(tr, point)
+        point = np.delete(point, -1)
+        point[1] += 30
+        point[2] -= 25
+        return point
 
-            point.append(1)
-
-            point = np.array(point).reshape((-1, 1))
-            point = np.matmul(tr, point)
-            point = np.delete(point, -1)
-            point[1] += 30
-            point[2] -= 25
-            return point
-        else:
-            return None
 
 
     def processSpears(self, spears, depthFrame):
