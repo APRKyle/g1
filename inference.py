@@ -19,7 +19,7 @@ coms   = Communicator()
 
 ep = EngineProcessor('/home/andrii/Gus2/networks/yolo_asparagus/model.engine')
 prp = PreProcessor()
-pop = PostProcessor(iou_threshold = 0.62, class_threshold = 0.75,
+pop = PostProcessor(iou_threshold = 0.6, class_threshold = 0.8,
                  input_height = 480, input_width = 640, img_height = 480, img_width = 640,
                   num_masks = 32)
 asparagusProcessor = AsparagusProcessor(topk = 0.06, botk = 0.06)
