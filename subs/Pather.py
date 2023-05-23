@@ -43,19 +43,20 @@ class Pather:
 
 
         if len(spears) == 0:
-            return False, None
+            return False, None, None
 
         for spear in spears:
 
             top = np.array(self.camera._calculatePix3D(spear[0], depthFrame))
             bot = np.array(self.camera._calculatePix3D(spear[1], depthFrame))
+            botArm = self._transformIntoRobot(bot)
             length = np.linalg.norm(top - bot)
-            distance = np.linalg.norm(bot)
-            print(f'spear: T {top}  B {bot}  length {length}  D {distance}')
+            distance = np.linalg.norm(botArm)
+            print(f'length {length}  D {distance}')
             if length > self.min_length:
                 if distance < self.min_dist:
-                    return True, spear
-        return False, None
+                    return True, spear, botArm
+        return False, None, None
 
     def _choseClosesCoord(self, coords, depthFrame):
 

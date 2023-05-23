@@ -6,6 +6,7 @@ from subs.Camera import Camera
 from subs.VideoInterface import Output
 from subs.AsparagusProcessor import AsparagusProcessor
 from subs.Pather import Pather
+from subs.Communicator import Communicator
 
 import cv2
 import numpy as np
@@ -13,6 +14,7 @@ import time
 
 output = Output(path = 'video.mp4')
 camera = Camera()
+coms   = Communicator()
 
 
 ep = EngineProcessor('/home/andrii/Gus2/networks/yolo_asparagus/model.engine')
@@ -27,9 +29,13 @@ ep.initalize()
 camera.initCamera()
 output.initOutput()
 
-
+armReady = None
 # try:
 while True:
+
+    armSignal = coms._readSignalFromArm()
+    if armSignal == 'A':
+        armReady = True
 
     image, depthRS, depthNP = camera.getData()
 
@@ -39,7 +45,24 @@ while True:
 
 
     spears = asparagusProcessor.process(boxes, masks)
-    stopSignal, spear = pather.processSpears(spears, depthRS)
+    stopSignal, spear, spear3d = pather.processSpears(spears, depthRS)
+
+    if stopSignal:
+        coms._sendStopToNav()
+
+    else:
+        coms._sendGoToNav()
+
+    stopConf = coms._readNavSignal()
+
+    if stopConf:
+
+
+
+        if armReady and spear is not None:
+            coms._sendCoordsToArm(spear3d)
+            armReady = False
+
 
     for b, m in zip(boxes, masks):
         b = list(map(lambda x: int(x), b))
@@ -52,7 +75,7 @@ while True:
         cv2.circle(image, (spear[0]), 1, (0,255,0), 2)
         cv2.circle(image, (spear[1]), 1, (0,255,0), 2)
         cv2.line(image, spear[0], spear[1], (255,0,0), 1)
-    print(f' stop signal: {stopSignal}')
+
     output.Render(image)
 
 # except Exception as e:
