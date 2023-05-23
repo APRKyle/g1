@@ -48,6 +48,8 @@ class Pather:
         for spear in spears:
             top = self.camera._calculatePix3D(spear[0], depthFrame)
             bot = self.camera._calculatePix3D(spear[1], depthFrame)
+            print(f' top: {top}')
+            print(f' bot: {bot}')
             length = np.linalg.norm(top - bot)
             if length > self.min_length:
                 if np.linalg.norm(bot) > self.min_dist:

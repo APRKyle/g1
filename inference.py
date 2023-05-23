@@ -28,21 +28,21 @@ camera.initCamera()
 output.initOutput()
 
 
-try:
-    while True:
+# try:
+while True:
 
-        image, depthRS, depthNP = camera.getData()
+    image, depthRS, depthNP = camera.getData()
 
-        image_data = prp.process(image)
-        net_output = ep.process(image_data)
-        boxes, masks, classid = pop.process(net_output)
-        spears = asparagusProcessor.process(boxes, masks)
-        stopSignal, spear = pather.processSpears(spears, depthRS)
-        print(f' stop signal: {stopSignal}')
-        output.Render(image)
+    image_data = prp.process(image)
+    net_output = ep.process(image_data)
+    boxes, masks, classid = pop.process(net_output)
+    spears = asparagusProcessor.process(boxes, masks)
+    stopSignal, spear = pather.processSpears(spears, depthRS)
+    print(f' stop signal: {stopSignal}')
+    output.Render(image)
 
-except Exception as e:
-    print(f'Error: {e}')
-    ep.deinitialize()
-finally:
-    ep.deinitialize()
+# except Exception as e:
+#     print(f'Error: {e}')
+#     ep.deinitialize()
+# finally:
+#     ep.deinitialize()
