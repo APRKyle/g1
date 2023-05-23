@@ -34,8 +34,7 @@ class Pather:
         point = np.array(point).reshape((-1, 1))
         point = np.matmul(tr, point)
         point = np.delete(point, -1)
-        point[1] += 0
-        point[2] -= 0
+
 
         return point
 
@@ -54,7 +53,7 @@ class Pather:
             botArm = self._transformIntoRobot(bot)
             length = np.linalg.norm(top - bot)
             distance = np.linalg.norm(botArm)
-            print(f'length {length}  D {distance}')
+            print(f'length {length}  D {distance} | P : {botArm}')
             if length > self.min_length:
                 if distance < self.min_dist:
                     return True, spear, botArm
