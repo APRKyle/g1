@@ -45,7 +45,8 @@ class Pather:
 
         if len(spears) == 0:
             return False, None, None
-
+        top = None
+        bot = None
         for idx, spear in enumerate(spears):
 
             top = np.array(self.camera._calculatePix3D(spear[0], depthFrame))
@@ -55,7 +56,7 @@ class Pather:
             botArm = self._transformIntoRobot(bot)
             length = np.linalg.norm(top - bot)
             distance = np.linalg.norm(botArm)
-            print(f'{idx}:   length {length}  D {distance} | P : {botArm}  F: {bot}')
+            print(f'{idx}:   length {length}  D {distance} | P: {botArm}  F: {bot}')
             if length > self.min_length:
                 if distance < self.min_dist:
                     return True, spear, botArm
