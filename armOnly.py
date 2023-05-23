@@ -73,5 +73,5 @@ try:
 except Exception as e:
     traceback.print_exc()
     ep.deinitialize()
-# finally:
-#     ep.deinitialize()
+finally:
+    ep.deinitialize()
