@@ -46,8 +46,8 @@ class Pather:
             return False, efficientSpear
 
         for spear in spears:
-            top = self.camera._calculatePix3D(spear[0], depthFrame)
-            bot = self.camera._calculatePix3D(spear[1], depthFrame)
+            top = np.array(self.camera._calculatePix3D(spear[0], depthFrame))
+            bot = np.array(self.camera._calculatePix3D(spear[1], depthFrame))
             print(f' top: {top}')
             print(f' bot: {bot}')
             length = np.linalg.norm(top - bot)
