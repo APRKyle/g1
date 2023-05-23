@@ -63,6 +63,7 @@ try:
             image[x, y, 2] = 150
 
         if spear is not None:
+            print(spear[0])
             cv2.circle(image, (spear[0]), 1, (0,255,0), 2)
             cv2.circle(image, (spear[1]), 1, (0,255,0), 2)
             cv2.line(image, spear[0], spear[1], (255,0,0), 1)
