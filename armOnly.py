@@ -52,6 +52,7 @@ try:
         print(f'arm ready: {armReady}')
 
         if armReady and spear3d is not None:
+            print(f'INSIDE MAIN LOOP SENDING RUTINE')
             coms._sendCoordsToArm(spear3d)
             armReady = False
 
@@ -64,7 +65,6 @@ try:
             image[x, y, 2] = 150
 
         if spear is not None:
-            print(f' spear: {spear}')
             cv2.circle(image, (spear[0][0], spear[0][1]), 1, (0,255,0), 2)
             cv2.circle(image, (spear[1][0], spear[1][1]), 1, (0,0,255), 2)
             cv2.line(image, (spear[0][1], spear[0][0]), (spear[1][0], spear[1][1]), (255,0,0), 1)
