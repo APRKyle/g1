@@ -24,5 +24,5 @@ class AsparagusProcessor:
             top_part = asparagus[:, asparagus[1] < box[0] + length * 0.06]
             top_point = np.mean(top_part, axis=1).astype(np.int)
             spears.append([bot_point, top_point])
-
+            print(f'spears in processor: {spears}')
         return spears

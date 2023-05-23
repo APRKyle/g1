@@ -46,6 +46,7 @@ class Pather:
             return False, None
 
         for spear in spears:
+            print(f'spear: {spear}')
             top = np.array(self.camera._calculatePix3D(spear[0], depthFrame))
             bot = np.array(self.camera._calculatePix3D(spear[1], depthFrame))
             length = np.linalg.norm(top - bot)
