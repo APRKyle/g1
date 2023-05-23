@@ -21,7 +21,7 @@ pop = PostProcessor(iou_threshold = 0.62, class_threshold = 0.75,
                  input_height = 480, input_width = 640, img_height = 480, img_width = 640,
                   num_masks = 32)
 asparagusProcessor = AsparagusProcessor(topk = 0.06, botk = 0.06)
-pather = Pather(camera = camera, min_lenght = 1000000, min_dist = 100000)
+pather = Pather(camera = camera, min_lenght = 0, min_dist = 100000)
 
 ep.initalize()
 camera.initCamera()
@@ -38,6 +38,7 @@ while True:
     boxes, masks, classid = pop.process(net_output)
     spears = asparagusProcessor.process(boxes, masks)
     stopSignal, spear = pather.processSpears(spears, depthRS)
+    print(spear)
     if spear is not None:
         cv2.circle(image, (spear[0]), 1, (0,255,0), 2)
         cv2.cirlce(image, (spear[1]), 1, (0,255,0), 2)
