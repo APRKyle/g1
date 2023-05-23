@@ -38,6 +38,10 @@ while True:
     boxes, masks, classid = pop.process(net_output)
     spears = asparagusProcessor.process(boxes, masks)
     stopSignal, spear = pather.processSpears(spears, depthRS)
+    if spear is not None:
+        cv2.circle(image, (spear[0]), 1, (0,255,0), 2)
+        cv2.cirlce(image, (spear[1]), 1, (0,255,0), 2)
+        cv2.line(image, spear[0], spear[1], (255,0,0), 1)
     print(f' stop signal: {stopSignal}')
     output.Render(image)
 

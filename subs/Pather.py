@@ -40,21 +40,20 @@ class Pather:
 
 
     def processSpears(self, spears, depthFrame):
-        efficientSpear = None
+
 
         if len(spears) == 0:
-            return False, efficientSpear
+            return False, None
 
         for spear in spears:
             top = np.array(self.camera._calculatePix3D(spear[0], depthFrame))
             bot = np.array(self.camera._calculatePix3D(spear[1], depthFrame))
-            print(f' top: {top}')
-            print(f' bot: {bot}')
             length = np.linalg.norm(top - bot)
+            print(f' length {length}')
             if length > self.min_length:
                 if np.linalg.norm(bot) > self.min_dist:
                     return True, spear
-        return False, efficientSpear
+        return False, None
 
     def _choseClosesCoord(self, coords, depthFrame):
 
