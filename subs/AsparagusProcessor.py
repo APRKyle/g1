@@ -22,7 +22,7 @@ class AsparagusProcessor:
             bot_point = np.mean(bot_part, axis=1).astype(np.int)[::-1]
 
 
-            top_part = asparagus[:, asparagus[1] < box[1] + length * 0.06]
+            top_part = asparagus[:, asparagus[0] < box[1] + length * 0.06]
             top_point = np.mean(top_part, axis=1).astype(np.int)[::-1]
             spears.append([bot_point, top_point])
             print(f'bot : {bot_point}')
