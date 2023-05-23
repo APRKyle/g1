@@ -30,46 +30,46 @@ camera.initCamera()
 output.initOutput()
 
 armReady = None
-# try:
-while True:
+try:
+    while True:
 
-    armSignal = coms._readSignalFromArm()
-    if armSignal == 'A':
-        armReady = True
+        armSignal = coms._readSignalFromArm()
+        if armSignal == 'A':
+            armReady = True
 
-    image, depthRS, depthNP = camera.getData()
+        image, depthRS, depthNP = camera.getData()
 
-    image_data = prp.process(image)
-    net_output = ep.process(image_data)
-    boxes, masks, classid = pop.process(net_output)
-
-
-    spears = asparagusProcessor.process(boxes, masks)
-    stopSignal, spear, spear3d = pather.processSpears(spears, depthRS)
+        image_data = prp.process(image)
+        net_output = ep.process(image_data)
+        boxes, masks, classid = pop.process(net_output)
 
 
-
-    if armReady and spear3d is not None:
-        coms._sendCoordsToArm(spear3d)
-        armReady = False
+        spears = asparagusProcessor.process(boxes, masks)
+        stopSignal, spear, spear3d = pather.processSpears(spears, depthRS)
 
 
-    for b, m in zip(boxes, masks):
-        b = list(map(lambda x: int(x), b))
-        cv2.rectangle(image, (b[0], b[1]), (b[2], b[3]), (0, 0, 160), 1)
-        p = np.where(m == 1)
-        x, y = p[0], p[1]
-        image[x, y, 2] = 150
 
-    if spear is not None:
-        cv2.circle(image, (spear[0]), 1, (0,255,0), 2)
-        cv2.circle(image, (spear[1]), 1, (0,255,0), 2)
-        cv2.line(image, spear[0], spear[1], (255,0,0), 1)
+        if armReady and spear3d is not None:
+            coms._sendCoordsToArm(spear3d)
+            armReady = False
 
-    output.Render(image)
 
-# except Exception as e:
-#     print(f'Error: {e}')
-#     ep.deinitialize()
+        for b, m in zip(boxes, masks):
+            b = list(map(lambda x: int(x), b))
+            cv2.rectangle(image, (b[0], b[1]), (b[2], b[3]), (0, 0, 160), 1)
+            p = np.where(m == 1)
+            x, y = p[0], p[1]
+            image[x, y, 2] = 150
+
+        if spear is not None:
+            cv2.circle(image, (spear[0]), 1, (0,255,0), 2)
+            cv2.circle(image, (spear[1]), 1, (0,255,0), 2)
+            cv2.line(image, spear[0], spear[1], (255,0,0), 1)
+
+        output.Render(image)
+
+except Exception as e:
+    print(f'Error: {e}')
+    ep.deinitialize()
 # finally:
 #     ep.deinitialize()
