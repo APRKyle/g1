@@ -53,7 +53,7 @@ class Pather:
             botArm = self._transformIntoRobot(bot)
             length = np.linalg.norm(top - bot)
             distance = np.linalg.norm(botArm)
-            print(f'{idx}:   length {length}  D {distance} | P : {botArm}')
+            print(f'{idx}:   length {length}  D {distance} | P : {botArm}  F: {bot}')
             if length > self.min_length:
                 if distance < self.min_dist:
                     return True, spear, botArm
