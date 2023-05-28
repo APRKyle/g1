@@ -36,7 +36,7 @@ class Streamer:
 
     def initStreamer(self):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sock.connect((self.receiver_port, self.receiver_port))
+        self.sock.connect((self.receiver_ip, self.receiver_port))
 
     def Render(self, image):
         frame_data = cv2.imencode('.jpg', image)[1].tostring()
