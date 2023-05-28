@@ -30,7 +30,7 @@ class Output:
 
 
 class Streamer:
-    def __init__(self, ip = '192.168.1.232', port = 5000):
+    def __init__(self, ip = '192.168.1.232', port =5000):
         self.receiver_ip =  ip
         self.receiver_port = port
 
