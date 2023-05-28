@@ -54,7 +54,7 @@ class Camera:
         depth_intrin = self.depthRS.profile.as_video_stream_profile().intrinsics
         depth = self.depthRS.get_distance(pix[0], pix[1])
         coord = rs.rs2_deproject_pixel_to_point(depth_intrin, pix, depth)
-        coord = list(map(lambda x: int(round(x, 3) * 1000), coord))
+        coord = np.array(list(map(lambda x: int(round(x, 3) * 1000), coord)))
         return coord
 
     def _getImage(self, frame):
