@@ -18,8 +18,8 @@ class Spear:
 
     def __str__(self):
         return f'{"-"*60} \nSPEAR: \n ' \
-               f'Bot point:{self.bot_3d}\t ' \
-               f'Top point:{self.top_3d}\t' \
+               f'Bot 3D: {self.bot_3d}\t Bot 2D: {self.bot_point} \n' \
+               f'Top 2D: {self.top_3d}\t Top 2D: {self.top_point} \n' \
                f'Lenght   :{self.lenght}'
 
 
