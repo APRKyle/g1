@@ -6,7 +6,7 @@ class Vizualizer:
         self.height = height
         self.width = width
         self.font = cv2.FONT_HERSHEY_SIMPLEX
-        self.font_scale = 1.0
+        self.font_scale = 0.5
         self.color = (0,0,0)  # Text color in BGR format
         self.thickness = 2
 
@@ -23,7 +23,8 @@ class Vizualizer:
             cv2.circle(image, (spear.top_point[0], spear.top_point[1]), 1, (0, 255, 0), 2)
             cv2.circle(image, (spear.bot_point[0], spear.bot_point[1]), 1, (0, 0, 255), 2)
             cv2.line(image, (spear.top_point[0], spear.top_point[1]), (spear.bot_point[0], spear.bot_point[1]), (255, 0, 0), 1)
-            cv2.putText(image, str(spear.lenght), (spear.mid_point), self.font, self.font_scale, self.color, self.thickness)
+            rounded_length = '{:.2f}'.format(spear.lenght)
+            cv2.putText(image, rounded_length, (spear.mid_point), self.font, self.font_scale, self.color, self.thickness)
 
         return image
 
