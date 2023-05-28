@@ -12,7 +12,7 @@ import cv2
 import numpy as np
 import traceback
 
-output = Streamer()
+output = Streamer(ip = '192.168.1.232', port = 5000)
 camera = Camera()
 
 
