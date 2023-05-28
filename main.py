@@ -24,7 +24,7 @@ pop = PostProcessor(iou_threshold = 0.8, class_threshold = 0.85,
 asparagusProcessor = AsparagusProcessor(topk = 0.06, botk = 0.06, camera = camera)
 pather = Pather(min_lenght = 0, min_dist = 100000)
 viz = Vizualizer()
-coms = Communicator(nav_required=False, arm_required=True)
+coms = Communicator(nav_required=True, arm_required=True)
 
 ep.initalize()
 camera.initCamera()
@@ -45,8 +45,12 @@ try:
             spears = asparagusProcessor.process(boxes, masks)
             stopSignal, spear, spear3d = pather.processSpears(spears)
 
-            if stopSignal and coms.ARM_IS_READY:
-                coms._sendCoordsToArm(spear3d)
+            if stopSignal:
+                coms._sendStopToNav()
+                if coms.NAV_IS_STOPPED and coms.ARM_IS_READY:
+                    coms._sendCoordsToArm(spear3d)
+
+
 
             if len(spears) != 0:
                 image = viz.process(image, spears)
