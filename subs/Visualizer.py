@@ -22,7 +22,7 @@ class Vizualizer:
 
             cv2.circle(image, (spear.top_point[0], spear.top_point[1]), 1, (0, 255, 0), 2)
             cv2.circle(image, (spear.bot_point[0], spear.bot_point[1]), 1, (0, 0, 255), 2)
-            cv2.line(image, (spear.top_point[0], spear.top_ponint[1]), (spear.bot_point[0], spear.bot_point[1]), (255, 0, 0), 1)
+            cv2.line(image, (spear.top_point[0], spear.top_point[1]), (spear.bot_point[0], spear.bot_point[1]), (255, 0, 0), 1)
             cv2.putText(image, str(spear.lenght), (spear.mid_point), self.font, self.font_scale, self.color, self.thickness)
 
         return image
