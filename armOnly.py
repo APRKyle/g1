@@ -33,12 +33,7 @@ coms.initComs()
 armReady = None
 try:
     while True:
-        spears = None
-        spear = None
-        spear3d = None
-        armSignal = coms._readSignalFromArm()
-        if armSignal == 'A':
-            armReady = True
+
 
         image, depthRS, depthNP = camera.getData()
 
@@ -50,10 +45,7 @@ try:
         spears = asparagusProcessor.process(boxes, masks)
         stopSignal, spear, spear3d = pather.processSpears(spears, depthRS)
 
-        if armReady and spear3d is not None:
 
-            coms._sendCoordsToArm(spear3d)
-            armReady = False
 
 
         for b, m in zip(boxes, masks):
