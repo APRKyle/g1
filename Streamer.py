@@ -22,11 +22,11 @@ print("LISTENING AT:", socket_address)
 while True:
     client_socket, addr = server_socket.accept()
     print('GOT CONNECTION FROM:', addr)
-    if client_socket:
-        image, _, _ = cam.getData()
-        print(image.shape)
 
-        a = pickle.dumps(image)
-        message = struct.pack("Q", len(a)) + a
-        client_socket.sendall(message)
+    image, _, _ = cam.getData()
+    print(image.shape)
+
+    a = pickle.dumps(image)
+    message = struct.pack("Q", len(a)) + a
+    client_socket.sendall(message)
 
