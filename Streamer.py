@@ -1,5 +1,5 @@
 import socket, cv2, pickle, struct
-from .Camera import Camera
+from subs.Camera import Camera
 
 cam = Camera()
 cam.initCamera()
