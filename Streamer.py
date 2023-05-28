@@ -6,16 +6,8 @@ import time
 cam = Camera()
 cam.initCamera()
 
-output = Streamer(ip = '192.168.1.232', port = 5000)
+output = Streamer(ip = '192.168.1.232', port = '5000')
 output.initStreamer()
-
-
-
-
-
-
-
-
 
 try:
     while True:
