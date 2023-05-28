@@ -1,5 +1,6 @@
 import cv2, struct, socket
 from subs.Camera import Camera
+import time
 
 cam = Camera()
 cam.initCamera()
@@ -30,6 +31,7 @@ sock.connect((receiver_ip, receiver_port))
 try:
     while True:
         image, _, _ = cam.getData()
+        time.sleep(1)
         send_frame(image, sock)
 except KeyboardInterrupt:
     cv2.destroyAllWindows()

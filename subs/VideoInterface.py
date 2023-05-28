@@ -17,6 +17,8 @@ class Output:
         if self.videoPath:
             self.videoSaver = jetson.utils.videoOutput(f'file://{self.videoPath}')
 
+
+
     def Render(self, image):
         output = jetson.utils.cudaFromNumpy(image)
         if self.ip:
@@ -24,7 +26,7 @@ class Output:
         if self.videoPath:
             self.videoSaver.Render(output)
 
-            
+
 
 
 
