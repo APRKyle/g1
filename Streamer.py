@@ -1,32 +1,41 @@
-import socket, cv2, pickle, struct
+import cv2, struct, socket
 from subs.Camera import Camera
 
 cam = Camera()
 cam.initCamera()
 
-server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-host_name = socket.gethostname()
-host_ip = '192.168.1.240'
-print('HOST IP:', host_ip)
-port = 9999
-socket_address = (host_ip, port)
 
-server_socket.bind(socket_address)
+def send_frame(frame, sock):
+    # Serialize the frame as a string
+    frame_data = cv2.imencode('.jpg', frame)[1].tostring()
+
+    # Get the size of the frame
+    size = len(frame_data)
+
+    # Pack the size and frame data as a struct
+    data = struct.pack('<L', size) + frame_data
+
+    # Send the frame data over the socket
+    sock.sendall(data)
 
 
-server_socket.listen(5)
-print("LISTENING AT:", socket_address)
+
+receiver_ip = '192.168.1.232'
+receiver_port = 5000
 
 
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.connect((receiver_ip, receiver_port))
 
-while True:
-    client_socket, addr = server_socket.accept()
-    print('GOT CONNECTION FROM:', addr)
+try:
+    while True:
+        image, _, _ = cam.getData()
+        send_frame(image, sock)
+except KeyboardInterrupt:
+    cv2.destroyAllWindows()
 
-    image, _, _ = cam.getData()
-    print(image.shape)
+    # Close the socket
+    sock.close()
 
-    a = pickle.dumps(image)
-    message = struct.pack("Q", len(a)) + a
-    client_socket.sendall(message)
+
 
