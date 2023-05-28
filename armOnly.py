@@ -40,7 +40,7 @@ try:
         image_data = prp.process(image)
         net_output = ep.process(image_data)
         boxes, masks, classid = pop.process(net_output)
-
+        print(f' class id : {classid}')
         if len(classid) != 0:
 
 
