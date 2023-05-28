@@ -5,8 +5,8 @@ import numpy as np
 #
 #
 class Pather:
-    def __init__(self, camera, min_lenght, min_dist):
-        self.camera = camera
+    def __init__(self, min_lenght, min_dist):
+
         self.min_length = min_lenght
         self.min_dist = min_dist
         # top camera
@@ -21,11 +21,7 @@ class Pather:
                                     [0.21691869172423983,-0.32610271027585847,1.3817092613169741]])
         self.trans_mat = np.array([-38.16005604135472,-200.49084496835601,91.98149669066109])
 
-    def process(self, points, depthFrame):
 
-        efficientSpear = self._choseClosesCoord(points, depthFrame)
-
-        return efficientSpear
 
     def _transformIntoRobot(self, coord):
 
@@ -45,42 +41,24 @@ class Pather:
 
 
 
-    def processSpears(self, spears, depthFrame):
+    def processSpears(self, spears):
+        efficient_spear2d = False
+        stop_signal = None
+        efficient_spear3d = None
 
-
-        if len(spears) == 0:
-            return False, None, None
-        top = None
-        bot = None
         for idx, spear in enumerate(spears):
 
-            top = np.array(self.camera._calculatePix3D(spear[0], depthFrame))
-            bot = np.array(self.camera._calculatePix3D(spear[1], depthFrame))
-            if np.all(bot == 0):
-                return False, None, None
-            botArm = self._transformIntoRobot(bot)
-            length = np.linalg.norm(top - bot)
+            botArm = self._transformIntoRobot(spear.bot_3d)
             distance = np.linalg.norm(botArm)
-            print(f'{idx}:   length {length}  D {distance} | P: {botArm}  F: {bot}')
-            if length > self.min_length:
+
+            if spear.length > self.min_length:
                 if distance < self.min_dist:
-                    return True, spear, botArm
-        return False, None, None
+                    efficient_spear2d = botArm
+                    efficient_spear3d = efficient_spear3d
+                    stop_signal = True
 
-    def _choseClosesCoord(self, coords, depthFrame):
+        return stop_signal, efficient_spear2d, efficient_spear3d
 
-        mindist = np.inf
-        efficientSpear = None
-        if coords is not None:
-            for point in coords:
-                coord = self.camera._calculatePix3D(point, depthFrame)
-                coord2 = self._transformIntoRobot(coord)
 
-                if np.any(coord2):
-                    dist = np.linalg.norm(coord2)
-                    if dist < mindist:
-                        mindist = dist
-                        efficientSpear = coord2
 
-        return efficientSpear
 

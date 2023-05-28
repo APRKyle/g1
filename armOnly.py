@@ -6,6 +6,7 @@ from subs.Camera import Camera
 from subs.VideoInterface import Streamer
 from subs.AsparagusProcessor import AsparagusProcessor
 from subs.Pather import Pather
+from subs.Visualizer import Vizualizer
 from subs.Communicator import Communicator
 
 import cv2
@@ -19,46 +20,37 @@ camera = Camera()
 
 ep = EngineProcessor('/home/andrii/Gus2/networks/yolo_asparagus/model.engine')
 prp = PreProcessor()
-pop = PostProcessor(iou_threshold = 0.7, class_threshold = 0.8,
+pop = PostProcessor(iou_threshold = 0.8, class_threshold = 0.85,
                  input_height = 480, input_width = 640, img_height = 480, img_width = 640,
                   num_masks = 32)
-asparagusProcessor = AsparagusProcessor(topk = 0.06, botk = 0.06)
-pather = Pather(camera = camera, min_lenght = 0, min_dist = 100000)
+asparagusProcessor = AsparagusProcessor(topk = 0.06, botk = 0.06, camera = camera)
+pather = Pather(min_lenght = 0, min_dist = 100000)
+viz = Vizualizer()
 
 ep.initalize()
 camera.initCamera()
 output.initStreamer()
 
-
-armReady = None
 try:
     while True:
 
 
-        image, depthRS, depthNP = camera.getData()
-
+        camera.getData()
+        image = camera.image
         image_data = prp.process(image)
         net_output = ep.process(image_data)
         boxes, masks, classid = pop.process(net_output)
 
+        if len(classid) == 0:
+            continue
 
         spears = asparagusProcessor.process(boxes, masks)
-        stopSignal, spear, spear3d = pather.processSpears(spears, depthRS)
+        stopSignal, spear, spear3d = pather.processSpears(spears)
 
 
 
-
-        for b, m in zip(boxes, masks):
-            b = list(map(lambda x: int(x), b))
-            cv2.rectangle(image, (b[0], b[1]), (b[2], b[3]), (0, 0, 160), 1)
-            p = np.where(m == 1)
-            x, y = p[0], p[1]
-            image[x, y, 2] = 150
-
-        if spear is not None:
-            cv2.circle(image, (spear[0][0], spear[0][1]), 1, (0,255,0), 2)
-            cv2.circle(image, (spear[1][0], spear[1][1]), 1, (0,0,255), 2)
-            cv2.line(image, (spear[0][0], spear[0][1]), (spear[1][0], spear[1][1]), (255,0,0), 1)
+        if len(spears) == 0:
+            continue
 
         output.Render(image)
 

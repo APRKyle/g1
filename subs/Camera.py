@@ -16,6 +16,7 @@ class Camera:
         self.imageWidth = imageWidth
         self.FPS = fps
 
+
     def initCamera(self):
         pipeline = rs.pipeline()
         config = rs.config()
@@ -33,13 +34,14 @@ class Camera:
         depth_sensor = profile.get_device().first_depth_sensor()
         depth_scale = depth_sensor.get_depth_scale()
         self.pipeline = pipeline
+        self.depthRS = None
 
     def getData(self):
 
         frame = self._getFrame()
-        image = self._getImage(frame)
-        depthRS, depthNP = self._getDepth(frame)
-        return image, depthRS, depthNP
+        self._getImage(frame)
+        self._getDepth(frame)
+
 
     def _getFrame(self):
 
@@ -47,10 +49,10 @@ class Camera:
         frame = self.align.process(frame)
         return frame
 
-    def _calculatePix3D(self, pix, depthFrame):
+    def _calculatePix3D(self, pix):
         #Depth frame should be depthrs frame
-        depth_intrin = depthFrame.profile.as_video_stream_profile().intrinsics
-        depth = depthFrame.get_distance(pix[0], pix[1])
+        depth_intrin = self.depthFrame.profile.as_video_stream_profile().intrinsics
+        depth = self.depthFrame.get_distance(pix[0], pix[1])
         coord = rs.rs2_deproject_pixel_to_point(depth_intrin, pix, depth)
         coord = list(map(lambda x: int(round(x, 3) * 1000), coord))
         return coord
@@ -58,15 +60,15 @@ class Camera:
     def _getImage(self, frame):
 
         image = frame.get_color_frame()
-        image = np.asanyarray(image.get_data())
-        return image
+        self.image = np.asanyarray(image.get_data())
+
 
     def _getDepth(self, frame):
 
-        depthRS = frame.get_depth_frame()
-        depthNP = np.asanyarray(depthRS.get_data())
+        self.depthRS = frame.get_depth_frame()
+        self.depthNP = np.asanyarray(self.depthRS.get_data())
 
-        return depthRS, depthNP
+
 
 
 
