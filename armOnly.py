@@ -14,7 +14,7 @@ import traceback
 
 output = Streamer()
 camera = Camera()
-coms   = Communicator()
+
 
 
 ep = EngineProcessor('/home/andrii/Gus2/networks/yolo_asparagus/model.engine')
@@ -28,7 +28,7 @@ pather = Pather(camera = camera, min_lenght = 0, min_dist = 100000)
 ep.initalize()
 camera.initCamera()
 output.initStreamer()
-coms.initComs()
+
 
 armReady = None
 try:
