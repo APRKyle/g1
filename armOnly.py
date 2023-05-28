@@ -41,16 +41,16 @@ try:
         net_output = ep.process(image_data)
         boxes, masks, classid = pop.process(net_output)
 
-        if len(classid) == 0:
-            continue
-
-        spears = asparagusProcessor.process(boxes, masks)
-        stopSignal, spear, spear3d = pather.processSpears(spears)
+        if len(classid) != 0:
 
 
+            spears = asparagusProcessor.process(boxes, masks)
+            stopSignal, spear, spear3d = pather.processSpears(spears)
 
-        if len(spears) != 0:
-            image = viz.process(image, spears)
+
+
+            if len(spears) != 0:
+                image = viz.process(image, spears)
 
         output.Render(image)
 
