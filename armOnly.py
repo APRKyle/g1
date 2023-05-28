@@ -3,7 +3,7 @@ from yolo_inferencing.PreProcessor import PreProcessor
 from yolo_inferencing.EngineProcessor import EngineProcessor
 
 from subs.Camera import Camera
-from subs.VideoInterface import Output
+from subs.VideoInterface import Streamer
 from subs.AsparagusProcessor import AsparagusProcessor
 from subs.Pather import Pather
 from subs.Communicator import Communicator
@@ -12,7 +12,7 @@ import cv2
 import numpy as np
 import traceback
 
-output = Output(path = 'video.mp4')
+output = Streamer()
 camera = Camera()
 coms   = Communicator()
 
@@ -27,7 +27,7 @@ pather = Pather(camera = camera, min_lenght = 0, min_dist = 100000)
 
 ep.initalize()
 camera.initCamera()
-output.initOutput()
+output.initStreamer()
 coms.initComs()
 
 armReady = None
