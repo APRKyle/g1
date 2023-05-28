@@ -49,8 +49,8 @@ try:
 
 
 
-        if len(spears) == 0:
-            continue
+        if len(spears) != 0:
+            image = viz.process(image, spears)
 
         output.Render(image)
 
