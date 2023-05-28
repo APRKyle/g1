@@ -1,6 +1,6 @@
 
 
-
+import numpy as np
 class Spear:
     def __init__(self, box, mask, bot_point, top_point, top_3d, bot_3d, lenght, id):
         self.box = box
