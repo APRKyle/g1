@@ -13,17 +13,16 @@ class AsparagusProcessor:
     def process(self, boxes, masks):
         spears = []
         for idx, (box, mask) in enumerate(zip(boxes, masks)):
-            # asparagus[0] - y
-            # asparagus[1] - x
+
 
             asparagus = np.where(mask == 1)
             asparagus = np.array([asparagus[0], asparagus[1]])
 
             length = box[3] - box[1]
             bot_part = asparagus[:, asparagus[0] > box[3] - length * 0.06]
-            print(f'bot_part: {bot_part}')
+
             bot_point = np.mean(bot_part, axis=1).astype(np.int)[::-1]
-            print(f'bot_point: {bot_point}')
+
 
 
             top_part = asparagus[:, asparagus[0] < box[1] + length * 0.06]

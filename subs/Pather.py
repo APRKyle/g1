@@ -47,7 +47,8 @@ class Pather:
         efficient_spear3d = None
 
         for idx, spear in enumerate(spears):
-
+            if np.all(spear.bot_3d == 0):
+                continue
             botArm = self._transformIntoRobot(spear.bot_3d)
             distance = np.linalg.norm(botArm)
 
