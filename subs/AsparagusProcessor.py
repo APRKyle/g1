@@ -17,7 +17,7 @@ class AsparagusProcessor:
 
 
             asparagusMask = np.where(mask == 1)
-
+            print(f'asparagusMask unique: {np.unique(asparagusMask)}')
             m1 = unreachable[0] == asparagusMask[0]
             m2 = unreachable[1] == asparagusMask[1]
             m3 = m1*m2
