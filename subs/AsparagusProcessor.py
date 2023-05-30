@@ -21,7 +21,7 @@ class AsparagusProcessor:
             m1 = unreachable[0] == asparagusMask[0]
             m2 = unreachable[1] == asparagusMask[1]
             m3 = m1*m2
-            print(f'unreachable: {unreachable}')
+            print(f'unreachable: {len(unreachable[0])}')
             print(f' unreachable and saparagus: {np.where(m3 == True)}')
             asparagus = np.array([asparagusMask[0][m3], asparagusMask[1][m3]])
 
