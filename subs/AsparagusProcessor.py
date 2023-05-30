@@ -16,7 +16,7 @@ class AsparagusProcessor:
         for idx, (box, mask) in enumerate(zip(boxes, masks)):
 
             mask[np.logical_and(mask == 1, self.camera.depthNP == 0)] = 0
-
+            print(np.unique(mask))
             asparagusMask = np.where(mask == 1)
 
 
