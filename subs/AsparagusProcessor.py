@@ -36,7 +36,8 @@ class AsparagusProcessor:
             top_point3d = self.camera._calculatePix3D(top_point)
             length = np.linalg.norm(bot_point3d - top_point3d)
 
-            pcdata = self.camera.depthNP[asparagus[0], asparagus[1]]
+            # pcdata = self.camera.depthNP[asparagus[0], asparagus[1]]
+            pcdata = np.array([1,1])
             spears.append(Spear(box = box, mask = mask,
                                  top_point = top_point, bot_point = bot_point,
                                  top_3d=top_point3d, bot_3d = bot_point3d,

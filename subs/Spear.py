@@ -18,7 +18,8 @@ class Spear:
         return f'{"-"*60} \nSPEAR: \n ' \
                f'Bot 3D: {self.bot_3d}\t Bot 2D: {self.bot_point} \n' \
                f'Top 3D: {self.top_3d}\t Top 2D: {self.top_point} \n' \
-               f'Lenght   :{self.lenght}'
+               f'Lenght   :{self.lenght}\n' \
+               f'pcdata un: {np.unique(self.pcdata)}'
 
 
 if __name__ == '__main__':
