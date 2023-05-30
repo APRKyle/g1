@@ -24,8 +24,9 @@ class AsparagusProcessor:
             print(f' asparagus after: {np.unique(asparagus)}')
             #asparagus 0 - y  asparagus 1 - x
             length = box[3] - box[1]
-            print(f' box : {box}')
+
             bot_part = asparagus[:, asparagus[0] > box[3] - length * self.botk]
+            print(f'bot part: {bot_part}')
             bot_point = np.mean(bot_part, axis=1).astype(np.int)[::-1]
 
             top_part = asparagus[:,asparagus[0] < box[1] + length * self.topk]
