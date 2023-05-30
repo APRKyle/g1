@@ -21,8 +21,8 @@ class AsparagusProcessor:
             m1 = unreachable[0] == asparagus[0]
             m2 = unreachable[1] == asparagus[1]
             m3 = m1*m2
-            asparagus = (asparagus[0][m3], asparagus[1][m3])
-            print(f' asparagus after: {np.unique(asparagus)}')
+            asparagus = np.array([asparagus[0][m3], asparagus[1][m3]])
+            print(f' asparagus after: {asparagus}')
             #asparagus 0 - y  asparagus 1 - x
             length = box[3] - box[1]
 
