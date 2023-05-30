@@ -36,7 +36,7 @@ try:
 
 
         camera.getData()
-        unreachable = np.where(camera.depthNP == 0)
+        # unreachable = np.where(camera.depthNP == 0)
         image = camera.image
         image_data = prp.process(image)
         net_output = ep.process(image_data)
