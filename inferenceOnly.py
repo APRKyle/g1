@@ -30,7 +30,7 @@ coms = Communicator(False, False)
 ep.initalize()
 camera.initCamera()
 output.initStreamer()
-asparagusProcessor = AsparagusProcessor(topk = 0.1, botk = 0.1, camera = camera)
+asparagusProcessor = AsparagusProcessor(topk = 0.06, botk = 0.06, camera = camera)
 try:
     while True:
 
