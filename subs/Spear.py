@@ -2,7 +2,7 @@
 
 import numpy as np
 class Spear:
-    def __init__(self, box, mask, bot_point, top_point, top_3d, bot_3d, lenght, id, pcdata):
+    def __init__(self, box, mask, bot_point, top_point, top_3d, bot_3d, lenght, id):
         self.box = box
         self.mask = mask
         self.bot_point = bot_point
@@ -12,14 +12,13 @@ class Spear:
         self.lenght = lenght
         self.id = id
         self.mid_point = (self.top_point + (self.bot_point - self.top_point)//2).astype(np.int)
-        self.pcdata = pcdata
+
 
     def __str__(self):
         return f'{"-"*60} \nSPEAR: \n ' \
                f'Bot 3D: {self.bot_3d}\t Bot 2D: {self.bot_point} \n' \
                f'Top 3D: {self.top_3d}\t Top 2D: {self.top_point} \n' \
-               f'Lenght   :{self.lenght}\n' \
-               f'pcdata un: {np.unique(self.pcdata)}'
+               f'Lenght   :{self.lenght}\n'
 
 
 if __name__ == '__main__':
