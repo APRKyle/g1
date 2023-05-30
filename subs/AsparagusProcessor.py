@@ -17,19 +17,16 @@ class AsparagusProcessor:
 
 
             asparagus = np.where(mask == 1)
-            asparagus = np.array([asparagus[0], asparagus[1]])
+
 
             # indices = np.where((coordinates1[0] != coordinates2[0]) | (coordinates1[1] != coordinates2[1]))
             # different_coordinates2 = (coordinates2[0][indices], coordinates2[1][indices])
 
             indices = np.where((unreachable[0] != asparagus[0]) | (unreachable[1] != asparagus[1]))
             asparagus = np.array([asparagus[0][indices], asparagus[1][indices]])
-
+            #asparagus 0 - y  asparagus 1 - x
             length = box[3] - box[1]
-            # bot_part = asparagus[:, asparagus[0] > box[3] - length * self.botk]
-            # bot_point = np.mean(bot_part, axis=1).astype(np.int)[::-1]
-            # top_part = asparagus[:, asparagus[0] < box[1] + length * self.topk]
-            # top_point = np.mean(top_part, axis=1).astype(np.int)[::-1]
+
 
             bot_part = asparagus[:, asparagus[0] > box[3] - length * self.botk]
 
