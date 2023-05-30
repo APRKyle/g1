@@ -23,6 +23,9 @@ class AsparagusProcessor:
             # different_coordinates2 = (coordinates2[0][indices], coordinates2[1][indices])
 
             indices = np.where((unreachable[0] != asparagus[0]) | (unreachable[1] != asparagus[1]))
+            print(f'unique unreachable')
+            print(f'{np.unique(unreachable)}')
+            print(f'indicies: {np.unique(indices)}')
             asparagus = np.array([asparagus[0][indices], asparagus[1][indices]])
             print('-'*20)
             print(np.unique(asparagus[0]))
