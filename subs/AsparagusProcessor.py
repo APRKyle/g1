@@ -12,12 +12,15 @@ class AsparagusProcessor:
 
     def process(self, boxes, masks):
         spears = []
+        unreachable = np.where(self.camera.depthNP == 0)
         for idx, (box, mask) in enumerate(zip(boxes, masks)):
 
 
             asparagus = np.where(mask == 1)
             asparagus = np.array([asparagus[0], asparagus[1]])
 
+            indices = np.where((unreachable[0] != asparagus[0]) | (unreachable[1] != asparagus[1]))
+            asparagus = (unreachable[0][indices], asparagus[1][indices])
             length = box[3] - box[1]
             # bot_part = asparagus[:, asparagus[0] > box[3] - length * self.botk]
             # bot_point = np.mean(bot_part, axis=1).astype(np.int)[::-1]
