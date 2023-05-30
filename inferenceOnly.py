@@ -16,7 +16,8 @@ import traceback
 output = Streamer(ip = '192.168.1.232', port = 5000)
 camera = Camera()
 
-ep = EngineProcessor('/home/andrii/Gus2/networks/yolo_asparagus/model.engine')
+# ep = EngineProcessor('/home/andrii/Gus2/networks/yolo_asparagus/model.engine')
+ep = EngineProcessor('/home/andrii/Gus2/networks/yolo8_3/model.engine')
 prp = PreProcessor()
 pop = PostProcessor(iou_threshold = 0.8, class_threshold = 0.85,
                  input_height = 480, input_width = 640, img_height = 480, img_width = 640,
@@ -43,10 +44,11 @@ try:
 
 
             spears = asparagusProcessor.process(boxes, masks)
-            stopSignal, spear, spear3d = pather.processSpears(spears)
-
             for s in spears:
                 print(s)
+            stopSignal, spear, spear3d = pather.processSpears(spears)
+
+
 
             if len(spears) != 0:
                 image = viz.process(image, spears)
