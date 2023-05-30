@@ -17,7 +17,7 @@ output = Streamer(ip = '192.168.1.108', port = 5000)
 camera = Camera()
 
 # ep = EngineProcessor('/home/andrii/Gus2/networks/yolo_asparagus/model.engine')
-ep = EngineProcessor('/home/andrii/Gus2/networks/yolo8_3/model.engine')
+ep = EngineProcessor('/home/andrii/Gus2/networks/yolo2/model.engine')
 prp = PreProcessor()
 pop = PostProcessor(iou_threshold = 0.8, class_threshold = 0.85,
                  input_height = 480, input_width = 640, img_height = 480, img_width = 640,
