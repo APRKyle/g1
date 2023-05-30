@@ -19,7 +19,8 @@ class AsparagusProcessor:
             mask[np.logical_and(mask == 1, self.camera.depthNP == 0)] = 0
             print(f'unique mask: {np.unique(mask)}')
             print(f'mask shape: {mask.shape}')
-            asparagusMask = np.where(mask == 1.0)
+            print(f'mask dtype: {mask.dtype}')
+            asparagusMask = np.where(mask == 1)
 
             print(f'asparagus mask: {asparagusMask}')
 
