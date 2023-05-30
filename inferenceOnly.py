@@ -41,7 +41,7 @@ try:
         net_output = ep.process(image_data)
         boxes, masks, classid = pop.process(net_output)
         if len(classid) != 0:
-            print(f'depth np shape: {camera.depthNP.shape}')
+            print(f'np.unique: {np.unique(camera.depthNP)}')
 
             spears = asparagusProcessor.process(boxes, masks)
             for s in spears:
