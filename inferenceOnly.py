@@ -36,7 +36,7 @@ try:
 
 
         camera.getData()
-        # unreachable = np.where(camera.depthNP == 0)
+        unreachable = np.where(camera.depthNP == 0)
         image = camera.image
         image_data = prp.process(image)
         net_output = ep.process(image_data)
@@ -53,7 +53,7 @@ try:
 
             if len(spears) != 0:
                 image = viz.process(image, spears)
-        # image[unreachable[0], unreachable[1], :] = 0
+        image[unreachable[0], unreachable[1], :] = 0
         output.Render(image)
 
 except Exception as e:
