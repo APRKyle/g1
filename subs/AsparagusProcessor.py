@@ -18,9 +18,10 @@ class AsparagusProcessor:
 
             asparagus = np.where(mask == 1)
 
-
-            indices = np.where((unreachable[0] != asparagus[0]) | (unreachable[1] != asparagus[1]))
-            asparagus = np.array([asparagus[0][indices], asparagus[1][indices]])
+            m1 = unreachable[0] == asparagus[0]
+            m2 = unreachable[1] == asparagus[1]
+            m3 = m1*m2
+            asparagus = (asparagus[0][m3], asparagus[1][m3])
             print(f' asparagus after: {np.unique(asparagus)}')
             #asparagus 0 - y  asparagus 1 - x
             length = box[3] - box[1]
