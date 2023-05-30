@@ -20,7 +20,7 @@ class AsparagusProcessor:
             asparagus = np.array([asparagus[0], asparagus[1]])
 
             indices = np.where((unreachable[0] != asparagus[0]) | (unreachable[1] != asparagus[1]))
-            asparagus = np.array([unreachable[0][indices], asparagus[1][indices]])
+            asparagus = np.array([unreachable[1][indices], asparagus[0][indices]])
 
             length = box[3] - box[1]
             # bot_part = asparagus[:, asparagus[0] > box[3] - length * self.botk]
