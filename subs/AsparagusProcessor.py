@@ -14,9 +14,11 @@ class AsparagusProcessor:
         spears = []
 
         for idx, (box, mask) in enumerate(zip(boxes, masks)):
-
+            a = np.logical_and(mask == 1, self.camera.depthNP == 0)
+            print(f'logical stuff: {np.unqiue(a)}')
             mask[np.logical_and(mask == 1, self.camera.depthNP == 0)] = 0
-            print(np.unique(mask))
+            print(f'unique mask: {np.unique(mask)}')
+            print(f'mask shape: {mask.shape}')
             asparagusMask = np.where(mask == 1)
 
 
