@@ -18,20 +18,21 @@ class AsparagusProcessor:
 
             asparagus = np.where(mask == 1)
 
-
+            print(f' asparagus')
+            print(f'Y : {asparagus[0]}')
+            print(f'X : {asparagus[1]}')
+            print(f'unreachable')
+            print(f'Y: {unreachable[0]}')
+            print(f'X: {unreachable[1]}')
             # indices = np.where((coordinates1[0] != coordinates2[0]) | (coordinates1[1] != coordinates2[1]))
             # different_coordinates2 = (coordinates2[0][indices], coordinates2[1][indices])
 
             indices = np.where((unreachable[0] != asparagus[0]) | (unreachable[1] != asparagus[1]))
-            print(f'unique unreachable')
-            print(f'y: {np.unique(unreachable[0])}')
-            print(f'x: {np.unique(unreachable[1])}')
-            print(f'indicies: {np.unique(indices)}')
+
             asparagus = np.array([asparagus[0][indices], asparagus[1][indices]])
-            print('-'*20)
-            print(np.unique(asparagus[0]))
-            print(np.unique(asparagus[1]))
-            print('-' * 20)
+            print(f'asparagus after')
+            print(f'Y {asparagus[0]}')
+            print(f'X {asparagus[1]}')
             #asparagus 0 - y  asparagus 1 - x
             length = box[3] - box[1]
 
