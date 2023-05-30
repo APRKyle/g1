@@ -22,7 +22,7 @@ class AsparagusProcessor:
 
             print(f'asparagus mask: {asparagusMask}')
 
-            asparagus = np.array(asparagusMask[0], asparagusMask[1])
+            asparagus = np.array([asparagusMask[0], asparagusMask[1]])
 
             length2d = box[3] - box[1]
 
