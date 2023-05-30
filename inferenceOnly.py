@@ -22,7 +22,7 @@ prp = PreProcessor()
 pop = PostProcessor(iou_threshold = 0.8, class_threshold = 0.85,
                  input_height = 480, input_width = 640, img_height = 480, img_width = 640,
                   num_masks = 32)
-asparagusProcessor = AsparagusProcessor(topk = 0.1, botk = 0.1, camera = camera)
+
 pather = Pather(min_lenght = 0, min_dist = 100000)
 viz = Vizualizer()
 coms = Communicator(False, False)
@@ -30,7 +30,7 @@ coms = Communicator(False, False)
 ep.initalize()
 camera.initCamera()
 output.initStreamer()
-
+asparagusProcessor = AsparagusProcessor(topk = 0.1, botk = 0.1, camera = camera)
 try:
     while True:
 
