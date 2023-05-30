@@ -19,12 +19,18 @@ class AsparagusProcessor:
             asparagus = np.array([asparagus[0], asparagus[1]])
 
             length = box[3] - box[1]
-            bot_part = asparagus[:, asparagus[0] > box[3] - length * self.botk]
+            bot_part = asparagus[asparagus[0] > box[3] - length * self.botk, :]
+            bot_point = np.mean(bot_part, axis=0).astype(np.int)
+            top_part = asparagus[asparagus[0] < box[1] + length * self.topk, :]
+            top_point = np.mean(top_part, axis=0).astype(np.int)
 
-            bot_point = np.mean(bot_part, axis=1).astype(np.int)[::-1]
+            # bot_part = asparagus[:, asparagus[0] > box[3] - length * self.botk]
+            #
+            # bot_point = np.mean(bot_part, axis=1).astype(np.int)[::-1]
+            #
+            # top_part = asparagus[:, asparagus[0] < box[1] + length * self.topk]
+            # top_point = np.mean(top_part, axis=1).astype(np.int)[::-1]
 
-            top_part = asparagus[:, asparagus[0] < box[1] + length * self.topk]
-            top_point = np.mean(top_part, axis=1).astype(np.int)[::-1]
 
             bot_point3d = self.camera._calculatePix3D(bot_point)
             top_point3d = self.camera._calculatePix3D(top_point)
