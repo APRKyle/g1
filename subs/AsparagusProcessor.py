@@ -23,9 +23,10 @@ class AsparagusProcessor:
             m3 = m1*m2
 
             asparagus = np.array([asparagusMask[0][m3], asparagusMask[1][m3]])
-
+            print(f'asparagus after: {asparagus}')
             length2d = box[3] - box[1]
             print(f'length 2d : {length2d}')
+            print(f'boxes: {boxes}')
             bot_part = asparagus[:, asparagus[0] > box[3] - length2d * self.botk]
 
             bot_point = np.mean(bot_part, axis=1).astype(np.int)[::-1]
