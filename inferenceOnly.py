@@ -36,12 +36,13 @@ try:
 
 
         camera.getData()
+        print(f'np.unique: {np.unique(camera.depthNP)}')
         image = camera.image
         image_data = prp.process(image)
         net_output = ep.process(image_data)
         boxes, masks, classid = pop.process(net_output)
         if len(classid) != 0:
-            print(f'np.unique: {np.unique(camera.depthNP)}')
+
 
             spears = asparagusProcessor.process(boxes, masks)
             for s in spears:
