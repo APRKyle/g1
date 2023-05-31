@@ -24,7 +24,7 @@ class Vizualizer:
             cv2.circle(image, (spear.bot_point[0], spear.bot_point[1]), 1, (0, 0, 255), 2)
             cv2.line(image, (spear.top_point[0], spear.top_point[1]), (spear.bot_point[0], spear.bot_point[1]), (255, 0, 0), 1)
             rounded_length = '{:.2f}'.format(spear.lenght)
-            cv2.putText(image, rounded_length, (spear.mid_point), self.font, self.font_scale, self.color, self.thickness)
+            cv2.putText(image, rounded_length, (spear.mid_point[0], spear.mid_point[1]), self.font, self.font_scale, self.color, self.thickness)
 
         return image
 
