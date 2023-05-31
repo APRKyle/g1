@@ -13,7 +13,7 @@ import cv2
 import numpy as np
 import traceback
 
-output = Streamer(ip = '192.168.1.232', port = 5000)
+output = Streamer(ip = '192.168.1.108', port = 5000)
 camera = Camera()
 
 ep = EngineProcessor('/home/andrii/Gus2/networks/yolo_asparagus/model.engine')
