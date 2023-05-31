@@ -45,7 +45,7 @@ class Communicator:
 
     def _sendGoToNav(self):
         GPIO.output(self.gpioOutputPin, GPIO.LOW)
-        self.NAV_SHOULD_MOVE = True
+        self.NAV_SHOULD_MOVE = False
 
     def _readNavSignal(self):
         value = GPIO.input(self.gpioInputPin)

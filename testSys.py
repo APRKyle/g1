@@ -34,7 +34,7 @@ output.initStreamer()
 
 
 while True:
-    a = input('Propmt (1 - Go NAV; 2 - Stop Nav; 3 - Send dummy cords)')
+    a = int(input('Propmt (1 - Go NAV; 2 - Stop Nav; 3 - Send dummy cords)'))
     print(f'Input is: {a}')
     if a == 1:
         coms._sendGoToNav()
