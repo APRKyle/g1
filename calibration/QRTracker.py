@@ -14,7 +14,7 @@ class Tracker:
             mid_x = barcode[0][2][0] + int(barcode[0][2][2] / 2)
             mid_y = barcode[0][2][1] + int(barcode[0][2][3] / 2)
             coord = self.camera._calculatePix3D([mid_x, mid_y])
-            coord = list(map(lambda x: int(round(x, 3) * 1000), coord))
+            # coord = list(map(lambda x: int(round(x, 3) * 1000), coord))
             return coord
         except Exception as e:
             return None
