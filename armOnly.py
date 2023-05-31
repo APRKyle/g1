@@ -9,8 +9,7 @@ from subs.Pather import Pather
 from subs.Visualizer import Vizualizer
 from subs.Communicator import Communicator
 
-import cv2
-import numpy as np
+import time
 import traceback
 
 output = Streamer(ip = '192.168.1.108', port = 5000)
@@ -45,8 +44,12 @@ try:
             spears = asparagusProcessor.process(boxes, masks)
             stopSignal, spear, spear3d = pather.processSpears(spears)
 
+            for s in spears:
+                print(print(s))
             if stopSignal and coms.ARM_IS_READY:
+                print(f'spear sent: {spear3d}')
                 coms._sendCoordsToArm(spear3d)
+                time.sleep(5)
 
             if len(spears) != 0:
                 image = viz.process(image, spears)
