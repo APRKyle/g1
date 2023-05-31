@@ -15,7 +15,9 @@ class Communicator:
             GPIO.setmode(GPIO.BOARD)
             GPIO.setup(self.gpioOutputPin, GPIO.OUT, initial=GPIO.LOW)
             GPIO.setup(self.gpioInputPin, GPIO.IN)
+            self._sendStopToNav()
             self.NAV_IS_STOPPED = False
+            self.NAV_SHOULD_MOVE = False
         if self.arm_required:
             self.ARM_IS_READY = False
             self.arduino = serial.Serial(port='/dev/ttyUSB0', baudrate=19200, writeTimeout=0, timeout=0)
@@ -39,9 +41,11 @@ class Communicator:
 
     def _sendStopToNav(self):
         GPIO.output(self.gpioOutputPin, GPIO.HIGH)
+        self.NAV_SHOULD_MOVE = True
 
     def _sendGoToNav(self):
         GPIO.output(self.gpioOutputPin, GPIO.LOW)
+        self.NAV_SHOULD_MOVE = True
 
     def _readNavSignal(self):
         value = GPIO.input(self.gpioInputPin)
