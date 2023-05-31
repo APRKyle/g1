@@ -49,6 +49,7 @@ class Communicator:
 
     def _readNavSignal(self):
         value = GPIO.input(self.gpioInputPin)
+        print(f'value from nav gpio: {value}')
         if value == '1':
             self.NAV_IS_STOPPED = True
         else:
