@@ -28,6 +28,7 @@ if __name__ == '__main__':
     while True:
         camera.getData()
         c = tracker.get_coordinate()
+        print(c)
         output.Render(camera.image)
 
 
