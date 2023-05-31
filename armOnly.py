@@ -25,7 +25,7 @@ asparagusProcessor = AsparagusProcessor(topk = 0.06, botk = 0.06, camera = camer
 pather = Pather(min_lenght = 0, min_dist = 100000)
 viz = Vizualizer()
 coms = Communicator(nav_required=False, arm_required=True)
-
+coms.initComs()
 ep.initalize()
 camera.initCamera()
 output.initStreamer()
