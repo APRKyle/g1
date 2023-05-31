@@ -44,5 +44,5 @@ while True:
     if a == 3:
         coms._sendCoordsToArm([1,1,1])
     coms._readNavSignal()
-    print(f'NAV State: {coms.NAV_SHOULD_MOVE}')
-    print(f'Sig from NAV: {coms.NAV_IS_STOPPED}')
+    print(f'NAV should move: {coms.NAV_SHOULD_MOVE}')
+    print(f'NAV STOPPED: {coms.NAV_IS_STOPPED}')
