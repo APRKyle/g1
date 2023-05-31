@@ -10,6 +10,7 @@ class Tracker:
     def get_coordinate(self):
         image = self.camera.image
         barcode = decode(image)
+        print(barcode)
         mid_x = barcode[0][2][0] + int(barcode[0][2][2] / 2)
         mid_y = barcode[0][2][1] + int(barcode[0][2][3] / 2)
         coord = self.camera._calculatePix3D([mid_x, mid_y])
