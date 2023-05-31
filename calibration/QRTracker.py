@@ -17,6 +17,7 @@ class Tracker:
         return coord
 
 if __name__ == '__main__':
+    from calibration.QRTracker import Tracker
     from subs.Camera import Camera
     from subs.VideoInterface import Streamer
 
