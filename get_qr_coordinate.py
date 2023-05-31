@@ -6,7 +6,7 @@ camera = Camera()
 tracker = Tracker(camera=camera)
 camera.initCamera()
 output = Streamer(ip='192.168.1.108')
-
+output.initStreamer()
 while True:
     camera.getData()
     c = tracker.get_coordinate()
