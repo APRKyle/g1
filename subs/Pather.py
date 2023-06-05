@@ -52,7 +52,7 @@ class Pather:
                 continue
             botArm = self._transformIntoRobot(spear.bot_3d)
             distance = np.linalg.norm(botArm)
-            print(f' distance: {distance}')
+
             if spear.lenght > self.min_length:
                 if distance < self.min_dist:
                     efficient_spear2d = efficient_spear2d
