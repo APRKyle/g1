@@ -1,7 +1,7 @@
 import cv2
 
 import numpy as np
-from .calibration.QRTracker import Tracker
+from calibration.QRTracker import Tracker
 from .subs.Camera import Camera
 from .subs.Pather import Pather
 from subs.VideoInterface import Streamer
