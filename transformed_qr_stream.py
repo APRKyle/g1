@@ -82,7 +82,11 @@ pather = Pather(min_lenght = 0, min_dist = 10000000)
 while True:
     camera.getData()
     c = tracker.get_coordinate()
-    pather._transformIntoRobot(coord=c)
+    if c is not None:
+        cords = pather._transformIntoRobot(coord=c)
+    else:
+        cords = None
+    print(cords)
 
 
 
