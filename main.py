@@ -46,13 +46,16 @@ try:
             stopSignal, spear, spear3d = pather.processSpears(spears)
 
             if stopSignal:
+
                 coms._sendStopToNav()
                 if coms.NAV_IS_STOPPED and coms.ARM_IS_READY:
                     coms._sendCoordsToArm(spear3d)
             else:
                 coms._sendGoToNav()
 
-
+            print(f'Stop signal(spear detected): {stopSignal}')
+            print(f'nav is stoped: {coms.NAV_IS_STOPPED}')
+            print(f'arm is read: {coms.ARM_IS_READY}')
 
             if len(spears) != 0:
                 image = viz.process(image, spears)
