@@ -37,6 +37,7 @@ while True:
 
     a = int(input('Propmt (1 - Go NAV; 2 - Stop Nav; 3 - Send dummy cords)'))
     print(f'Input is: {a}')
+    camera.getData()
     if a == 1:
         coms._sendGoToNav()
     if a == 2:
@@ -47,4 +48,5 @@ while True:
     print(f'NAV should move: {coms.NAV_SHOULD_MOVE}')
     print(f'NAV STOPPED: {coms.NAV_IS_STOPPED}')
     print(f'Robot is ready: {coms.ARM_IS_READY}')
+    output.Render(camera.image)
 
