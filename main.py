@@ -22,7 +22,7 @@ pop = PostProcessor(iou_threshold = 0.8, class_threshold = 0.85,
                  input_height = 480, input_width = 640, img_height = 480, img_width = 640,
                   num_masks = 32)
 asparagusProcessor = AsparagusProcessor(topk = 0.1, botk = 0.08, camera = camera)
-pather = Pather(min_lenght = 0, min_dist = 100000)
+pather = Pather(min_lenght = 0, min_dist = 550)
 viz = Vizualizer()
 coms = Communicator(nav_required=True, arm_required=True)
 coms.initComs()
@@ -54,9 +54,7 @@ try:
             else:
                 coms._sendGoToNav()
 
-            print(f'Stop signal(spear detected): {stopSignal}')
-            print(f'nav is stoped: {coms.NAV_IS_STOPPED}')
-            print(f'arm is read: {coms.ARM_IS_READY}')
+
 
             if len(spears) != 0:
                 image = viz.process(image, spears)
