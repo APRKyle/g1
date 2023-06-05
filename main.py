@@ -56,6 +56,8 @@ try:
 
             if len(spears) != 0:
                 image = viz.process(image, spears)
+        else:
+            coms._sendGoToNav()
 
         output.Render(image)
 
