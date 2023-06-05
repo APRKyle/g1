@@ -87,6 +87,7 @@ while True:
     else:
         cords = None
     print(cords)
+    output.Render(camera.image)
 
 
 
