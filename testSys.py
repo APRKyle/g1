@@ -46,3 +46,5 @@ while True:
     coms._readNavSignal()
     print(f'NAV should move: {coms.NAV_SHOULD_MOVE}')
     print(f'NAV STOPPED: {coms.NAV_IS_STOPPED}')
+    print(f'Robot is ready: {coms.ARM_IS_READY}')
+
