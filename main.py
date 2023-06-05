@@ -33,7 +33,7 @@ output.initStreamer()
 try:
     while True:
 
-
+        coms._readNavSignal()
         camera.getData()
         image = camera.image
         image_data = prp.process(image)
