@@ -10,6 +10,6 @@ output.initStreamer()
 while True:
     camera.getData()
     c = tracker.get_coordinate()
-    c.gc2()
+    tracker.gc2()
     print(c)
     output.Render(camera.image)
