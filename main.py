@@ -57,6 +57,8 @@ try:
 
 
             if len(spears) != 0:
+                for s in spear:
+                    print(s)
                 image = viz.process(image, spears)
         else:
             coms._sendGoToNav()
