@@ -20,6 +20,13 @@ class Tracker:
             print(e)
             return None
 
+    def gc2(self):
+        retval, decoded_info, points, straight_qrcode = self.qrDecoder.detectAndDecodeMulti(self.camera.img)
+        print(f'retrieve: {retval}')
+
+
+        retval, decoded_info, points, straight_qrcode = qcd.detectAndDecodeMulti(img)
+
 if __name__ == '__main__':
     from calibration.QRTracker import Tracker
     from subs.Camera import Camera
