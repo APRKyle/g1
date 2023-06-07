@@ -3,8 +3,9 @@ from subs.Camera import Camera
 from subs.VideoInterface import Streamer
 
 camera = Camera(imageHeight=720, imageWidth=1280, fps=15)
-tracker = Tracker(camera=camera)
 camera.initCamera()
+tracker = Tracker(camera=camera)
+
 output = Streamer(ip='192.168.1.108')
 output.initStreamer()
 
