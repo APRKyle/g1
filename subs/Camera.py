@@ -24,7 +24,7 @@ class Camera:
         pipeline_profile = config.resolve(pipeline_wrapper)
         device = pipeline_profile.get_device()
         device_product_line = str(device.get_info(rs.camera_info.product_line))
-        config.enable_stream(rs.stream.depth, self.imageWidth, self.imageHeight, rs.format.z16, 6)
+        config.enable_stream(rs.stream.depth, self.imageWidth, self.imageHeight, rs.format.z16, self.FPS)
         config.enable_stream(rs.stream.color, self.imageWidth, self.imageHeight, rs.format.rgb8, self.FPS)
         profile = pipeline.start(config)
 
