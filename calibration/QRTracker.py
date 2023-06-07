@@ -13,6 +13,7 @@ class Tracker:
         try:
             mid_x = barcode[0][2][0] + int(barcode[0][2][2] / 2)
             mid_y = barcode[0][2][1] + int(barcode[0][2][3] / 2)
+            cv2.circle(image, (mid_x, mid_y, 4, (0,255,0), 3))
             coord = self.camera._calculatePix3D([mid_x, mid_y])
             # coord = list(map(lambda x: int(round(x, 3) * 1000), coord))
             return coord
