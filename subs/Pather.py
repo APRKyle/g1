@@ -56,9 +56,10 @@ class Pather:
             print(f'distance: {distance}')
             if spear.lenght > self.min_length:
                 if distance < self.min_dist:
-                    efficient_spear2d = efficient_spear2d
-                    efficient_spear3d = botArm
-                    stop_signal = True
+                    if cd < 820:
+                        efficient_spear2d = efficient_spear2d
+                        efficient_spear3d = botArm
+                        stop_signal = True
 
         return stop_signal, efficient_spear2d, efficient_spear3d
 
