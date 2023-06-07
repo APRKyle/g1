@@ -18,7 +18,6 @@ class Tracker:
             # coord = list(map(lambda x: int(round(x, 3) * 1000), coord))
             return coord
         except Exception as e:
-            print(e)
             return None
 
     def gc2(self):
