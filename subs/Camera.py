@@ -11,10 +11,11 @@ import RPi.GPIO as GPIO
 
 
 class Camera:
-    def __init__(self, imageHeight=480, imageWidth=640, fps=30):
+    def __init__(self, imageHeight=480, imageWidth=640, fps=30, dfps = 30):
         self.imageHeight = imageHeight
         self.imageWidth = imageWidth
         self.FPS = fps
+        self.DepthFPS = dfps
 
 
     def initCamera(self):
@@ -24,7 +25,7 @@ class Camera:
         pipeline_profile = config.resolve(pipeline_wrapper)
         device = pipeline_profile.get_device()
         device_product_line = str(device.get_info(rs.camera_info.product_line))
-        config.enable_stream(rs.stream.depth, self.imageWidth, self.imageHeight, rs.format.z16, 6)
+        config.enable_stream(rs.stream.depth, self.imageWidth, self.imageHeight, rs.format.z16, self.DepthFPS)
         config.enable_stream(rs.stream.color, self.imageWidth, self.imageHeight, rs.format.rgb8, self.FPS)
         profile = pipeline.start(config)
 

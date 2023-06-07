@@ -2,7 +2,7 @@ from calibration.QRTracker import Tracker
 from subs.Camera import Camera
 from subs.VideoInterface import Streamer
 
-camera = Camera(imageHeight=720, imageWidth=1280, fps=15)
+camera = Camera(imageHeight=720, imageWidth=1280, fps=15, dfps=6)
 camera.initCamera()
 tracker = Tracker(camera=camera)
 
