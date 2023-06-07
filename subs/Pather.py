@@ -49,6 +49,8 @@ class Pather:
             if np.all(spear.bot_3d == 0):
                 print('unreachable depth')
                 continue
+            cd = np.linalg.norm(spear.bot_3d)
+            print(f'camera distance: {cd}')
             botArm = self._transformIntoRobot(spear.bot_3d)
             distance = np.linalg.norm(botArm)
             print(f'distance: {distance}')
