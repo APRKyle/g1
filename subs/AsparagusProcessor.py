@@ -20,8 +20,10 @@ class AsparagusProcessor:
 
             asparagusMask = np.where(mask == 1)
 
+            print(f'mask shape: {mask.shape}')
             asparagus = np.array([asparagusMask[0], asparagusMask[1]])
-
+            print(f'0 min: {asparagus[0].min()} max: {asparagus[0].max()}')
+            print(f'1 min: {asparagus[1].min()} max: {asparagus[1].max()}')
             length2d = box[3] - box[1]
 
             bot_part = asparagus[:, asparagus[0] > box[3] - length2d * self.botk]

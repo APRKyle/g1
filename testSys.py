@@ -50,4 +50,3 @@ while True:
     print(f'Robot is ready: {coms.ARM_IS_READY}')
     output.Render(camera.image)
 
-print('huyesos')
