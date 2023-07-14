@@ -33,6 +33,7 @@ try:
     while True:
         coms._readSignalFromArm()
 
+
         camera.getData()
         image = camera.image
         image_data = prp.process(image)
