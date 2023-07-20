@@ -25,8 +25,10 @@ class AsparagusProcessor:
             print(f'0 min: {asparagus[0].min()} max: {asparagus[0].max()}')
             print(f'1 min: {asparagus[1].min()} max: {asparagus[1].max()}')
             length2d = box[3] - box[1]
-
             bot_part = asparagus[:, asparagus[0] > box[3] - length2d * self.botk]
+            #length2d = asparagus[0].max() - asparagus[0].min()
+            #bot_part = asparagus[:, asparagus[0] > asparagus[0].max() - length2d*self.botk]
+            #same with top part buth change max to min
 
             bot_point = np.mean(bot_part, axis=1).astype(np.int)[::-1]
 
