@@ -15,16 +15,16 @@ class Spear:
         self.skeleton_3d = skeleton3d
 
     def to_dict(self):
-        return {'box'       : self.box,
-                'mask'      : self.mask,
-                'bot_point' : self.bot_point,
-                'top_point' : self.top_point,
-                'top_3d'    : self.top_3d,
-                'bot_3d'    : self.bot_3d,
+        return {'box'       : self.box.tolist(),
+                'mask'      : self.mask.tolist(),
+                'bot_point' : self.bot_point.tolist(),
+                'top_point' : self.top_point.tolist(),
+                'top_3d'    : self.top_3d.tolist(),
+                'bot_3d'    : self.bot_3d.tolist(),
                 'length'    : self.lenght,
                 'id'        : self.id,
-                'skeleton'  : self.skeleton,
-                'skeleton3d': self.skeleton_3d}
+                'skeleton'  : self.skeleton.tolist(),
+                'skeleton3d': self.skeleton_3d.tolist()}
 
 
     @classmethod
