@@ -30,12 +30,12 @@ output.initStreamer()
 
 
 ignore_distance = 500
-botk = 0.05
-topk = 0.05
+botk = 0.01
+topk = 0.01
 
 
 
-def split_into_n_pices(n , indexes):
+def split_into_n_pices(n , indexes, topk, botk):
 
     dist = indexes[0].max() - indexes[0].min()
     step = dist//n
@@ -45,7 +45,12 @@ def split_into_n_pices(n , indexes):
         part = indexes[:, np.logical_and(indexes[0] >=c, indexes[0] <= c + step)]
         res.append(np.mean(part, axis = 1).astype(np.int)[::-1])
         c = c + step
-    return res
+
+    bot_part = indexes[:, indexes[0] > indexes[0].max() - dist * botk]
+    top_part = indexes[:, indexes[0] < indexes[0].min() + dist * topk]
+    bot_point = np.mean(bot_part, axis = 1).astype(np.int)[::-1]
+    top_point = np.mean(top_part, axis = 1).astype(np.int)[::-1]
+    return res, bot_part, top_part
 
 
 try:
@@ -71,17 +76,27 @@ try:
                 if np.all(np.all(mask == 0)):
                     continue
 
-
-
-                mask = mask.astype(np.uint8)
+                mask = mask.astype(np.int)
                 asparagusMask = np.where(mask == 1)
                 asparagus = np.array([asparagusMask[0], asparagusMask[1]])
+                # asparagus: 0 -  y coordinate, 1 - x coordinate
 
+
+                res, bot_point, top_point = split_into_n_pices(10, asparagus, topk, botk)
+
+
+                # spears.append(Spear(box=box, mask=mask,
+                #                     top_point=top_point, bot_point=bot_point,
+                #                     top_3d=top_point3d, bot_3d=bot_point3d,
+                #                     lenght=length, id=idx,
+                #                     ))
                 image[asparagus[0], asparagus[1], 1] = 120
 
-                res = split_into_n_pices(10, asparagus)
+
                 for v in res:
-                    cv2.circle(image, (v[0], v[1]), 4, (255, 0, 0), 3)
+                    cv2.circle(image, (v[0], v[1]), 2, (255, 0, 0), 2)
+                cv2.cicle(image, (bot_point[0], bot_point[1]), 3, (0,0,255), 3)
+                cv2.circle(image, (top_point[0], top_point[1]), 3, (0,0,255), 3)
 
 
 
