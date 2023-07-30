@@ -63,14 +63,8 @@ try:
                 asparagusMask = np.where(mask == 1)
                 asparagus = np.array([asparagusMask[0], asparagusMask[1]])
 
-                c = []
-                for i in range(len(asparagus)):
-                    p  = np.array([asparagus[i][0], asparagus[i][1]])
-                    print(f'p : {p}')
-                    c.append(camera._calculatePix3D(pix = [p[0], p[1]]))
-                print(c)
-                # skeleton =  cv2.ximgproc.thinning(mask, thinningType=cv2.ximgproc.THINNING_GUOHALL)
-                # skeleton =  np.where(skeleton == 1)
+                print(asparagus[0])
+
                 image[asparagus[0], asparagus[1], 1] = 120
 
 
