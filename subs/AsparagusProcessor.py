@@ -18,11 +18,9 @@ class AsparagusProcessor:
 
             mask[np.logical_and(mask == 1, self.camera.depthNP == 0)] = 0  # stereo unreachable pixels distance check
             mask[np.logical_and(mask == 1, self.camera.depthNP > self.ignore_distance)] = 0
-            print('-'*20)
-            print(mask)
-            print(mask.shape)
-            print(f'min: {self.camera.depthNP.min()}  max: {self.camera.depthNP.max()}')
-            print('-'*20)
+
+            if np.all(np.all(mask == 0)):
+                continue
             mask = mask.astype(np.int)
 
             asparagusMask = np.where(mask == 1)
