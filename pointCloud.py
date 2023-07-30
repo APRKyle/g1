@@ -17,24 +17,26 @@ import traceback
 output = Streamer(ip = '192.168.1.232', port = 5000)
 camera = Camera()
 
-# ep = EngineProcessor('/home/andrii/Gus2/networks/yolo_asparagus/model.engine')
 ep = EngineProcessor('/home/andrii/Gus2/networks/yolo2/model.engine')
 prp = PreProcessor()
 pop = PostProcessor(iou_threshold = 0.8, class_threshold = 0.85,
                  input_height = 480, input_width = 640, img_height = 480, img_width = 640,
                   num_masks = 32)
 
-pather = Pather(min_lenght = 0, min_dist = 100000)
-viz = Vizualizer()
-coms = Communicator(False, False)
 
 ep.initalize()
 camera.initCamera()
 output.initStreamer()
-asparagusProcessor = AsparagusProcessor(topk = 0.06, botk = 0.06, camera = camera)
+
+
 ignore_distance = 300
 botk = 0.05
 topk = 0.05
+
+
+
+
+
 try:
     while True:
 
@@ -45,6 +47,11 @@ try:
         net_output = ep.process(image_data)
         boxes, masks, classid = pop.process(net_output)
         spears = []
+        m, valid_points = camera.getPointCloud()
+        print('-'*20)
+        print(m)
+        print(valid_points)
+        print('-'*20)
         if len(classid) != 0:
 
 

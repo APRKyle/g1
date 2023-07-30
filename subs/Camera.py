@@ -58,7 +58,16 @@ class Camera:
         coord = np.array(list(map(lambda x: int(round(x, 3) * 1000), coord)))
         return coord
 
+    def getPointCloud(self):
+        depth_intrin = self.depthRS.profile.as_video_stream_profile().intrinsics
+        points = rs.points()
+        points.import_from(self.depthRS)
+        vertices = np.asanyarray(points.get_vertices())
 
+        # Filter out invalid points (where z = 0)
+        mask = vertices[:, 2] > 0
+        valid_points = vertices[mask]
+        return mask, valid_points
 
     def _getImage(self, frame):
 
