@@ -64,7 +64,8 @@ try:
                 asparagus = np.array([asparagusMask[0], asparagusMask[1]])
 
                 c = []
-                for p in asparagus:
+                for i in range(len(asparagus)):
+                    p  = np.array([asparagus[i][0], asparagus[i][1]])
                     print(f'p : {p}')
                     c.append(camera._calculatePix3D(pix = [p[0], p[1]]))
                 print(c)
