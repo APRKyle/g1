@@ -41,9 +41,9 @@ def split_into_n_pices(n , mask):
     dist = indexes[0].max() - indexes[0].min()
     step = dist//n
     c = indexes[0].min()
-    part = indexes[np.logical_and(indexes[0] >=c, indexes[0] <= c + step), :]
+    part = indexes[:, np.logical_and(indexes[0] >=c, indexes[0] <= c + step)]
     print(part)
-    v  = np.mean(part, axis = 1)
+    v  = np.mean(part, axis = 1).astype(np.int)
     print(v)
     return v
 
