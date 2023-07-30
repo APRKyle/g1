@@ -41,11 +41,12 @@ def split_into_n_pices(n , mask):
     dist = indexes[0].max() - indexes[0].min()
     step = dist//n
     c = indexes[0].min()
-    part = indexes[:, np.logical_and(indexes[0] >=c, indexes[0] <= c + step)]
-
-    v  = np.mean(part, axis = 1).astype(np.int)[::-1]
-
-    return v
+    res = []
+    for i in range(n):
+        part = indexes[:, np.logical_and(indexes[0] >=c, indexes[0] <= c + step)]
+        res.append(np.mean(part, axis = 1).astype(np.int)[::-1])
+        c = c + step
+    return res
 
 
 try:
@@ -71,8 +72,9 @@ try:
                 if np.all(np.all(mask == 0)):
                     continue
 
-                v = split_into_n_pices(3, mask)
-                cv2.circle(image, (v[0], v[1]), 4, (255, 0, 0), 3)
+                res = split_into_n_pices(3, mask)
+                for v in res:
+                    cv2.circle(image, (v[0], v[1]), 4, (255, 0, 0), 3)
 
                 mask = mask.astype(np.uint8)
                 asparagusMask = np.where(mask == 1)
