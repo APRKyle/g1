@@ -76,11 +76,9 @@ class Camera:
 
         self.points.map_to(self.imageRS)
         pointcloud_data = self.points.calculate(self.depthRS)
-        vertices = np.asanyarray(pointcloud_data.get_vertices()).tolist()
+        vertices = np.asanyarray(pointcloud_data.get_vertices())
+        vertices = np.array([list(item) for item in vertices])
 
-        print('-'*20)
-        print(vertices)
-        print('-'*20)
         # Filter out invalid points (where z = 0)
         mask = vertices[:, 2] > 0
         valid_points = vertices[mask]
