@@ -60,12 +60,12 @@ try:
                 if np.all(np.all(mask == 0)):
                     continue
                 mask = mask.astype(np.uint8)
-                skeleton =  cv2.ximgproc.thinning(mask)
-                print('-'*20)
-                print(skeleton)
-                print(type(skeleton))
                 asparagusMask = np.where(mask == 1)
                 asparagus = np.array([asparagusMask[0], asparagusMask[1]])
+
+                skeleton =  cv2.ximgproc.thinning(mask)
+                print(np.unique(skeleton))
+                skeleton =  np.where(skeleton == 1)
                 image[asparagus[0], asparagus[1], 1] = 120
 
 
