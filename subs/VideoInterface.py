@@ -40,12 +40,12 @@ class Streamer:
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect((self.receiver_ip, self.receiver_port))
 
-    def Render(self, image, data_array):
-        # Serialize the image and additional data (data_array) to JSON
+    def Render(self, image, my_objects):
+        # Serialize the image and the array of MyClass objects to JSON
         frame_data = cv2.imencode('.jpg', image)[1].tostring()
         data = {
-            'image': frame_data.decode('latin1'),  # Convert bytes to string for JSON serialization
-            'data_array': data_array.tolist()  # Convert the NumPy array to a list for JSON serialization
+            'image': frame_data.decode('latin1'),
+            'spears': [obj.to_dict() for obj in my_objects]
         }
         json_data = json.dumps(data).encode('utf-8')
 
