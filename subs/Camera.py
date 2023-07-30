@@ -58,6 +58,8 @@ class Camera:
         coord = np.array(list(map(lambda x: int(round(x, 3) * 1000), coord)))
         return coord
 
+
+
     def _getImage(self, frame):
 
         image = frame.get_color_frame()

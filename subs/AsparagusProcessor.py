@@ -4,10 +4,11 @@ from .Spear import Spear
 
 
 class AsparagusProcessor:
-    def __init__(self, camera, topk = 0.06, botk = 0.06):
+    def __init__(self, camera, topk = 0.06, botk = 0.06, ignore_distance = 200 ):
         self.topk = topk
         self.botk = botk
         self.camera = camera
+        self.ignore_distance = ignore_distance
 
 
     def process(self, boxes, masks):
@@ -15,7 +16,8 @@ class AsparagusProcessor:
 
         for idx, (box, mask) in enumerate(zip(boxes, masks)):
 
-            mask[np.logical_and(mask == 1, self.camera.depthNP == 0)] = 0
+            mask[np.logical_and(mask == 1, self.camera.depthNP == 0)] = 0  # stereo unreachable pixels distance check
+            print(f'min: {self.camera.depthNP.min()}  max: {self.camera.depthNP.max()}')
             mask = mask.astype(np.int)
 
             asparagusMask = np.where(mask == 1)
