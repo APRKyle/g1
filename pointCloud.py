@@ -67,7 +67,7 @@ try:
         net_output = ep.process(image_data)
         boxes, masks, classid = pop.process(net_output)
         spears = []
-
+        data = []
         if len(classid) != 0:
 
 
@@ -99,7 +99,7 @@ try:
 
                 image[asparagus[0], asparagus[1], 1] = 120
 
-
+                data = skeleton3d
                 for v in skeleton:
                     cv2.circle(image, (v[0], v[1]), 2, (255, 0, 0), 2)
                 cv2.circle(image, (bot_point[0], bot_point[1]), 3, (0,0,255), 3)
@@ -107,7 +107,7 @@ try:
 
 
 
-        output.Render(image, skeleton3d)
+        output.Render(image, data)
 
 except Exception as e:
     traceback.print_exc()
