@@ -107,7 +107,7 @@ try:
 
 
 
-        output.Render(image, spears)
+        output.Render(image, skeleton3d)
 
 except Exception as e:
     traceback.print_exc()
