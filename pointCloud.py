@@ -37,7 +37,7 @@ topk = 0.01
 def calculate_batch_3d(points):
     res = []
     for p in points:
-        res.append(camera._calculatePix3D(p))
+        res.append(camera._calculatePix3D(p).tolist())
     return res
 def split_into_n_pices(n , indexes, topk, botk):
 
