@@ -29,20 +29,31 @@ class Output:
             self.videoSaver.Render(output)
 
 
+import json
+
 class Streamer:
-    def __init__(self, ip = '192.168.1.108', port =5000):
-        self.receiver_ip =  ip
+    def __init__(self, ip='192.168.1.108', port=5000):
+        self.receiver_ip = ip
         self.receiver_port = port
 
     def initStreamer(self):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect((self.receiver_ip, self.receiver_port))
 
-    def Render(self, image):
+    def Render(self, image, data_array):
+        # Serialize the image and additional data (data_array) to JSON
         frame_data = cv2.imencode('.jpg', image)[1].tostring()
-        size = len(frame_data)
-        data = struct.pack('<L', size) + frame_data
+        data = {
+            'image': frame_data.decode('latin1'),  # Convert bytes to string for JSON serialization
+            'data_array': data_array.tolist()  # Convert the NumPy array to a list for JSON serialization
+        }
+        json_data = json.dumps(data).encode('utf-8')
+
+        # Send the JSON data with the size header
+        size = len(json_data)
+        data = struct.pack('<L', size) + json_data
         self.sock.sendall(data)
+
 
     def close(self):
         self.sock.close()

@@ -107,7 +107,7 @@ try:
 
 
 
-        output.Render(image)
+        output.Render(image, [1,2,3])
 
 except Exception as e:
     traceback.print_exc()
