@@ -59,7 +59,7 @@ try:
 
                 if np.all(np.all(mask == 0)):
                     continue
-                mask = mask.astype(np.int)
+                mask = mask.astype(np.uint8)
                 skeleton =  cv2.ximgproc.thinning(mask)
                 print('-'*20)
                 print(skeleton)
