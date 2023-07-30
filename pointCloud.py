@@ -34,7 +34,11 @@ botk = 0.01
 topk = 0.01
 
 
-
+def calculate_batch_3d(points):
+    res = []
+    for p in points:
+        res.append(camera._calculatePix3D(p))
+    return res
 def split_into_n_pices(n , indexes, topk, botk):
 
     dist = indexes[0].max() - indexes[0].min()
@@ -82,18 +86,21 @@ try:
                 # asparagus: 0 -  y coordinate, 1 - x coordinate
 
 
-                res, bot_point, top_point = split_into_n_pices(10, asparagus, topk, botk)
+                skeleton, bot_point, top_point = split_into_n_pices(20, asparagus, topk, botk)
+                skeleton3d = calculate_batch_3d(skeleton)
+                top_3d = camera._calculatePix3D(top_point)
+                bot_3d = camera._calculatePix3D(bot_point)
+                length = np.linalg.norm(bot_3d - top_3d)
 
 
-                # spears.append(Spear(box=box, mask=mask,
-                #                     top_point=top_point, bot_point=bot_point,
-                #                     top_3d=top_point3d, bot_3d=bot_point3d,
-                #                     lenght=length, id=idx,
-                #                     ))
+                spears.append(Spear(box = box, mask = mask, bot_point = bot_point, top_point = top_point, top_3d = top_3d,
+                      bot_3d = bot_3d, lenght = length, id = idx, skeleton = skeleton, skeleton3d = skeleton3d))
+
+
                 image[asparagus[0], asparagus[1], 1] = 120
 
 
-                for v in res:
+                for v in skeleton:
                     cv2.circle(image, (v[0], v[1]), 2, (255, 0, 0), 2)
                 cv2.circle(image, (bot_point[0], bot_point[1]), 3, (0,0,255), 3)
                 cv2.circle(image, (top_point[0], top_point[1]), 3, (0,0,255), 3)
