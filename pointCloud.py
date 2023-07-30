@@ -65,7 +65,7 @@ try:
 
                 c = []
                 for p in asparagus:
-                    c.append(camera._calculatePix3D(p))
+                    c.append(camera._calculatePix3D(pix = [p[1], p[0]]))
                 print(c)
                 # skeleton =  cv2.ximgproc.thinning(mask, thinningType=cv2.ximgproc.THINNING_GUOHALL)
                 # skeleton =  np.where(skeleton == 1)
