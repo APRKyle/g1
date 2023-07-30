@@ -50,7 +50,7 @@ def split_into_n_pices(n , indexes, topk, botk):
     top_part = indexes[:, indexes[0] < indexes[0].min() + dist * topk]
     bot_point = np.mean(bot_part, axis = 1).astype(np.int)[::-1]
     top_point = np.mean(top_part, axis = 1).astype(np.int)[::-1]
-    return res, bot_part, top_part
+    return res, bot_point, top_point
 
 
 try:
