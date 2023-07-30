@@ -76,7 +76,7 @@ class Camera:
 
         self.points.map_to(self.imageRS)
         pointcloud_data = self.points.calculate(self.depthRS)
-        vertices = np.asanyarray(pointcloud_data.get_vertices())
+        vertices = np.asanyarray(pointcloud_data.get_vertices()).to_list()
         print('-'*20)
         print(vertices)
         print('-'*20)
