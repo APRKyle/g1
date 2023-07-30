@@ -67,10 +67,12 @@ try:
                 mask[np.logical_and(mask == 1, camera.depthNP == 0)] = 0  # stereo dispaired pixels distance check
                 mask[np.logical_and(mask == 1, camera.depthNP > ignore_distance)] = 0  # unreachable pixel ignorance
 
-                v = split_into_n_pices(3, mask)
-                cv2.circle(image, (v[0], v[1]), 4, (255, 0, 0), 3)
+
                 if np.all(np.all(mask == 0)):
                     continue
+
+                v = split_into_n_pices(3, mask)
+                cv2.circle(image, (v[0], v[1]), 4, (255, 0, 0), 3)
 
                 mask = mask.astype(np.uint8)
                 asparagusMask = np.where(mask == 1)
