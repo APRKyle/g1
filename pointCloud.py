@@ -35,6 +35,13 @@ topk = 0.05
 
 
 
+def split_into_n_pices(n , mask):
+    dist = mask[0].max() - mask[0].min()
+    step = dist//n
+    c = mask[0].min()
+
+    v = np.mean(mask[np.logical_and(mask[0] >=c, mask[0] <= c + step)], axis = 1)[::-1]
+    return v
 
 
 try:
@@ -53,17 +60,18 @@ try:
 
             for idx, (box, mask) in enumerate(zip(boxes, masks)):
 
-                mask[
-                    np.logical_and(mask == 1, camera.depthNP == 0)] = 0  # stereo unreachable pixels distance check
-                mask[np.logical_and(mask == 1, camera.depthNP > ignore_distance)] = 0
+                mask[np.logical_and(mask == 1, camera.depthNP == 0)] = 0  # stereo dispaired pixels distance check
+                mask[np.logical_and(mask == 1, camera.depthNP > ignore_distance)] = 0  # unreachable pixel ignorance
 
                 if np.all(np.all(mask == 0)):
                     continue
+
                 mask = mask.astype(np.uint8)
                 asparagusMask = np.where(mask == 1)
                 asparagus = np.array([asparagusMask[0], asparagusMask[1]])
 
-                print(asparagus[0])
+                v = split_into_n_pices(3, asparagus)
+                cv2.circle(image, (v[0], v[1]), 4, (255,0,0), 3)
 
                 image[asparagus[0], asparagus[1], 1] = 120
 
