@@ -73,7 +73,7 @@ class Camera:
         return coord
 
     def getPointCloud(self):
-
+        #inefcient !! (computationally hard)
         self.points.map_to(self.imageRS)
         pointcloud_data = self.points.calculate(self.depthRS)
         vertices = np.asanyarray(pointcloud_data.get_vertices())

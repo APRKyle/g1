@@ -47,11 +47,7 @@ try:
         net_output = ep.process(image_data)
         boxes, masks, classid = pop.process(net_output)
         spears = []
-        m, valid_points = camera.getPointCloud()
-        print('-'*20)
-        print(m)
-        print(valid_points)
-        print('-'*20)
+
         if len(classid) != 0:
 
 
@@ -64,6 +60,10 @@ try:
                 if np.all(np.all(mask == 0)):
                     continue
                 mask = mask.astype(np.int)
+                skeleton =  cv2.ximgproc.thinning(mask)
+                print('-'*20)
+                print(skeleton)
+                print(type(skeleton))
                 asparagusMask = np.where(mask == 1)
                 asparagus = np.array([asparagusMask[0], asparagusMask[1]])
                 image[asparagus[0], asparagus[1], 1] = 120
