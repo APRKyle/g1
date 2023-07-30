@@ -37,6 +37,9 @@ class Camera:
         self.pipeline = pipeline
         self.depthRS = None
 
+
+        self.points = rs.pointcloud()
+
     def getData(self):
 
         frame = self._getFrame()
@@ -50,6 +53,17 @@ class Camera:
         frame = self.align.process(frame)
         return frame
 
+    def _getImage(self, frame):
+
+        self.imageRS = frame.get_color_frame()
+        self.image = np.asanyarray(self.imageRS.get_data())
+
+
+    def _getDepth(self, frame):
+
+        self.depthRS = frame.get_depth_frame()
+        self.depthNP = np.asanyarray(self.depthRS.get_data())
+
     def _calculatePix3D(self, pix):
         #Depth frame should be depthrs frame
         depth_intrin = self.depthRS.profile.as_video_stream_profile().intrinsics
@@ -59,26 +73,17 @@ class Camera:
         return coord
 
     def getPointCloud(self):
-        depth_intrin = self.depthRS.profile.as_video_stream_profile().intrinsics
-        points = rs.points()
-        points.import_from(self.depthRS)
-        vertices = np.asanyarray(points.get_vertices())
+
+        self.points.map_to(self.imageRS)
+        pointcloud_data = self.points.calculate(self.depthRS)
+        vertices = np.asanyarray(pointcloud_data.get_vertices())
 
         # Filter out invalid points (where z = 0)
         mask = vertices[:, 2] > 0
         valid_points = vertices[mask]
         return mask, valid_points
 
-    def _getImage(self, frame):
 
-        image = frame.get_color_frame()
-        self.image = np.asanyarray(image.get_data())
-
-
-    def _getDepth(self, frame):
-
-        self.depthRS = frame.get_depth_frame()
-        self.depthNP = np.asanyarray(self.depthRS.get_data())
 
 
 
