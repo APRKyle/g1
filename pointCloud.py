@@ -95,7 +95,7 @@ try:
 
                 for v in res:
                     cv2.circle(image, (v[0], v[1]), 2, (255, 0, 0), 2)
-                cv2.cicle(image, (bot_point[0], bot_point[1]), 3, (0,0,255), 3)
+                cv2.circle(image, (bot_point[0], bot_point[1]), 3, (0,0,255), 3)
                 cv2.circle(image, (top_point[0], top_point[1]), 3, (0,0,255), 3)
 
 
