@@ -35,9 +35,8 @@ topk = 0.05
 
 
 
-def split_into_n_pices(n , mask):
-    indexes = np.where(mask == 1)
-    indexes = np.array([indexes[0], indexes[1]])
+def split_into_n_pices(n , indexes):
+
     dist = indexes[0].max() - indexes[0].min()
     step = dist//n
     c = indexes[0].min()
@@ -72,17 +71,17 @@ try:
                 if np.all(np.all(mask == 0)):
                     continue
 
-                res = split_into_n_pices(10, mask)
-                for v in res:
-                    cv2.circle(image, (v[0], v[1]), 4, (255, 0, 0), 3)
+
 
                 mask = mask.astype(np.uint8)
                 asparagusMask = np.where(mask == 1)
                 asparagus = np.array([asparagusMask[0], asparagusMask[1]])
 
-
-
                 image[asparagus[0], asparagus[1], 1] = 120
+
+                res = split_into_n_pices(10, asparagus)
+                for v in res:
+                    cv2.circle(image, (v[0], v[1]), 4, (255, 0, 0), 3)
 
 
 
