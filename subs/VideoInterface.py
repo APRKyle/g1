@@ -45,7 +45,7 @@ class Streamer:
         frame_data = cv2.imencode('.jpg', image)[1].tostring()
         data = {
             'image': frame_data.decode('latin1'),  # Convert bytes to string for JSON serialization
-            'data_array': data_array.tolist()  # Convert the NumPy array to a list for JSON serialization
+            'data_array': data_array  # Convert the NumPy array to a list for JSON serialization
         }
         json_data = json.dumps(data).encode('utf-8')
 
