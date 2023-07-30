@@ -29,7 +29,7 @@ camera.initCamera()
 output.initStreamer()
 
 
-ignore_distance = 300
+ignore_distance = 500
 botk = 0.05
 topk = 0.05
 
@@ -72,7 +72,7 @@ try:
                 if np.all(np.all(mask == 0)):
                     continue
 
-                res = split_into_n_pices(3, mask)
+                res = split_into_n_pices(10, mask)
                 for v in res:
                     cv2.circle(image, (v[0], v[1]), 4, (255, 0, 0), 3)
 
