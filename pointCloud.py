@@ -16,6 +16,7 @@ import traceback
 
 output = Streamer(ip = '192.168.1.232', port = 5000)
 camera = Camera()
+pather = Pather(min_lenght=5, min_dist = 5)
 
 ep = EngineProcessor('/home/andrii/Gus2/networks/yolo2/model.engine')
 prp = PreProcessor()
@@ -105,8 +106,13 @@ try:
                 cv2.circle(image, (bot_point[0], bot_point[1]), 3, (0,0,255), 3)
                 cv2.circle(image, (top_point[0], top_point[1]), 3, (0,0,255), 3)
 
+            if len(spears) != 0:
+                robot_skeleton = []
+                for spear in spears:
+                    for point in spear.skeleton3d:
+                        robot_skeleton.append(pather._transformIntoRobot(skeleton3d))
 
-
+                print(robot_skeleton)
         output.Render(image, data)
 
 except Exception as e:
