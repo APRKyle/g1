@@ -55,16 +55,17 @@ class Pather:
             cd = np.linalg.norm(spear.bot_3d)
             print(f'camera distance: {cd}')
             botArm = self._transformIntoRobot(spear.bot_3d)
+            topArm = self._transformIntoRobot(spear.top_3d)
             distance = np.linalg.norm(botArm)
             print(f'distance: {distance}')
-
+            d = abs(botArm[1]) - abs(topArm[1])
             if spear.lenght > self.min_length:
                 if distance < self.min_dist:
-                    # if cd < 820:
-                    if botArm[0] < 10:
-                        efficient_spear2d = efficient_spear2d
-                        efficient_spear3d = botArm
-                        stop_signal = True
+                    if d > 7:
+                        if botArm[0] < 10:
+                            efficient_spear2d = efficient_spear2d
+                            efficient_spear3d = botArm
+                            stop_signal = True
 
         return stop_signal, efficient_spear2d, efficient_spear3d
 
