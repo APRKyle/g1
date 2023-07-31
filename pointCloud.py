@@ -95,7 +95,7 @@ try:
 
 
                 spears.append(Spear(box = box, mask = mask, bot_point = bot_point, top_point = top_point, top_3d = top_3d,
-                      bot_3d = bot_3d, lenght = length, id = idx, skeleton = skeleton, skeleton3d = skeleton3d))
+                      bot_3d = bot_3d, lenght = length, id = idx, skeleton = skeleton, skeleton_3d = skeleton3d))
 
 
                 image[asparagus[0], asparagus[1], 1] = 120
@@ -109,7 +109,7 @@ try:
             if len(spears) != 0:
                 robot_skeleton = []
                 for spear in spears:
-                    for point in spear.skeleton3d:
+                    for point in spear.skeleton_3d:
                         robot_skeleton.append(pather._transformIntoRobot(point))
 
                 print(robot_skeleton)

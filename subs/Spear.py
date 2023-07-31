@@ -2,7 +2,7 @@
 
 import numpy as np
 class Spear:
-    def __init__(self, box, mask, bot_point, top_point, top_3d, bot_3d, lenght, id, skeleton, skeleton3d):
+    def __init__(self, box, mask, bot_point, top_point, top_3d, bot_3d, lenght, id, skeleton, skeleton_3d):
         self.box = box
         self.mask = mask
         self.bot_point = bot_point
@@ -12,7 +12,7 @@ class Spear:
         self.lenght = lenght
         self.id = id
         self.skeleton = skeleton
-        self.skeleton_3d = skeleton3d
+        self.skeleton_3d = skeleton_3d
 
     def to_dict(self):
         return {'box'       : self.box.tolist(),
