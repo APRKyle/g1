@@ -110,7 +110,7 @@ try:
                 robot_skeleton = []
                 for spear in spears:
                     for point in spear.skeleton3d:
-                        robot_skeleton.append(pather._transformIntoRobot(skeleton3d))
+                        robot_skeleton.append(pather._transformIntoRobot(point))
 
                 print(robot_skeleton)
         output.Render(image, data)
