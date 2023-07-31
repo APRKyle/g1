@@ -33,6 +33,7 @@ output.initStreamer()
 ignore_distance = 500
 botk = 0.01
 topk = 0.01
+end_effector_len = 100
 
 
 def calculate_batch_3d(points):
@@ -109,12 +110,18 @@ try:
             if len(spears) != 0:
                 robot_skeleton = []
                 for spear in spears:
+                    robot_skeleton = []
                     for point in spear.skeleton_3d:
                         robot_skeleton.append(pather._transformIntoRobot(point))
 
-                print('='*20)
-                print(robot_skeleton)
-                print('-'*20)
+                    botArm = pather._transformIntoRobot(spear.bot_3d)
+                    endEndeffector = botArm + end_effector_len
+                    robot_skeleton_np = np.array(robot_skeleton)
+                    end_skeleton = robot_skeleton_np[robot_skeleton_np[:,1] > endEndeffector]
+
+
+
+
         output.Render(image, data)
 
 except Exception as e:
