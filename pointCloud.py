@@ -108,11 +108,7 @@ try:
                 cv2.circle(image, (top_point[0], top_point[1]), 3, (0,0,255), 3)
 
                 lin_dist = abs(top_3d[1] - bot_3d[1])
-                print('-'*20)
-                print(f'linear distance: {lin_dist}')
-                print(f'top3d: {top_3d}')
-                print(f'bot3d: {bot_3d}')
-                print('-'*20)
+                print(data)
                 if lin_dist > 100:
                     image[asparagus[0], asparagus[1], 1] = 255
                 else:
