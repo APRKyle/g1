@@ -59,14 +59,17 @@ class Pather:
             distance = np.linalg.norm(botArm)
             lin_dist = abs(topArm[1] - botArm[1])
             print(f'lin dist: {lin_dist}')
+            print(f'distance: {distance}')
+            print(f'botArm  : {botArm}')
+            print(f'topArm  : {topArm}')
+            print(f'lenght  : {spear.lenght}')
 
             if spear.lenght > self.min_length:
                 if distance < self.min_dist:
                     if lin_dist > 130:
-                        if botArm[0] < 10:
-                            efficient_spear2d = efficient_spear2d
-                            efficient_spear3d = botArm
-                            stop_signal = True
+                        efficient_spear2d = efficient_spear2d
+                        efficient_spear3d = botArm
+                        stop_signal = True
 
         return stop_signal, efficient_spear2d, efficient_spear3d
 
