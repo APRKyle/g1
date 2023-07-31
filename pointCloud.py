@@ -111,7 +111,7 @@ try:
                 print('-'*20)
                 print(f'lin : {lin_dist}')
                 print(f'euc  : {length}')
-                if lin_dist > 100:
+                if lin_dist > 130:
                     image[asparagus[0], asparagus[1], 1] = 255
                 else:
                     image[asparagus[0], asparagus[1], 0] = 255
