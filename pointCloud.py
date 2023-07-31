@@ -112,7 +112,9 @@ try:
                     for point in spear.skeleton_3d:
                         robot_skeleton.append(pather._transformIntoRobot(point))
 
+                print('='*20)
                 print(robot_skeleton)
+                print('-'*20)
         output.Render(image, data)
 
 except Exception as e:
