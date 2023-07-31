@@ -99,25 +99,31 @@ try:
                       bot_3d = bot_3d, lenght = length, id = idx, skeleton = skeleton, skeleton_3d = skeleton3d))
 
 
-                image[asparagus[0], asparagus[1], 1] = 120
+
 
                 data = skeleton3d
-                for v in skeleton:
-                    cv2.circle(image, (v[0], v[1]), 2, (255, 0, 0), 2)
+                # for v in skeleton:
+                #     cv2.circle(image, (v[0], v[1]), 2, (255, 0, 0), 2)
                 cv2.circle(image, (bot_point[0], bot_point[1]), 3, (0,0,255), 3)
                 cv2.circle(image, (top_point[0], top_point[1]), 3, (0,0,255), 3)
 
-            if len(spears) != 0:
-                robot_skeleton = []
-                for spear in spears:
-                    robot_skeleton = []
-                    for point in spear.skeleton_3d:
-                        robot_skeleton.append(pather._transformIntoRobot(point))
+                lin_dist = abs(top_3d[1] - bot_3d[1])
+                if lin_dist > 5:
+                    image[asparagus[0], asparagus[1], 1] = 255
+                else:
+                    image[asparagus[0], asparagus[1], 0] = 255
 
-                    botArm = pather._transformIntoRobot(spear.bot_3d)
-                    endEndeffector = botArm + end_effector_len
-                    robot_skeleton_np = np.array(robot_skeleton)
-                    end_skeleton = robot_skeleton_np[robot_skeleton_np[:,1] > endEndeffector]
+            # if len(spears) != 0:
+            #     robot_skeleton = []
+            #     for spear in spears:
+            #         robot_skeleton = []
+            #         for point in spear.skeleton_3d:
+            #             robot_skeleton.append(pather._transformIntoRobot(point))
+            #
+            #         botArm = pather._transformIntoRobot(spear.bot_3d)
+            #         endEndeffector = botArm + end_effector_len
+            #         robot_skeleton_np = np.array(robot_skeleton)
+            #         end_skeleton = robot_skeleton_np[robot_skeleton_np[:,1] > endEndeffector]
 
 
 
