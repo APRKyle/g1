@@ -109,7 +109,7 @@ try:
 
                 lin_dist = abs(top_3d[1] - bot_3d[1])
                 print(f'linear distance: {lin_dist}')
-                if lin_dist > 5:
+                if lin_dist > 100:
                     image[asparagus[0], asparagus[1], 1] = 255
                 else:
                     image[asparagus[0], asparagus[1], 0] = 255
