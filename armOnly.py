@@ -51,6 +51,7 @@ try:
                 coms._sendCoordsToArm(spear3d)
                 time.sleep(5)
 
+
             if len(spears) != 0:
                 image = viz.process(image, spears)
 
