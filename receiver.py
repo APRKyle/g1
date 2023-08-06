@@ -1,3 +1,5 @@
+import os.path
+
 import matplotlib
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -67,16 +69,50 @@ elevation = 90  # Set the elevation angle (default is 30 degrees)
 azimuth = 90    # Set the azimuthal angle (default is 45 degrees)
 ax.view_init(elevation, azimuth)
 plt.ion()  # Turn on interactive mode
+import datetime
+data_path = r'C:\Users\Andrii\PycharmProjects\GUS\outputs'
+dt = datetime.datetime.now()
+dir_name = dt.strftime('%Y_%m_%d_%H_%M_%S')
+dir_name = os.path.join(data_path, dir_name)
 
+if os.path.exists(os.path.join(data_path, dir_name)):
+    pass
+else:
+    os.mkdir(dir_name)
+
+    video_dir = os.path.join(dir_name, 'video')
+    data_dir = os.path.join(dir_name, 'data')
+
+    os.mkdir(video_dir)
+    os.mkdir(data_dir)
+
+
+try:
+    with open(os.path.join(data_dir, 'data.json'), 'r') as json_file:
+        data_json = json.load(json_file)
+except FileNotFoundError:
+
+    existing_data = []
+json_file = open(os.path.join(data_dir, 'data.json'), 'w')
+frame_id = -1
+fourcc = cv2.VideoWriter_fourcc(*'XVID')  # Codec for AVI format
+out = cv2.VideoWriter(os.path.join(video_dir, 'output.avi'), fourcc, 1.0, (640, 480))
 try:
     while True:
         # Receive and display the frame, and get the additional data (data_array)
+
         frame, data = receive_frame(conn)
 
+        frame_id +=1
+        out.write(frame)
+        existing_data.append(data)
+
+
         # Extract x, y, and z coordinates from the data_array
-        ax.cla()  # Clear the previous plot
-        for key, value in data.items():
-            print(f'{key}: {value}')
+        # ax.cla()  # Clear the previous plot
+
+        # for key, value in data.items():
+        #     print(f'{key}: {value}')
         # for d in data:
         #     data_array = np.array(d)
         #
@@ -103,6 +139,12 @@ try:
         # plt.pause(0.01)  # Pause for 0.5 seconds before the next iteration
 
 except KeyboardInterrupt:
+
+    with open(os.path.join(data_dir, 'data.json'), 'w') as json_file:
+        json.dump(existing_data, json_file, indent=4, separators=(',', ':'))
     conn.close()
     sock.close()
+    out.release()
     cv2.destroyAllWindows()
+
+

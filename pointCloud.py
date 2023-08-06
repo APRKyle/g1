@@ -99,7 +99,7 @@ try:
 
 
                 data[idx] = spear.to_dict()
-                print(data)
+
 
 
 
@@ -108,10 +108,10 @@ try:
 
                 lin_dist = abs(top_3d[1] - bot_3d[1])
 
-                if lin_dist > 130:
-                    image[asparagus[0], asparagus[1], 1] = 255
-                else:
-                    image[asparagus[0], asparagus[1], 0] = 255
+                # if lin_dist > 130:
+                #     image[asparagus[0], asparagus[1], 1] = 255
+                # else:
+                #     image[asparagus[0], asparagus[1], 0] = 255
 
             # if len(spears) != 0:
             #     robot_skeleton = []
