@@ -49,7 +49,7 @@ def split_into_n_pices(n , indexes, topk, botk):
     res = []
     for i in range(n):
         part = indexes[:, np.logical_and(indexes[0] >=c, indexes[0] <= c + step)]
-        res.append(np.mean(part, axis = 1).astype(np.int)[::-1])
+        res.append(np.mean(part, axis = 1).astype(np.int)[::-1].tolist())
         c = c + step
 
     bot_part = indexes[:, indexes[0] > indexes[0].max() - dist * botk]
