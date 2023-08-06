@@ -14,7 +14,7 @@ import cv2
 import numpy as np
 import traceback
 
-output = Streamer(ip = '192.168.1.232', port = 5000)
+# output = Streamer(ip = '192.168.1.232', port = 5000)
 camera = Camera()
 pather = Pather(min_lenght=5, min_dist = 5)
 
@@ -27,7 +27,7 @@ pop = PostProcessor(iou_threshold = 0.8, class_threshold = 0.85,
 
 ep.initalize()
 camera.initCamera()
-output.initStreamer()
+# output.initStreamer()
 
 
 ignore_distance = 500
@@ -69,7 +69,7 @@ try:
         net_output = ep.process(image_data)
         boxes, masks, classid = pop.process(net_output)
         spears = []
-        data = []
+        data = {}
         if len(classid) != 0:
 
 
@@ -94,23 +94,18 @@ try:
                 bot_3d = camera._calculatePix3D(bot_point)
                 length = np.linalg.norm(bot_3d - top_3d)
 
+                spear = Spear(box = box, mask = mask, bot_point = bot_point, top_point = top_point, top_3d = top_3d,
+                      bot_3d = bot_3d, lenght = length, id = idx, skeleton = skeleton, skeleton_3d = skeleton3d)
 
-                spears.append(Spear(box = box, mask = mask, bot_point = bot_point, top_point = top_point, top_3d = top_3d,
-                      bot_3d = bot_3d, lenght = length, id = idx, skeleton = skeleton, skeleton_3d = skeleton3d))
+                print(spear.to_dict())
+                data[idx] = spear.to_dict()
 
 
 
 
-                data.append(skeleton3d)
-                # for v in skeleton:
-                #     cv2.circle(image, (v[0], v[1]), 2, (255, 0, 0), 2)
-                cv2.circle(image, (bot_point[0], bot_point[1]), 3, (0,0,255), 3)
-                cv2.circle(image, (top_point[0], top_point[1]), 3, (0,0,255), 3)
 
                 lin_dist = abs(top_3d[1] - bot_3d[1])
-                print('-'*20)
-                print(f'lin : {lin_dist}')
-                print(f'euc  : {length}')
+
                 if lin_dist > 130:
                     image[asparagus[0], asparagus[1], 1] = 255
                 else:
@@ -131,7 +126,7 @@ try:
 
 
 
-        output.Render(image, data)
+        # output.Render(image, data)
 
 except Exception as e:
     traceback.print_exc()
