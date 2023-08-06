@@ -23,7 +23,7 @@ class Spear:
                 'bot_3d'    : self.bot_3d.tolist(),
                 'length'    : self.lenght,
                 'id'        : self.id,
-                'skeleton'  : self.skeleton,
+                'skeleton'  : self.skeleton.to_list(),
                 'skeleton3d': self.skeleton_3d}
 
 
