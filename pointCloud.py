@@ -99,8 +99,7 @@ try:
 
 
                 data[idx] = spear.to_dict()
-                for ix in data.keys:
-                    print(ix)
+                print(data)
 
 
 
