@@ -26,7 +26,7 @@ def receive_frame(sock):
     data = json.loads(json_data.decode('utf-8'))
     frame = cv2.imdecode(np.frombuffer(data['image'].encode('latin1'), dtype=np.uint8), cv2.IMREAD_COLOR)
     data_array = np.array(data['data_array'])
-
+    print(data_array)
     # Display the image and use the additional data (data_array) as needed
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     cv2.imshow('Received Stream', frame)

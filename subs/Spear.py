@@ -15,8 +15,10 @@ class Spear:
         self.skeleton_3d = skeleton_3d
 
     def to_dict(self):
+        mask_data = np.where(self.mask == 1)
+        mask_data = [mask_data[0].to_list(), mask_data[1].to_list()]
         return {'box'       : self.box.tolist(),
-                'mask'      : self.mask.tolist(),
+                'mask'      : mask_data,
                 'bot_point' : self.bot_point.tolist(),
                 'top_point' : self.top_point.tolist(),
                 'top_3d'    : self.top_3d.tolist(),

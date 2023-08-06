@@ -14,7 +14,7 @@ import cv2
 import numpy as np
 import traceback
 
-# output = Streamer(ip = '192.168.1.232', port = 5000)
+output = Streamer(ip = '192.168.1.232', port = 5000)
 camera = Camera()
 pather = Pather(min_lenght=5, min_dist = 5)
 
@@ -27,7 +27,7 @@ pop = PostProcessor(iou_threshold = 0.8, class_threshold = 0.85,
 
 ep.initalize()
 camera.initCamera()
-# output.initStreamer()
+output.initStreamer()
 
 
 ignore_distance = 500
@@ -97,8 +97,11 @@ try:
                 spear = Spear(box = box, mask = mask, bot_point = bot_point, top_point = top_point, top_3d = top_3d,
                       bot_3d = bot_3d, lenght = length, id = idx, skeleton = skeleton, skeleton_3d = skeleton3d)
 
-                print(spear.to_dict())
+
                 data[idx] = spear.to_dict()
+                for ix in data.keys:
+                    print(ix)
+
 
 
 
@@ -126,7 +129,7 @@ try:
 
 
 
-        # output.Render(image, data)
+        output.Render(image, data)
 
 except Exception as e:
     traceback.print_exc()
