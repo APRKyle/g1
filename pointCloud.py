@@ -49,13 +49,15 @@ def split_into_n_pices(n , indexes, topk, botk):
     res = []
     for i in range(n):
         part = indexes[:, np.logical_and(indexes[0] >=c, indexes[0] <= c + step)]
-
-        leftmost_point = part[:, np.argmin(part[0])]
-        rightmost_point = part[:, np.argmax(part[0])]
-
+        try:
+            leftmost_point = part[:, np.argmin(part[0])]
+            rightmost_point = part[:, np.argmax(part[0])]
+            res.append(leftmost_point.tolist())
+            res.append(rightmost_point.tolist())
+        except Exception as e:
+            pass
         res.append(np.mean(part, axis = 1).astype(np.int)[::-1].tolist())
-        res.append(leftmost_point.tolist())
-        res.append(rightmost_point.tolist())
+
         c = c + step
 
     bot_part = indexes[:, indexes[0] > indexes[0].max() - dist * botk]
