@@ -50,8 +50,8 @@ def split_into_n_pices(n , indexes, topk, botk):
     for i in range(n):
         part = indexes[:, np.logical_and(indexes[0] >=c, indexes[0] <= c + step)]
         try:
-            leftmost_point = np.mean(part[:, np.argmin(part[0])], axis = 1).astype(np.int)[::-1].tolist()
-            rightmost_point = np.mean(part[:, np.argmax(part[0])], axis = 1).astype(np.int)[::-1].tolist()
+            leftmost_point = part[:, np.argmin(part[0])].astype(np.int)[::-1].tolist()
+            rightmost_point =part[:, np.argmax(part[0])].astype(np.int)[::-1].tolist()
             print('-'*20)
             print(leftmost_point)
             print('-'*20)
