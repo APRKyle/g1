@@ -54,8 +54,8 @@ def split_into_n_pices(n , indexes, topk, botk):
         rightmost_point = part[:, np.argmax(part[0])]
 
         res.append(np.mean(part, axis = 1).astype(np.int)[::-1].tolist())
-        res.append(leftmost_point)
-        res.append(rightmost_point)
+        res.append(leftmost_point.tolist())
+        res.append(rightmost_point.tolist())
         c = c + step
 
     bot_part = indexes[:, indexes[0] > indexes[0].max() - dist * botk]
