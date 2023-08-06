@@ -49,6 +49,7 @@ def split_into_n_pices(n , indexes, topk, botk):
     res = []
     for i in range(n):
         part = indexes[:, np.logical_and(indexes[0] >=c, indexes[0] <= c + step)]
+        print(part)
         res.append(np.mean(part, axis = 1).astype(np.int)[::-1].tolist())
         c = c + step
 
@@ -84,14 +85,8 @@ try:
 
                 mask = mask.astype(np.int)
                 asparagusMask = np.where(mask == 1)
-                contours, _ = cv2.findContours(mask.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-                for contour in contours:
-                    epsilon = 0.02 * cv2.arcLength(contour, True)
-                    approx = cv2.approxPolyDP(contour, epsilon, closed=True)
-                print(approx)
-                print(type(approx))
-                print(len(approx))
+
                 asparagus = np.array([asparagusMask[0], asparagusMask[1]])
                 # asparagus: 0 -  y coordinate, 1 - x coordinate
 
