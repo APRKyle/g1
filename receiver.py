@@ -25,8 +25,8 @@ def receive_frame(sock):
     # Deserialize the JSON data to retrieve the image and additional data
     data = json.loads(json_data.decode('utf-8'))
     frame = cv2.imdecode(np.frombuffer(data['image'].encode('latin1'), dtype=np.uint8), cv2.IMREAD_COLOR)
-    data_array = np.array(data['data_array'])
-    print(data_array)
+    # data_array = np.array(data['data_array'])
+    data_array = data['data_array']
     # Display the image and use the additional data (data_array) as needed
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     cv2.imshow('Received Stream', frame)
@@ -75,30 +75,32 @@ try:
 
         # Extract x, y, and z coordinates from the data_array
         ax.cla()  # Clear the previous plot
-        for d in data:
-            data_array = np.array(d)
-
-            x = data_array[:, 0]
-            y = data_array[:, 1]
-            z = data_array[:, 2]
-
-
-
-            # Plot the new data in 3D
-            ax.scatter(x, y, z, c='r', marker='o')
-
-            # Set labels for each axis (you can choose to set them only once outside the loop if they don't change)
-        ax.set_xlabel('X Label')
-        ax.set_ylabel('Y Label')
-        ax.set_zlabel('Z Label')
-
-        # Set limits for the x, y, and z axes (you can choose to set them only once outside the loop if they don't change)
-        ax.set_xlim(-200, 200)
-        ax.set_ylim(-200, 200)
-        ax.set_zlim(0, 400)
-
-        plt.draw()
-        plt.pause(0.01)  # Pause for 0.5 seconds before the next iteration
+        for key, value in data.items():
+            print(f'{key}: {value}')
+        # for d in data:
+        #     data_array = np.array(d)
+        #
+        #     x = data_array[:, 0]
+        #     y = data_array[:, 1]
+        #     z = data_array[:, 2]
+        #
+        #
+        #
+        #     # Plot the new data in 3D
+        #     ax.scatter(x, y, z, c='r', marker='o')
+        #
+        #     # Set labels for each axis (you can choose to set them only once outside the loop if they don't change)
+        # ax.set_xlabel('X Label')
+        # ax.set_ylabel('Y Label')
+        # ax.set_zlabel('Z Label')
+        #
+        # # Set limits for the x, y, and z axes (you can choose to set them only once outside the loop if they don't change)
+        # ax.set_xlim(-200, 200)
+        # ax.set_ylim(-200, 200)
+        # ax.set_zlim(0, 400)
+        #
+        # plt.draw()
+        # plt.pause(0.01)  # Pause for 0.5 seconds before the next iteration
 
 except KeyboardInterrupt:
     conn.close()
