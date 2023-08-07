@@ -81,7 +81,7 @@ def split_into_n_pices(n , indexes, topk, botk):
         res.append(mean)
 
         c = c + step
-    res = remove_outliers(res)
+    res = remove_outliers(np.array(res))
     res = res.tolist()
     bot_part = indexes[:, indexes[0] > indexes[0].max() - dist * botk]
     top_part = indexes[:, indexes[0] < indexes[0].min() + dist * topk]
