@@ -57,7 +57,11 @@ def remove_outliers(data):
 def calculate_batch_3d(points):
     res = []
     for p in points:
-        res.append(camera._calculatePix3D(p).tolist())
+        p3d = camera._calculatePix3D(p)
+        if np.array_equal(p3d, np.array([0, 0, 0])):
+            print(f'point  {p3d}   ignored')
+        else:
+            res.append(camera._calculatePix3D(p).tolist())
     return res
 def split_into_n_pices(n , indexes, topk, botk):
 
