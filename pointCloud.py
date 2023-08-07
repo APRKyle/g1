@@ -49,18 +49,19 @@ def split_into_n_pices(n , indexes, topk, botk):
     res = []
     for i in range(n):
         part = indexes[:, np.logical_and(indexes[0] >=c, indexes[0] <= c + step)]
-        try:
-            leftmost_point = part[:, np.argmin(part[0])].astype(np.int)[::-1].tolist()
-            rightmost_point =part[:, np.argmax(part[0])].astype(np.int)[::-1].tolist()
-            print('-'*20)
-            print(f'leftmost  : {leftmost_point}')
-            print(f'rightmost : {rightmost_point}')
-
-
-            res.append(leftmost_point)
-            res.append(rightmost_point)
-        except Exception as e:
-            print(e)
+        #Adding more points to the sekelton - increase in computation time
+        # try:
+        #     leftmost_point = part[:, np.argmin(part[0])].astype(np.int)[::-1].tolist()
+        #     rightmost_point =part[:, np.argmax(part[0])].astype(np.int)[::-1].tolist()
+        #     print('-'*20)
+        #     print(f'leftmost  : {leftmost_point}')
+        #     print(f'rightmost : {rightmost_point}')
+        #
+        #
+        #     res.append(leftmost_point)
+        #     res.append(rightmost_point)
+        # except Exception as e:
+        #     print(e)
         mean = np.mean(part, axis = 1).astype(np.int)[::-1].tolist()
         print(f'meanmost : {mean}')
         print('-' * 20)

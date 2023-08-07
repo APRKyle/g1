@@ -145,7 +145,7 @@ try:
 
         ax.plot_surface(x_ground, y_ground, z_ground, color='brown', alpha=0.7)
 
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         cv2.imshow('Received Stream', frame)
 
 
