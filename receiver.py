@@ -117,6 +117,7 @@ try:
         frame, data = receive_frame(conn)
 
         frame_id +=1
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         out.write(frame)
         existing_data.append(data)
 
