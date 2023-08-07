@@ -10,8 +10,28 @@ import socket
 import cv2
 matplotlib.use('TkAgg')
 
+def get_angles(data):
+    centroid = np.mean(data, axis=0)
+    # centroid = data[0]
 
+    translated_points = data - centroid
+    covariance_matrix = np.cov(translated_points, rowvar=False)
+    eigenvalues, eigenvectors = np.linalg.eigh(covariance_matrix)
+    dominant_eigenvector = eigenvectors[:, np.argmax(eigenvalues)]
+    dominant_eigenvector /= np.linalg.norm(dominant_eigenvector)
+    pitch = np.arcsin(dominant_eigenvector[2])
+    yaw = np.arctan2(dominant_eigenvector[1], dominant_eigenvector[0])
+    roll = 0
 
+    pitch_deg = np.degrees(pitch).astype(int)
+    yaw_deg = np.degrees(yaw).astype(int)
+    roll_deg = np.degrees(roll).astype(int)
+    return pitch_deg, yaw_deg, roll_deg
+
+font = cv2.FONT_HERSHEY_SIMPLEX
+font_scale = 0.8
+font_color = (255, 255, 255)  # White color
+thickness = 2
 def receive_frame(sock):
     # Receive the size of the data
     size_data = b''
@@ -44,10 +64,10 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind((receiver_ip, receiver_port))
 sock.listen(1)
 
-# Accept incoming connection
+
 conn, addr = sock.accept()
 
-# Create a 3D plot
+
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
@@ -125,9 +145,13 @@ try:
         ax.cla()
         for id, d in data.items():
             skeleton_3d = np.array(d['skeleton3d'])
+            pitch_deg, yaw_deg, roll_deg = get_angles(skeleton_3d)
             x = skeleton_3d[:, 0]
             y = skeleton_3d[:, 1]
             z = skeleton_3d[:, 2]
+            cv2.putText(frame, f'pitch : {pitch_deg}', (50, 50), font, font_scale, font_color, thickness)
+            cv2.putText(frame, f'yaw : {yaw_deg}', (50, 100), font, font_scale, font_color, thickness)
+            cv2.putText(frame, f'roll : {roll_deg}', (50, 150), font, font_scale, font_color, thickness)
             # b = np.array(d['box']).astype(int)
             # cv2.rectangle(frame, tuple([b[0], b[1]]), tuple([b[2], b[3]]), (0,255,0), 2)
             frame[d['mask'][0], d['mask'][1], :] = (0,90,0)

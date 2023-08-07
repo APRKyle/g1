@@ -35,7 +35,19 @@ botk = 0.01
 topk = 0.01
 end_effector_len = 100
 
+def remove_outliers(data):
 
+    Q1 = np.percentile(data, 25, axis=0)
+    Q3 = np.percentile(data, 75, axis=0)
+
+    IQR = Q3 - Q1
+
+    threshold_multiplier = 1.5
+
+    outlier_mask = (data < Q1 - threshold_multiplier * IQR) | (data > Q3 + threshold_multiplier * IQR)
+
+    cleaned_data = data[~np.any(outlier_mask, axis=1)]
+    return cleaned_data
 def calculate_batch_3d(points):
     res = []
     for p in points:
@@ -62,13 +74,12 @@ def split_into_n_pices(n , indexes, topk, botk):
         #     res.append(rightmost_point)
         # except Exception as e:
         #     print(e)
-        mean = np.mean(part, axis = 1).astype(np.int)[::-1].tolist()
-        print(f'meanmost : {mean}')
-        print('-' * 20)
+        mean = np.mean(part, axis = 1).astype(np.int)[::-1]
         res.append(mean)
 
         c = c + step
-
+    res = remove_outliers(res)
+    res = res.tolist()
     bot_part = indexes[:, indexes[0] > indexes[0].max() - dist * botk]
     top_part = indexes[:, indexes[0] < indexes[0].min() + dist * topk]
     bot_point = np.mean(bot_part, axis = 1).astype(np.int)[::-1]
@@ -118,12 +129,6 @@ try:
 
 
                 data[idx] = spear.to_dict()
-
-
-
-
-
-
 
                 lin_dist = abs(top_3d[1] - bot_3d[1])
 
