@@ -45,7 +45,10 @@ def remove_outliers(data):
     threshold_multiplier = 1.5
 
     outlier_mask = (data < Q1 - threshold_multiplier * IQR) | (data > Q3 + threshold_multiplier * IQR)
-
+    print('mask')
+    print(outlier_mask)
+    print('data')
+    print(data)
     cleaned_data = data[~np.any(outlier_mask, axis=1)]
     return cleaned_data
 def calculate_batch_3d(points):
