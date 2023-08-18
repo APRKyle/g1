@@ -70,14 +70,14 @@ class Pather:
                         efficient_spear2d = efficient_spear2d
                         efficient_spear3d = botArm
                         stop_signal = True
-                        angle = 0
+                        angle = 45
 
                 else:
                     if lin_dist > 130:
                         efficient_spear2d = efficient_spear2d
                         efficient_spear3d = botArm
                         stop_signal = True
-                        angle = 45
+                        angle = 0
 
 
 
