@@ -47,7 +47,6 @@ try:
             print(f'arm is ready: {coms.ARM_IS_READY}')
             if stopSignal and coms.ARM_IS_READY:
                 print(f'spear sent: {spear3d}')
-                coms._sendCoordsToArm(spear3d)
                 coms._sendCoordsAngleToArm(angle, spear3d)
                 time.sleep(5)
 
