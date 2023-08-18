@@ -13,7 +13,7 @@ import cv2
 import numpy as np
 import traceback
 
-output = Streamer(ip = '192.168.1.108', port = 5000)
+#output = Streamer(ip = '192.168.1.108', port = 5000)
 camera = Camera()
 
 ep = EngineProcessor('/home/andrii/Gus2/networks/yolo_asparagus/model.engine')
@@ -29,7 +29,7 @@ coms = Communicator(nav_required=True, arm_required=True)
 coms.initComs()
 ep.initalize()
 camera.initCamera()
-output.initStreamer()
+#output.initStreamer()
 
 
 
@@ -43,10 +43,10 @@ while True:
     if a == 2:
         coms._sendStopToNav()
     if a == 3:
-        coms._sendCoordsToArm([1,1,1])
+        coms._sendCoordsAngleToArm(90, [1,1,1])
     coms._readNavSignal()
     print(f'NAV should move: {coms.NAV_SHOULD_MOVE}')
     print(f'NAV STOPPED: {coms.NAV_IS_STOPPED}')
     print(f'Robot is ready: {coms.ARM_IS_READY}')
-    output.Render(camera.image)
+    #output.Render(camera.image)
 
