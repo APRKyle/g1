@@ -41,7 +41,7 @@ class Communicator:
 
     def _sendCoordsAngleToArm(self, angle, cords):
         if cords is not None:
-            value = 'B' + str(int(cords[0])) + ' ' + str(int(cords[1])) + ' ' + str(int(cords[2])) + str(int(angle)) +'\r'
+            value = 'B' + str(int(cords[0])) + ' ' + str(int(cords[1])) + ' ' + str(int(cords[2])) + ' ' +  str(int(angle)) +'\r'
             self.arduino.write(bytes(value, 'utf-8'))
             self.ARM_IS_READY = False
 

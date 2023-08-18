@@ -70,6 +70,11 @@ class Pather:
                         efficient_spear2d = efficient_spear2d
                         efficient_spear3d = botArm
                         stop_signal = True
+                        angle = 90
+                    else:
+                        efficient_spear2d = efficient_spear2d
+                        efficient_spear3d = botArm
+
 
         return stop_signal, efficient_spear2d, efficient_spear3d
 
