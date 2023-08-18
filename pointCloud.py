@@ -20,7 +20,7 @@ pather = Pather(min_lenght=5, min_dist = 5)
 
 ep = EngineProcessor('/home/andrii/Gus2/networks/yolo2/model.engine')
 prp = PreProcessor()
-pop = PostProcessor(iou_threshold = 0.8, class_threshold = 0.85,
+pop = PostProcessor(iou_threshold = 0.6, class_threshold = 0.6,
                  input_height = 480, input_width = 640, img_height = 480, img_width = 640,
                   num_masks = 32)
 

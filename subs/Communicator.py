@@ -39,6 +39,12 @@ class Communicator:
             self.arduino.write(bytes(value, 'utf-8'))
             self.ARM_IS_READY = False
 
+    def _sendCoordsAngleToArm(self, angle, cords):
+        if cords is not None:
+            value = 'B' + str(int(cords[0])) + ' ' + str(int(cords[1])) + ' ' + str(int(cords[2])) + str(int(angle)) +'\r'
+            self.arduino.write(bytes(value, 'utf-8'))
+            self.ARM_IS_READY = False
+
     def _sendStopToNav(self):
         GPIO.output(self.gpioOutputPin, GPIO.HIGH)
         self.NAV_SHOULD_MOVE = False
