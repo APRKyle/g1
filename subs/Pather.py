@@ -48,7 +48,7 @@ class Pather:
         efficient_spear2d = False
         stop_signal = None
         efficient_spear3d = None
-
+        angle = None
         for idx, spear in enumerate(spears):
             if np.all(spear.bot_3d == 0):
                 print('unreachable depth')
