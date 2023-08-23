@@ -17,7 +17,7 @@ import time
 output = Streamer(ip = '192.168.1.108', port = 5000)
 camera = Camera()
 pather = Pather(min_lenght=5, min_dist = 5)
-coms = Communicator()
+coms = Communicator(arm_required = True)
 
 ep = EngineProcessor('/home/andrii/Gus2/networks/yolo2/model.engine')
 prp = PreProcessor()
