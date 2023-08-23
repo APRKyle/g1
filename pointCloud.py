@@ -156,7 +156,7 @@ try:
                     efficient_spear2d = efficient_spear2d
                     efficient_spear3d = botArm
                     stop_signal = True
-                    angle = round(spear.pitch) * -1
+                    angle = 90 - round(spear.pitch) * -1
 
                     if stop_signal and coms.ARM_IS_READY:
 
