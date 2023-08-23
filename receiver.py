@@ -144,7 +144,9 @@ try:
         ax.cla()
         for id, d in data.items():
             skeleton_3d = np.array(d['skeleton3d'])
-            pitch_deg, yaw_deg, roll_deg = get_angles(skeleton_3d)
+            pitch_deg = d['pitch']
+            roll_deg = d['roll']
+            yaw_def = d['yaw']
             x = skeleton_3d[:, 0]
             y = skeleton_3d[:, 1]
             z = skeleton_3d[:, 2]
