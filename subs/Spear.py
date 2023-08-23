@@ -2,7 +2,7 @@
 
 import numpy as np
 class Spear:
-    def __init__(self, box, mask, bot_point, top_point, top_3d, bot_3d, lenght, id, skeleton, skeleton_3d):
+    def __init__(self, box, mask, bot_point, top_point, top_3d, bot_3d, lenght, id, skeleton, skeleton_3d, roll, pitch, yaw):
         self.box = box
         self.mask = mask
         self.bot_point = bot_point
@@ -13,6 +13,9 @@ class Spear:
         self.id = id
         self.skeleton = skeleton
         self.skeleton_3d = skeleton_3d
+        self.roll = roll
+        self.pitch = pitch
+        self.yaw = yaw
 
     def to_dict(self):
         mask_data = np.where(self.mask == 1)
@@ -27,7 +30,10 @@ class Spear:
                 'length'    : self.lenght,
                 'id'        : self.id,
                 'skeleton'  : self.skeleton,
-                'skeleton3d': self.skeleton_3d}
+                'skeleton3d': self.skeleton_3d,
+                'roll'      :  self.roll,
+                'pitch'     : self.pitch,
+                'yaw'       : self.yaw}
 
 
     @classmethod

@@ -62,14 +62,11 @@ class Pather:
             distance = np.linalg.norm(botArm)
 
 
-
-
-            if spear.lenght > self.min_length:
-                if distance < self.min_dist:
-                    if botArm[0] < 10:
-                        efficient_spear2d = efficient_spear2d
-                        efficient_spear3d = botArm
-                        stop_signal = True
+            if distance < self.min_dist:
+                if botArm[0] < 10:
+                    efficient_spear2d = efficient_spear2d
+                    efficient_spear3d = botArm
+                    stop_signal = True
 
         return stop_signal, efficient_spear2d, efficient_spear3d
 
