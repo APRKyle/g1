@@ -160,7 +160,7 @@ try:
 
                     if stop_signal and coms.ARM_IS_READY:
 
-                        coms._sendCoordsToArm(efficient_spear3d, angle)
+                        coms._sendCoordsAngle(efficient_spear3d, angle)
                         time.sleep(5)
 
 
