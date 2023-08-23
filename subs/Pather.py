@@ -53,7 +53,6 @@ class Pather:
             if np.all(spear.bot_3d == 0):
                 print('unreachable depth')
                 continue
-            cd = np.linalg.norm(spear.bot_3d)
             botArm = self._transformIntoRobot(spear.bot_3d)
             topArm = self._transformIntoRobot(spear.top_3d)
             distance = np.linalg.norm(botArm)
@@ -84,5 +83,54 @@ class Pather:
         return stop_signal, efficient_spear2d, efficient_spear3d, angle
 
 
+    def processComplex(self, spears):
+        efficient_spear2d = False
+        stop_signal = None
+        efficient_spear3d = None
+        angle = None
+        if len(spears) == 1:
+            if np.all(spears[0].bot_3d == 0):
+                return stop_signal, efficient_spear2d, efficient_spear3d, angle
+            else:
+                botArm = self._transformIntoRobot(spears[0].bot_3d)
+                topArm = self._transformIntoRobot(spears[0].top_3d)
+                distance = np.linalg.norm(botArm)
+                lin_dist = abs(topArm[1] - botArm[1])
+
+                if spears[0].lenght > self.min_length:
+                    if distance < self.min_dist:
+                        if lin_dist > 130:
+                            efficient_spear2d = efficient_spear2d
+                            efficient_spear3d = botArm
+                            stop_signal = True
+                            angle = 45
+
+                    else:
+                        if lin_dist > 130:
+                            efficient_spear2d = efficient_spear2d
+                            efficient_spear3d = botArm
+                            stop_signal = True
+                            angle = 0
+
+                    return stop_signal, efficient_spear2d, efficient_spear3d, angle
+
+    def processWAngle(self, spears):
+        if len(spears) == 0
+        pitch_deg, yaw_deg, roll_deg = self.getAngles(spears[0].skeleton3D)
+    def _getAngles(self, data):
+        centroid = np.mean(data, axis=0)
+        translated_points = data - centroid
+        covariance_matrix = np.cov(translated_points, rowvar=False)
+        eigenvalues, eigenvectors = np.linalg.eigh(covariance_matrix)
+        dominant_eigenvector = eigenvectors[:, np.argmax(eigenvalues)]
+        dominant_eigenvector /= np.linalg.norm(dominant_eigenvector)
+        pitch = np.arcsin(dominant_eigenvector[2])
+        yaw = np.arctan2(dominant_eigenvector[1], dominant_eigenvector[0])
+        roll = 0
+
+        pitch_deg = np.degrees(pitch)
+        yaw_deg = np.degrees(yaw)
+        roll_deg = np.degrees(roll)
+        return pitch_deg, yaw_deg, roll_deg
 
 
