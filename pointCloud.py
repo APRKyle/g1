@@ -13,10 +13,11 @@ from subs.Spear import Spear
 import cv2
 import numpy as np
 import traceback
-
-output = Streamer(ip = '192.168.1.232', port = 5000)
+import time
+output = Streamer(ip = '192.168.1.108', port = 5000)
 camera = Camera()
 pather = Pather(min_lenght=5, min_dist = 5)
+coms = Communicator()
 
 ep = EngineProcessor('/home/andrii/Gus2/networks/yolo2/model.engine')
 prp = PreProcessor()
@@ -24,7 +25,7 @@ pop = PostProcessor(iou_threshold = 0.6, class_threshold = 0.6,
                  input_height = 480, input_width = 640, img_height = 480, img_width = 640,
                   num_masks = 32)
 
-
+coms.initComs()
 ep.initalize()
 camera.initCamera()
 output.initStreamer()
@@ -94,10 +95,12 @@ def get_angles(data):
     return pitch_deg, yaw_deg, roll_deg
 
 
+
+
 try:
     while True:
 
-
+        coms._readSignalFromArm()
         camera.getData()
         image = camera.image
         image_data = prp.process(image)
@@ -106,7 +109,10 @@ try:
         spears = []
         data = {}
         if len(classid) != 0:
-
+            efficient_spear2d = False
+            stop_signal = None
+            efficient_spear3d = None
+            angle = None
 
             for idx, (box, mask) in enumerate(zip(boxes, masks)):
 
@@ -137,13 +143,25 @@ try:
                       bot_3d = bot_3d, lenght = length, id = idx, skeleton = skeleton, skeleton_3d = skeleton3d,
                               roll = roll_deg, yaw = yaw_deg, pitch = pitch_deg)
 
-
+                spears.append(spear)
                 data[idx] = spear.to_dict()
 
                 lin_dist = abs(top_3d[1] - bot_3d[1])
 
+            for spear in spears:
+                botArm = pather._transformIntoRobot(spear.bot_3d)
+                distance = np.linalg.norm(botArm)
 
+                if distance < pather.min_dist:
+                    efficient_spear2d = efficient_spear2d
+                    efficient_spear3d = botArm
+                    stop_signal = True
+                    angle = spear.yaw
 
+                    if stop_signal and coms.ARM_IS_READY:
+
+                        coms._sendCoordsToArm(efficient_spear3d, angle)
+                        time.sleep(5)
 
 
 

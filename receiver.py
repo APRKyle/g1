@@ -146,7 +146,7 @@ try:
             skeleton_3d = np.array(d['skeleton3d'])
             pitch_deg = d['pitch']
             roll_deg = d['roll']
-            yaw_def = d['yaw']
+            yaw_deg = d['yaw']
             x = skeleton_3d[:, 0]
             y = skeleton_3d[:, 1]
             z = skeleton_3d[:, 2]
