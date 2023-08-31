@@ -13,7 +13,7 @@ class AsparagusProcessor:
 
     def process(self, boxes, masks):
         spears = []
-
+        data = {}
         for idx, (box, mask) in enumerate(zip(boxes, masks)):
 
             mask[np.logical_and(mask == 1, self.camera.depthNP == 0)] = 0  # stereo unreachable pixels distance check
@@ -49,10 +49,10 @@ class AsparagusProcessor:
 
             spears.append(spear)
 
+            data[idx] = spear.to_dict()
 
 
-
-        return spears
+        return spears, data
 
     def _remove_outliers(self, data):
 
