@@ -45,7 +45,7 @@ try:
             spears, data = asparagusProcessor.process(boxes, masks)
             botArm, distance2Bot, angle, stopSignal = pather.processMain(spears)
 
-            print(stopSignal)
+
             # if stopSignal and coms.ARM_IS_READY:
             #     print(f'spear sent: {spear3d}')
             #     coms._sendCoordsToArm(spear3d)

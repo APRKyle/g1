@@ -136,7 +136,7 @@ class Pather:
             botArm, distance2Bot, robotAcessabilityFlag = self._maxHeightDistanceFilter(spear)
             if robotAcessabilityFlag != 0:
                 data.append([spear, botArm, distance2Bot, robotAcessabilityFlag])
-
+        print(len(data))
         #no any spear
         if len(data) == 0:
             return botArm, distance2Bot, angle, stopSignal
