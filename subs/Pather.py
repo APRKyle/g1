@@ -79,36 +79,6 @@ class Pather:
         return stop_signal, efficient_spear2d, efficient_spear3d, angle
 
 
-    def processComplex(self, spears):
-        efficient_spear2d = False
-        stop_signal = None
-        efficient_spear3d = None
-        angle = None
-        if len(spears) == 1:
-            if np.all(spears[0].bot_3d == 0):
-                return stop_signal, efficient_spear2d, efficient_spear3d, angle
-            else:
-                botArm = self._transformIntoRobot(spears[0].bot_3d)
-                topArm = self._transformIntoRobot(spears[0].top_3d)
-                distance = np.linalg.norm(botArm)
-                lin_dist = abs(topArm[1] - botArm[1])
-
-                if spears[0].lenght > self.min_length:
-                    if distance < self.min_dist:
-                        if lin_dist > 130:
-                            efficient_spear2d = efficient_spear2d
-                            efficient_spear3d = botArm
-                            stop_signal = True
-                            angle = 45
-
-                    else:
-                        if lin_dist > 130:
-                            efficient_spear2d = efficient_spear2d
-                            efficient_spear3d = botArm
-                            stop_signal = True
-                            angle = 0
-
-                    return stop_signal, efficient_spear2d, efficient_spear3d, angle
 
 
 
