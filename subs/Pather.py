@@ -114,7 +114,7 @@ class Pather:
                 robotAcessabilityFlag = 0
                 return botArm, distance2Bot, robotAcessabilityFlag
 
-            if distance2Bot < self.min_dist:
+            if distance2Bot > self.min_dist:
                 print(f' spear min distance OK')
                 robotAcessabilityFlag = 2
                 return botArm, distance2Bot, robotAcessabilityFlag
