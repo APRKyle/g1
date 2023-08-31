@@ -45,14 +45,15 @@ try:
             spears, data = asparagusProcessor.process(boxes, masks)
             botArm, distance2Bot, angle, stopSignal = pather.processMain(spears)
 
-
+            print(stopSignal)
             # if stopSignal and coms.ARM_IS_READY:
             #     print(f'spear sent: {spear3d}')
             #     coms._sendCoordsToArm(spear3d)
             #     time.sleep(5)
             if stopSignal:
-                print(botArm)
-                print(angle)
+                # print(botArm)
+                # print(angle)
+                pass
 
             if len(spears) != 0:
                 image = viz.process(image, spears)

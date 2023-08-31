@@ -52,7 +52,7 @@ class Pather:
 
         for idx, spear in enumerate(spears):
             if np.all(spear.bot_3d == 0):
-                print('unreachable depth')
+
                 continue
 
             if spear.length < self.min_length:
@@ -104,18 +104,16 @@ class Pather:
         if cameraAcessabilityFlag :
 
             if spear.lenght < self.min_length:
-                print(f'spear length OK')
                 robotAcessabilityFlag = 0
                 return botArm, distance2Bot,  robotAcessabilityFlag
-            print(f' distance 2 bot: {distance2Bot}')
-            print(f' max distance: {self.max_distance}')
+
             if distance2Bot > self.max_distance:
-                print(f'spear max distance OK')
+
                 robotAcessabilityFlag = 0
                 return botArm, distance2Bot, robotAcessabilityFlag
 
             if distance2Bot > self.min_dist:
-                print(f' spear min distance OK')
+
                 robotAcessabilityFlag = 2
                 return botArm, distance2Bot, robotAcessabilityFlag
 
@@ -140,7 +138,7 @@ class Pather:
             botArm, distance2Bot, robotAcessabilityFlag = self._maxHeightDistanceFilter(spear)
             if robotAcessabilityFlag != 0:
                 data.append([spear, botArm, distance2Bot, robotAcessabilityFlag])
-        print(len(data))
+
         #no any spear
         if len(data) == 0:
             return botArm, distance2Bot, angle, stopSignal
