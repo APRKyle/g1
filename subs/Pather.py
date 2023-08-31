@@ -42,6 +42,15 @@ class Pather:
 
         return point
 
+    def _transformAllSpears(self, spears):
+        filtered_spears = []
+        for idx, spear in enumerate(spears):
+            if np.all(spear.bot_3d) == 0:
+                continue
+            botArm = self._transformIntoRobot(spear.bot_3d)
+            topArm = self._transformIntoRobot(spear.top_3d)
+
+            pass
 
 
     def processSpears(self, spears):
@@ -51,17 +60,12 @@ class Pather:
         angle = None
         for idx, spear in enumerate(spears):
             if np.all(spear.bot_3d == 0):
-                print('unreachable depth')
                 continue
             botArm = self._transformIntoRobot(spear.bot_3d)
             topArm = self._transformIntoRobot(spear.top_3d)
             distance = np.linalg.norm(botArm)
             lin_dist = abs(topArm[1] - botArm[1])
-            print(f'lin dist: {lin_dist}')
-            print(f'distance: {distance}')
-            print(f'botArm  : {botArm}')
-            print(f'topArm  : {topArm}')
-            print(f'lenght  : {spear.lenght}')
+
 
             if spear.lenght > self.min_length:
                 if distance < self.min_dist:
@@ -114,9 +118,8 @@ class Pather:
 
                     return stop_signal, efficient_spear2d, efficient_spear3d, angle
 
-    def processWAngle(self, spears):
-        if len(spears) == 0
-        pitch_deg, yaw_deg, roll_deg = self.getAngles(spears[0].skeleton3D)
+
+
     def _getAngles(self, data):
         centroid = np.mean(data, axis=0)
         translated_points = data - centroid
