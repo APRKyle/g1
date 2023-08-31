@@ -100,18 +100,21 @@ class Pather:
         robotAcessabilityFlag = 0  #states 0 - unassseible, 1 - accesible, 2 - acessible with angle correction according to min dist
 
         botArm, distance2Bot, cameraAcessabilityFlag  = self._calculateBotArmDistance(spear)
-        print(f'cam Acess: {cameraAcessabilityFlag}')
+
         if cameraAcessabilityFlag :
 
             if spear.lenght < self.min_length:
+                print(f'spear length OK')
                 robotAcessabilityFlag = 0
                 return botArm, distance2Bot,  robotAcessabilityFlag
 
             if distance2Bot > self.max_distance:
+                print(f'spear max distance OK')
                 robotAcessabilityFlag = 0
                 return botArm, distance2Bot, robotAcessabilityFlag
 
             if distance2Bot < self.min_dist:
+                print(f' spear min distance OK')
                 robotAcessabilityFlag = 2
                 return botArm, distance2Bot, robotAcessabilityFlag
 
