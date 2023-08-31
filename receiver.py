@@ -137,7 +137,7 @@ try:
 
         frame_id +=1
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        out.write(frame)
+        #out.write(frame)   #UNCOMMENT THIS TO SAVE THE STREAM
         existing_data.append(data)
 
 

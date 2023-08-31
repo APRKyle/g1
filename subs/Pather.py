@@ -195,7 +195,7 @@ class Pather:
 
             ans, distance = calculateHorizontalDistance2All(data, lowestidx)
             if data[lowestidx][2] < self.min_dist:
-
+                print('spear is close to robot')
                 if distance < 0:
                     angle = 90
                 else:
@@ -203,8 +203,10 @@ class Pather:
 
             else:
                 if distance < 0:
+                    print('distance between spears is less then zero (closest spear is on the right)')
                     angle = 45
                 else:
+                    print('distance between spears is more then zero (closest spear is on the right)')
                     angle = -45
 
 
