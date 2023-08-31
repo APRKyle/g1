@@ -208,10 +208,12 @@ class Pather:
             else:
                 if distance < 0:
                     print('distance between spears is less then zero (closest spear is on the right)')
-                    angle = 45
+                    angle = 30
                 else:
                     print('distance between spears is more then zero (closest spear is on the right)')
-                    angle = -45
+                    angle = -30
+
+
 
 
             return data[lowestidx][1], data[lowestidx][2], angle, True
