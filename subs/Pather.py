@@ -194,7 +194,7 @@ class Pather:
                     lowestidx = idx
 
             ans, distance = calculateHorizontalDistance2All(data, lowestidx)
-            if data[lowestidx] < self.min_dist:
+            if data[lowestidx][2] < self.min_dist:
 
                 if distance < 0:
                     angle = 90
@@ -208,7 +208,7 @@ class Pather:
                     angle = -45
 
 
-            return data[lowestidx][2], data[lowestidx][2], angle, True
+            return data[lowestidx][1], data[lowestidx][2], angle, True
 
 
 
