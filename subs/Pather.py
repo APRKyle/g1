@@ -143,10 +143,11 @@ class Pather:
 
         #no any spear
         if len(data) == 0:
+            print('no spears')
             return botArm, distance2Bot, angle, stopSignal
         #only one spear
         if len(data) == 1:
-
+            print('one spear')
             spear = data[0][0]
             robotAcessabilityFlag= data[0][-1]
             if robotAcessabilityFlag == 0:
@@ -180,6 +181,7 @@ class Pather:
 
 
         else:
+            print('more then 1 spears')
             # data : [
             #         [spear, botArm, distance2Bot, robotAcessabilityFlag]
             #
