@@ -17,6 +17,8 @@ class Spear:
         self.pitch = pitch
         self.yaw = yaw
 
+
+
     def to_dict(self):
         mask_data = np.where(self.mask == 1)
         mask_data = [mask_data[0].tolist(), mask_data[1].tolist()]
@@ -33,7 +35,7 @@ class Spear:
                 'skeleton3d': self.skeleton_3d,
                 'roll'      :  self.roll,
                 'pitch'     : self.pitch,
-                'yaw'       : self.yaw}
+                'yaw'       : self.yaw,}
 
 
     @classmethod

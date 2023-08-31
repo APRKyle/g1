@@ -36,6 +36,8 @@ class AsparagusProcessor:
 
 
             skeleton, bot_point, top_point = self.split_into_n_pices(20, asparagus, self.topk, self.botk)
+
+
             skeleton3d = self.calculate_batch_3d(skeleton)
             top_3d = self.camera._calculatePix3D(top_point)
             bot_3d = self.camera._calculatePix3D(bot_point)
@@ -45,7 +47,7 @@ class AsparagusProcessor:
 
             spear = Spear(box=box, mask=mask, bot_point=bot_point, top_point=top_point, top_3d=top_3d,
                           bot_3d=bot_3d, lenght=length, id=idx, skeleton=skeleton, skeleton_3d=skeleton3d,
-                          roll=roll_deg, yaw=yaw_deg, pitch=pitch_deg)
+                          roll=roll_deg, yaw=yaw_deg, pitch=pitch_deg,)
 
             spears.append(spear)
 
