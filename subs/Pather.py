@@ -150,6 +150,7 @@ class Pather:
             print('one spear')
             spear = data[0][0]
             robotAcessabilityFlag= data[0][-1]
+            print(f'acessability flag: {robotAcessabilityFlag}')
             if robotAcessabilityFlag == 0:
                 return botArm, distance2Bot, angle, stopSignal
 
