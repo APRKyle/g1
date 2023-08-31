@@ -20,8 +20,8 @@ class Pather:
         # self.trans_mat = np.array([122.99726589200256,-42.55390325708568,254.56977538984853])
 
         self.rot_mat = np.array(    [[0.9006824488163374, 0.25594508983254777, -0.18684312962242106],
-     [0.005999550033748842, -0.622774720467394, -0.7006617360840779],
-     [0.3989700772442051, -0.7002331967959551, 0.5488516932658601]])
+                                 [0.005999550033748842, -0.622774720467394, -0.7006617360840779],
+                                 [0.3989700772442051, -0.7002331967959551, 0.5488516932658601]])
         self.trans_mat = np.array([131.989565068334, -124.83270897539833, 144.33913885030037])
 
 
@@ -114,7 +114,7 @@ class Pather:
                 robotAcessabilityFlag = 0
                 return botArm, distance2Bot, robotAcessabilityFlag
 
-            if distance2Bot > self.min_dist:
+            if distance2Bot < self.min_dist:
 
                 robotAcessabilityFlag = 2
                 return botArm, distance2Bot, robotAcessabilityFlag
