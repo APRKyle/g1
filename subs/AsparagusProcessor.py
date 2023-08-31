@@ -4,7 +4,7 @@ from .Spear import Spear
 
 
 class AsparagusProcessor:
-    def __init__(self, camera, topk = 0.06, botk = 0.06, ignore_distance = 400 ):
+    def __init__(self, camera, topk = 0.06, botk = 0.06, ignore_distance = 700 ):
         self.topk = topk
         self.botk = botk
         self.camera = camera
