@@ -152,6 +152,7 @@ class Pather:
             robotAcessabilityFlag= data[0][-1]
             print(f'acessability flag: {robotAcessabilityFlag}')
             if robotAcessabilityFlag == 0:
+
                 return botArm, distance2Bot, angle, stopSignal
 
 
@@ -165,7 +166,7 @@ class Pather:
                         angle = (90 - spearPitch) * -1
                     else:
                         angle = 90 - spearPitch * -1
-                return botArm, distance2Bot, angle, stopSignal
+                return data[0][1], data[0][2], angle, True
 
             if robotAcessabilityFlag == 2:
                 spearPitch = round(spears[0].pitch)
@@ -176,7 +177,7 @@ class Pather:
                         angle = -90
                     else:
                         angle = 90
-                return botArm, distance2Bot, angle, stopSignal
+                return data[0][1], data[0][2], angle, True
 
 
 
