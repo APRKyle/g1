@@ -42,15 +42,7 @@ class Pather:
 
         return point
 
-    def _transformAllSpears(self, spears):
-        filtered_spears = []
-        for idx, spear in enumerate(spears):
-            if np.all(spear.bot_3d) == 0:
-                continue
-            botArm = self._transformIntoRobot(spear.bot_3d)
-            topArm = self._transformIntoRobot(spear.top_3d)
 
-            pass
 
 
     def processSpears(self, spears):
