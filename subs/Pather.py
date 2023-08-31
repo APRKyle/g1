@@ -107,7 +107,8 @@ class Pather:
                 print(f'spear length OK')
                 robotAcessabilityFlag = 0
                 return botArm, distance2Bot,  robotAcessabilityFlag
-
+            print(f' distance 2 bot: {distance2Bot}')
+            print(f' max distance: {self.max_distance}')
             if distance2Bot > self.max_distance:
                 print(f'spear max distance OK')
                 robotAcessabilityFlag = 0
