@@ -5,10 +5,11 @@ import numpy as np
 #
 #
 class Pather:
-    def __init__(self, min_lenght, min_dist):
+    def __init__(self, min_lenght, min_dist, max_distance):
 
         self.min_length = min_lenght
         self.min_dist = min_dist
+        self.max_distance = max_distance
         # top camera
 
 
@@ -43,7 +44,6 @@ class Pather:
 
 
 
-
     def processSpears(self, spears):
         efficient_spear2d = False
         stop_signal = None
@@ -71,6 +71,158 @@ class Pather:
                     stop_signal = True
 
         return stop_signal, efficient_spear2d, efficient_spear3d
+
+
+
+
+
+
+
+    def _calculateBotArmDistance(self, spear):
+        #transformed bot point into robot frame and calculate distance to it
+
+        botArm = None
+        distanceToBot = None
+        cameraAcessabilityFlag = False
+        if np.all(spear.bot_3d == 0):
+            return botArm, distanceToBot, cameraAcessabilityFlag
+
+        botArm = self._transformIntoRobot(spear.bot_3d)
+        distance2Bot = np.linalg.norm(botArm)
+        cameraAcessabilityFlag  = True
+        return botArm, distance2Bot, cameraAcessabilityFlag
+
+
+    def _maxHeightDistanceFilter(self, spear):
+
+        #filters spear accordint to spear height and robot max reachable distance
+
+        robotAcessabilityFlag = 0  #states 0 - unassseible, 1 - accesible, 2 - acessible with angle correction according to min dist
+
+        botArm, distance2Bot, cameraAcessabilityFlag  = self._calculateBotArmDistance(spear)
+
+        if cameraAcessabilityFlag :
+
+            if spear.lenght < self.min_length:
+                robotAcessabilityFlag = 0
+                return botArm, distance2Bot,  robotAcessabilityFlag
+
+            if distance2Bot > self.max_distance:
+                robotAcessabilityFlag = 0
+                return botArm, distance2Bot, robotAcessabilityFlag
+
+            if distance2Bot < self.min_dist:
+                robotAcessabilityFlag = 2
+                return botArm, distance2Bot, robotAcessabilityFlag
+
+            robotAcessabilityFlag = 1
+            return botArm, distance2Bot, robotAcessabilityFlag
+
+        else:
+            robotAcessabilityFlag = 0
+            return botArm, distance2Bot, robotAcessabilityFlag
+
+
+    def processMain(self, spears):
+        #botArm, distance2Bot, angle, stopSignal
+
+        botArm = None
+        distance2Bot = None
+        angle = None
+        stopSignal = None
+
+        data = []
+        for idx, spear in enumerate(spears):
+            botArm, distance2Bot, robotAcessabilityFlag = self._maxHeightDistanceFilter(spear)
+            if robotAcessabilityFlag != 0:
+                data.append([spear, botArm, distance2Bot, robotAcessabilityFlag])
+
+        #no any spear
+        if len(data) == 0:
+            return botArm, distance2Bot, angle, stopSignal
+        #only one spear
+        if len(data) == 1:
+
+            spear = data[0][0]
+            robotAcessabilityFlag= data[0][-1]
+            if robotAcessabilityFlag == 0:
+                return botArm, distance2Bot, angle, stopSignal
+
+
+
+            if robotAcessabilityFlag == 1:
+                spearPitch = round(spear.pitch)
+                if abs(spearPitch) < 50 and abs(spearPitch) > 40:
+                    angle = 0
+                else:
+                    if spearPitch > 0:
+                        angle = (90 - spearPitch) * -1
+                    else:
+                        angle = 90 - spearPitch * -1
+                return botArm, distance2Bot, angle, stopSignal
+
+            if robotAcessabilityFlag == 2:
+                spearPitch = round(spears[0].pitch)
+                if abs(spearPitch) < 50 and abs(spearPitch) > 40:
+                    angle = 90
+                else:
+                    if spearPitch > 0:
+                        angle = -90
+                    else:
+                        angle = 90
+                return botArm, distance2Bot, angle, stopSignal
+
+
+
+
+        else:
+            # data : [
+            #         [spear, botArm, distance2Bot, robotAcessabilityFlag]
+            #
+            # ]
+
+            minv = np.inf
+            lowestidx = None
+
+            for idx, v in enumerate(data):
+                if data[2] < minv:
+                    minv = data[2]
+                    lowestidx = idx
+
+            ans, distance = calculateHorizontalDistance2All(data, lowestidx)
+            if data[2] < self.min_dist:
+
+                if distance < 0:
+                    angle = 90
+                else:
+                    angle = -90
+
+            else:
+                if distance < 0:
+                    angle = 45
+                else:
+                    angle = -45
+
+
+            return data[lowestidx][2], data[lowestidx][2], angle, True
+
+
+
+def calculateHorizontalDistance2All(data, bidx):
+    ans = {}
+    closesOnX = np.inf
+    for idx, value in enumerate(data):
+        if idx == bidx:
+            continue
+        distance = data[bidx][1][0] - value[1][0]
+        ans[idx] = distance
+        if abs(distance) < abs(closesOnX):
+            closesOnX = distance
+    return ans, distance
+
+
+
+
 
 
 
