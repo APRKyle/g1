@@ -163,9 +163,9 @@ class Pather:
                     angle = 0
                 else:
                     if spearPitch > 0:
-                        angle = (90 - spearPitch) * -1
+                        angle = (spearPitch) * -1
                     else:
-                        angle = 90 - spearPitch * -1
+                        angle = spearPitch * -1
                 return data[0][1], data[0][2], angle, True
 
             if robotAcessabilityFlag == 2:
