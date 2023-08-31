@@ -54,6 +54,18 @@ class Streamer:
         data = struct.pack('<L', size) + json_data
         self.sock.sendall(data)
 
+    def renderImage(self, image):
+        frame_data = cv2.imencode('.jpg', image)[1].tostring()
+        data = {
+            'image': frame_data.decode('latin1'),  # Convert bytes to string for JSON serialization  # Convert the NumPy array to a list for JSON serialization
+        }
+        json_data = json.dumps(data).encode('utf-8')
+
+        # Send the JSON data with the size header
+        size = len(json_data)
+        data = struct.pack('<L', size) + json_data
+        self.sock.sendall(data)
+
     def close(self):
         self.sock.close()
 

@@ -16,4 +16,4 @@ while True:
         print(c)
 
     # tracker.gc2()
-    output.Render(camera.image)
+    output.renderImage(camera.image)
