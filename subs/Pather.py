@@ -43,6 +43,7 @@ class Pather:
 
 
 
+
     def processSpears(self, spears):
         efficient_spear2d = False
         stop_signal = None

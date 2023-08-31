@@ -38,7 +38,6 @@ class Spear:
 
     @classmethod
     def from_dict(cls, data):
-        # Create an instance of the class from the dictionary data
         return cls(box = data['box'], mask = data['mask'], bot_point = data['bot_point'], top_point = data['top_point'],
                    top_3d = data['top_3d'], bot_3d = data['bot_3d'], lenght = data['lenght'], id = data['id'],
                    skeleton = data['skeleton'], skeleton_3d = data['skeleton3d'], pitch=data['pitch'], roll = data['roll'], yaw = data['yaw'])
