@@ -49,7 +49,7 @@ try:
             if stopSignal and coms.ARM_IS_READY:
                 print(f'spear sent: {botArm}')
                 print(f'angle sent: {angle}')
-                coms._sendCoordsAngleToArm(botArm, angle)
+                coms._sendCoordsAngle(botArm, angle)
                 time.sleep(5)
 
 
