@@ -55,15 +55,15 @@ class Vizualizer:
         for spear, flags in data.items():
             text = description(flags)
             text = text.split('*')
-            text.append(f'len: {spear.lenght}')
-            text.append(f'distance2rob: {np.linalg.norm(spear.arm_bot_3d)}')
+            text.append(f'len: {str(spear.lenght)[:6]}')
+            text.append(f'distance2rob: {str(np.linalg.norm(spear.arm_bot_3d))[:6]}')
 
 
             midpoint = spear.skeleton[len(spear.skeleton) // 2]
 
             #rectangle
             x, y = midpoint[0] - 100, midpoint[1] - 100
-            width, height = 200, 300
+            width, height = 150, 120
             color_rectangle = (0, 0, 0)  # Black
             cv2.rectangle(image, (x, y), (x + width, y + height), color_rectangle, thickness=-1)
 
