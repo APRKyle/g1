@@ -113,7 +113,7 @@ class Pather:
 
             # -------------far away spear limits-------------
             #  -----close spears should be angled flag-------
-            if distance2Bot < self.min_distance_w_no_angle_correction:
+            if botArm[-1] < self.min_distance_w_no_angle_correction:
                 spear.arm_bot_3d = botArm
                 data[spear][1] = 1
             else:
