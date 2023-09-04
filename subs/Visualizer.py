@@ -63,7 +63,7 @@ class Vizualizer:
 
             #rectangle
             x, y = midpoint[0] - 100, midpoint[1] - 100
-            width, height = 150, 120
+            width, height = 120, 180
             color_rectangle = (0, 0, 0)  # Black
             cv2.rectangle(image, (x, y), (x + width, y + height), color_rectangle, thickness=-1)
 
