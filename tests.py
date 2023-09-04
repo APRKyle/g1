@@ -24,7 +24,6 @@ try:
             spears, data = asparagusProcessor.process(boxes, masks) #filtered on camera reach and camera distance
             data1 = pather._filter_height_distance(spears) #filtered on length and min/max distance
 
-            print(data1)
 
 
 
