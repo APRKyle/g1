@@ -29,7 +29,7 @@ try:
             print(data1)
 
 
-            image = viz.process_test(image, data1)
+            image = viz.process_tests(image, data1)
 
         output.Render(image, data)
 
