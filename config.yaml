@@ -19,7 +19,7 @@ working_area:
 asparagus:
   topk: 0.05
   botk: 0.05
-  n_skeletons: 15
+  n_skeletons: 20
   min_lenht: 150
 
 
