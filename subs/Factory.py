@@ -29,8 +29,8 @@ def assemble(config_path = 'config.yaml'):
     yolo_img_width = config['yolo']['img_width']
 
     working_area_ignore_distance = config['working_area']['ignore_distance']
-    min_distance_w_no_angle_correction = config['working_area']['min_dist']
-    max_reachable_distance = config['working_area']['max_distance']
+    min_distance_w_no_angle_correction = config['working_area']['min_distance_w_no_angle_correction']
+    max_reachable_distance = config['working_area']['max_reachable_distance']
 
     asparagus_topk = config['asparagus']['topk']
     asparagus_botk = config['asparagus']['botk']
