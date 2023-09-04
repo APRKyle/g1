@@ -14,8 +14,8 @@ import yaml
 
 
 
-def assemble():
-    with open('../config.yaml', 'r') as config_file:
+def assemble(config_path = 'config.yaml'):
+    with open('config.yaml', 'r') as config_file:
         config = yaml.safe_load(config_file)
 
 
