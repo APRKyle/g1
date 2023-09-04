@@ -4,7 +4,8 @@ from .Spear import Spear
 
 
 class AsparagusProcessor:
-    def __init__(self, camera, topk = 0.06, botk = 0.06, ignore_distance = 700 ):
+    def __init__(self, camera, topk = 0.06, botk = 0.06, ignore_distance = 700, n_skeletons = 20):
+        self.n_skeletons = n_skeletons
         self.topk = topk
         self.botk = botk
         self.camera = camera
@@ -22,20 +23,12 @@ class AsparagusProcessor:
             if np.all(np.all(mask == 0)):
                 continue
             mask = mask.astype(np.int)
-
             asparagusMask = np.where(mask == 1)
-
-
             asparagus = np.array([asparagusMask[0], asparagusMask[1]])
-            #asparagus: 0 -  y coordinate, 1 - x coordinate
-
-            length2d = asparagus[0].max() - asparagus[0].min()
-            bot_part = asparagus[:, asparagus[0] > asparagus[0].max() - length2d * self.botk]
-            top_part = asparagus[:, asparagus[0] < asparagus[0].min() + length2d * self.topk]
 
 
 
-            skeleton, bot_point, top_point = self.split_into_n_pices(20, asparagus, self.topk, self.botk)
+            skeleton, bot_point, top_point = self.split_into_n_pices(self.n_skeletons, asparagus, self.topk, self.botk)
 
 
             skeleton3d = self.calculate_batch_3d(skeleton)

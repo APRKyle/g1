@@ -233,6 +233,10 @@ def calculateHorizontalDistance2All(data, bidx):
     return ans, distance
 
 
+#general logic:
+#receive all spears from asparagus processor, where in asparagus processor only depth eliminated
+
+
 
 
 
