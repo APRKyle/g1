@@ -55,7 +55,7 @@ def assemble(config_path = 'config.yaml'):
     coms.initComs()
     ep.initalize()
     camera.initCamera()
-    output.initStreamer()
+    #output.initStreamer()
 
 
     return ep, prp, pop, asparagusProcessor, pather, viz, coms, camera, output
