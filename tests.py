@@ -3,6 +3,7 @@
 from subs.Factory import assemble
 
 ep, prp, pop, asparagusProcessor, pather, viz, coms, camera, output = assemble(config_path ='config.yaml')
+print('config loaded')
 
 '''
 
