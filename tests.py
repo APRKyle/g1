@@ -26,7 +26,6 @@ try:
 
 
 
-            print(data1)
 
 
             image = viz.process_tests(image, data1)
