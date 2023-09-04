@@ -77,7 +77,7 @@ class Vizualizer:
                 y = y + 30
                 position = (x, y)
                 cv2.putText(image, t, position, font, font_scale, font_color, font_thickness)
-
+            cv2.circle(image, tuple(spear.bot_point), 2, (0,0,255), 2)
         return image
 
 
