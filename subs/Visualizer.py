@@ -41,18 +41,24 @@ class Vizualizer:
         #   0 - closer then max dist
         #   1 - further then reach
         def description(a):
-            if   a == [0,0,0]: return 'LEN <  MIN_LEN \n PP > MIN_DIST_TRUCK \n PP < MAX_DIST_ARM\n'
-            elif a == [0,0,1]: return 'LEN <  MIN_LEN \n PP > MIN_DIST_TRUCK \n PP > MAX_DIST_ARM\n'
-            elif a == [0,1,0]: return 'LEN <  MIN_LEN \n PP < MIN_DIST_TRUCK \n PP < MAX_DIST_ARM\n'
-            elif a == [1,0,0]: return 'LEN >= MIN_LEN \n PP > MIN_DIST_TRUCK \n PP < MAX_DIST_ARM\n'
-            elif a == [1,0,1]: return 'LEN >= MIN_LEN \n PP > MIN_DIST_TRUCK \n PP > MAX_DIST_ARM\n'
-            elif a == [1,1,0]: return 'LEN >= MIN_LEN \n PP < MIN_DIST_TRUCK \n PP < MAX_DIST_ARM\n'
-            elif a == [0,1,1]: return 'LEN <  MIN_LEN \n PP > MIN_DIST_TRUCK \n PP > MAX_DIST_ARM\n'
-            elif a == [1,1,1]: return 'LEN >= MIN_LEN \n PP > MIN_DIST_TRUCK \n PP > MAX_DIST_ARM\n'
+            if   a == [0,0,0]: return 'LEN <  MIN_LEN * PP > MIN_DIST_TRUCK * PP < MAX_DIST_ARM'
+            elif a == [0,0,1]: return 'LEN <  MIN_LEN * PP > MIN_DIST_TRUCK * PP > MAX_DIST_ARM'
+            elif a == [0,1,0]: return 'LEN <  MIN_LEN * PP < MIN_DIST_TRUCK * PP < MAX_DIST_ARM'
+            elif a == [1,0,0]: return 'LEN >= MIN_LEN * PP > MIN_DIST_TRUCK * PP < MAX_DIST_ARM'
+            elif a == [1,0,1]: return 'LEN >= MIN_LEN * PP > MIN_DIST_TRUCK * PP > MAX_DIST_ARM'
+            elif a == [1,1,0]: return 'LEN >= MIN_LEN * PP < MIN_DIST_TRUCK * PP < MAX_DIST_ARM'
+            elif a == [0,1,1]: return 'LEN <  MIN_LEN * PP > MIN_DIST_TRUCK * PP > MAX_DIST_ARM'
+            elif a == [1,1,1]: return 'LEN >= MIN_LEN * PP > MIN_DIST_TRUCK * PP > MAX_DIST_ARM'
+
+
 
         for spear, flags in data.items():
             text = description(flags)
-            text += f'len: {spear.lenght} \n distance2rob: {np.linalg.norm(spear.arm_bot_3d)}'
+            text = text.split('*')
+            text.append(f'len: {spear.lenght}')
+            text.append(f'distance2rob: {np.linalg.norm(spear.arm_bot_3d)}')
+
+
             midpoint = spear.skeleton[len(spear.skeleton) // 2]
 
             #rectangle
@@ -63,12 +69,14 @@ class Vizualizer:
 
             #text
 
-            position = (x, y)
             font = cv2.FONT_HERSHEY_SIMPLEX
-            font_scale = 1
+            font_scale = 0.5
             font_color = (255, 255, 255)
-            font_thickness = 1
-            cv2.putText(image, text, position, font, font_scale, font_color, font_thickness)
+            font_thickness = 2
+            for t in text:
+                y = y + 30
+                position = (x, y)
+                cv2.putText(image, t, position, font, font_scale, font_color, font_thickness)
 
         return image
 
