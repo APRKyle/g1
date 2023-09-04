@@ -105,6 +105,7 @@ class Pather:
             #       bot arm transformation and distance check
             botArm, distance2Bot, cameraAcessabilityFlag = self._calculateBotArmDistance(spear)
             if distance2Bot is None:
+                spear.arm_bot_3d = [0,0,0]
                 return data
 
             # -------------far away spear limits-------------
