@@ -57,6 +57,9 @@ class Vizualizer:
             text = text.split('*')
             text.append(f'len: {str(spear.lenght)[:6]}')
             text.append(f'distance2rob: {str(np.linalg.norm(spear.arm_bot_3d))[:6]}')
+            text.append(f'cor: {str(spear.arm_bot_3d[0])[:6]} , '
+                        f'     {str(spear.arm_bot_3d[1])[:6]} ,'
+                        f'     {str(spear.arm_bot_3d[2])[:6]}')
 
 
             midpoint = spear.skeleton[len(spear.skeleton) // 2]
