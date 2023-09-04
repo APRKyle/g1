@@ -17,11 +17,10 @@ working_area:
   max_reachable_distance: 1000000
 
 asparagus:
-  topk: 0.15
-  botk: 0.09
+  topk: 0.05
+  botk: 0.05
   n_skeletons: 15
-  min_lenht: 0
-
+  min_lenht: 150
 
 
 streamer:
