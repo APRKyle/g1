@@ -65,7 +65,7 @@ class Vizualizer:
             midpoint = spear.skeleton[len(spear.skeleton) // 2]
 
             #rectangle
-            x, y = midpoint[0] - 100, midpoint[1] - 150
+            x, y = midpoint[0] - 100, midpoint[1] - 60
             width, height = 150, 180
             color_rectangle = (0, 0, 0)  # Black
             cv2.rectangle(image, (x, y), (x + width, y + height), color_rectangle, thickness=-1)
