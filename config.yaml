@@ -1,0 +1,31 @@
+# Example YAML Configuration File for a Web Server
+
+# Server Configuration
+yolo:
+  weights_path: '/home/andrii/Gus2/networks/yolo_asparagus/model.engine'
+  iou_threshold: 0.8
+  class_threshold: 0.85
+  num_masks: 32
+  input_height: 480
+  input_width: 640
+  img_height: 480
+  img_width: 640
+
+working_area:
+  ignore_distance: 400
+  min_dist: 0
+  max_distance: 1000000
+
+asparagus:
+  topk: 0.15
+  botk: 0.09
+  n_skeletons: 15
+  min_lenht: 0
+
+
+
+streamer:
+  ip: 192.168.1.108
+  port: 5000
+
+

@@ -1,3 +1,11 @@
+
+
+from subs.Factory import assemble
+
+ep, prp, pop, asparagusProcessor, pather, viz, coms, camera, output = assemble()
+
+'''
+
 from yolo_inferencing.PostProcessor import PostProcessor
 from yolo_inferencing.PreProcessor import PreProcessor
 from yolo_inferencing.EngineProcessor import EngineProcessor
@@ -59,3 +67,5 @@ except Exception as e:
     ep.deinitialize()
 finally:
     ep.deinitialize()
+
+'''

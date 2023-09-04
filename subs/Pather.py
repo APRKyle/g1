@@ -234,7 +234,9 @@ def calculateHorizontalDistance2All(data, bidx):
 
 
 #general logic:
-#receive all spears from asparagus processor, where in asparagus processor only depth eliminated
+#   receive all spears from asparagus processor
+#       depth unrechable
+#       distance from the camera(z distance only) ignored
 
 
 
