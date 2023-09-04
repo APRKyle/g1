@@ -16,6 +16,7 @@ class Spear:
         self.roll = roll
         self.pitch = pitch
         self.yaw = yaw
+        self.arm_bot_3d = None
 
 
 
@@ -35,7 +36,8 @@ class Spear:
                 'skeleton3d': self.skeleton_3d,
                 'roll'      :  self.roll,
                 'pitch'     : self.pitch,
-                'yaw'       : self.yaw,}
+                'yaw'       : self.yaw,
+                'arm_bot_3d': self.arm_bot_3d}
 
 
     @classmethod

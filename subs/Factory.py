@@ -29,27 +29,29 @@ def assemble(config_path = 'config.yaml'):
     yolo_img_width = config['yolo']['img_width']
 
     working_area_ignore_distance = config['working_area']['ignore_distance']
-    working_area_min_dist = config['working_area']['min_dist']
-    working_area_max_distance = config['working_area']['max_distance']
+    min_distance_w_no_angle_correction = config['working_area']['min_dist']
+    max_reachable_distance = config['working_area']['max_distance']
 
     asparagus_topk = config['asparagus']['topk']
     asparagus_botk = config['asparagus']['botk']
     asparagus_n_skeletons = config['asparagus']['n_skeletons']
-    asparagus_min_lenht = config['asparagus']['min_lenht']
+    asparagus_min_lenght = config['asparagus']['min_lenht']
 
     streamer_ip = config['streamer']['ip']
     streamer_port = config['streamer']['port']
 
-    output = Streamer(ip='192.168.1.108', port=5000)
+    output = Streamer(ip=streamer_ip, port=streamer_port)
     camera = Camera()
 
-    ep = EngineProcessor('/home/andrii/Gus2/networks/yolo_asparagus/model.engine')
+    ep = EngineProcessor(yolo_weights_path)
     prp = PreProcessor()
-    pop = PostProcessor(iou_threshold=0.8, class_threshold=0.85,
-                        input_height=480, input_width=640, img_height=480, img_width=640,
-                        num_masks=32)
-    asparagusProcessor = AsparagusProcessor(topk=0.15, botk=0.09, camera=camera, n_skeletons=15, ignore_distance=400)
-    pather = Pather(min_lenght=0, min_dist=0, max_distance=1000000)
+    pop = PostProcessor(iou_threshold=yolo_iou_threshold, class_threshold=yolo_class_threshold,
+                        input_height=yolo_input_height, input_width=yolo_input_width, img_height=yolo_img_height,
+                        img_width=yolo_img_width,num_masks=yolo_num_masks)
+    asparagusProcessor = AsparagusProcessor(topk=asparagus_topk, botk=asparagus_botk, camera=camera,
+                                            n_skeletons=asparagus_n_skeletons, ignore_distance=working_area_ignore_distance)
+    pather = Pather(min_lenght=asparagus_min_lenght, min_distance_w_no_angle_correction=min_distance_w_no_angle_correction,
+                    max_reachable_distance=max_reachable_distance)
     viz = Vizualizer()
     coms = Communicator(nav_required=False, arm_required=True)
     coms.initComs()

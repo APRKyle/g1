@@ -5,11 +5,11 @@ import numpy as np
 #
 #
 class Pather:
-    def __init__(self, min_lenght, min_dist, max_distance):
+    def __init__(self, min_lenght, min_distance_w_no_angle_correction, max_reachable_distance):
 
         self.min_length = min_lenght
-        self.min_dist = min_dist
-        self.max_distance = max_distance
+        self.min_distance_w_no_angle_correction = min_distance_w_no_angle_correction
+        self.max_reachable_distance = max_reachable_distance
         # top camera
 
 
@@ -66,7 +66,7 @@ class Pather:
             distance = np.linalg.norm(botArm)
 
 
-            if distance < self.min_dist:
+            if distance < self.min_distance_w_no_angle_correction:
                 if botArm[0] < 10:
                     efficient_spear2d = efficient_spear2d
                     efficient_spear3d = botArm
@@ -75,9 +75,53 @@ class Pather:
         return stop_signal, efficient_spear2d, efficient_spear3d
 
 
+    #function
+    #return dict{spear : approach flag}
 
+    def _filter_height_distance(self, spears):
 
+        #flag_description
+        # [length, min, max]
+        # length:
+        #   0 - low on length
+        #   1 - good on length
+        # min:
+        #   0 - far from robot
+        #   1 - close to robot
+        # max:
+        #   0 - closer then max dist
+        #   1 - further then reach
 
+        data = {}
+        for spear in spears:
+            data[spear] = [0,0,0]
+            #-------------spear length check-------------
+            if spear.lenght >= self.min_length:
+                data[spear][0] = 1
+            else:
+                data[spear][0] = 0
+            #--------------------------------------------
+
+            #       bot arm transformation and distance check
+            botArm, distance2Bot, cameraAcessabilityFlag = self._calculateBotArmDistance(spear)
+
+            # -------------far away spear limits-------------
+            if distance2Bot > self.max_reachable_distance:
+                data[spear][2] = 1
+            else:
+                data[spear][2] = 0
+
+            # -------------far away spear limits-------------
+            #  -----close spears should be angled flag-------
+            if distance2Bot < self.min_distance_w_no_angle_correction:
+                spear.arm_bot_3d = botArm
+                data[spear][1] = 1
+            else:
+            #  -----perfect match spear-------
+                spear.arm_bot_3d = botArm
+                data[spear][1] = 0
+
+        return data
 
 
     def _calculateBotArmDistance(self, spear):
@@ -109,12 +153,12 @@ class Pather:
                 robotAcessabilityFlag = 0
                 return botArm, distance2Bot,  robotAcessabilityFlag
 
-            if distance2Bot > self.max_distance:
+            if distance2Bot > self.max_reachable_distance:
 
                 robotAcessabilityFlag = 0
                 return botArm, distance2Bot, robotAcessabilityFlag
 
-            if distance2Bot < self.min_dist:
+            if distance2Bot < self.min_distance_w_no_angle_correction:
 
                 robotAcessabilityFlag = 2
                 return botArm, distance2Bot, robotAcessabilityFlag
@@ -198,7 +242,7 @@ class Pather:
                     lowestidx = idx
 
             ans, distance = calculateHorizontalDistance2All(data, lowestidx)
-            if data[lowestidx][2] < self.min_dist:
+            if data[lowestidx][2] < self.min_distance_w_no_angle_correction:
                 print('spear is close to robot')
                 if distance < 0:
                     angle = 90
@@ -212,8 +256,6 @@ class Pather:
                 else:
                     print('distance between spears is more then zero (closest spear is on the right)')
                     angle = -60
-
-
 
 
             return data[lowestidx][1], data[lowestidx][2], angle, True

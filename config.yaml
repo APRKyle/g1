@@ -13,8 +13,8 @@ yolo:
 
 working_area:
   ignore_distance: 400
-  min_dist: 0
-  max_distance: 1000000
+  min_distance_w_no_angle_correction: 0
+  max_reachable_distance: 1000000
 
 asparagus:
   topk: 0.15
