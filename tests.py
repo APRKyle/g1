@@ -31,7 +31,7 @@ try:
 
             image = viz.process_tests(image, data1)
 
-        output.Render(image, data)
+        output.renderImage(image)
 
 except Exception as e:
     traceback.print_exc()
