@@ -128,7 +128,7 @@ class Pather:
         #transformed bot point into robot frame and calculate distance to it
 
         botArm = None
-        distanceToBot = None
+        distanceToBot = np.inf
         cameraAcessabilityFlag = False
         if np.all(spear.bot_3d == 0):
             return botArm, distanceToBot, cameraAcessabilityFlag
