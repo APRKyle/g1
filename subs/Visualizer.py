@@ -40,18 +40,18 @@ class Vizualizer:
         # max:
         #   0 - closer then max dist
         #   1 - further then reach
-        description = {
-                        [0,0,0]: 'LEN <  MIN_LEN \n PP > MIN_DIST_TRUCK \n PP < MAX_DIST_ARM\n',
-                        [0,0,1]: 'LEN <  MIN_LEN \n PP > MIN_DIST_TRUCK \n PP > MAX_DIST_ARM\n',
-                        [0,1,0]: 'LEN <  MIN_LEN \n PP < MIN_DIST_TRUCK \n PP < MAX_DIST_ARM\n',
-                        [1,0,0]: 'LEN >= MIN_LEN \n PP > MIN_DIST_TRUCK \n PP < MAX_DIST_ARM\n',
-                        [1,0,1]: 'LEN >= MIN_LEN \n PP > MIN_DIST_TRUCK \n PP > MAX_DIST_ARM\n',
-                        [1,1,0]: 'LEN >= MIN_LEN \n PP < MIN_DIST_TRUCK \n PP < MAX_DIST_ARM\n',
-                        [0,1,1]: 'LEN <  MIN_LEN \n PP > MIN_DIST_TRUCK \n PP > MAX_DIST_ARM\n',
-                        [1,1,1]: 'LEN >= MIN_LEN \n PP > MIN_DIST_TRUCK \n PP > MAX_DIST_ARM\n'
-        }
+        def description(a):
+            if   a == [0,0,0]: return 'LEN <  MIN_LEN \n PP > MIN_DIST_TRUCK \n PP < MAX_DIST_ARM\n'
+            elif a == [0,0,1]: return 'LEN <  MIN_LEN \n PP > MIN_DIST_TRUCK \n PP > MAX_DIST_ARM\n'
+            elif a == [0,1,0]: return 'LEN <  MIN_LEN \n PP < MIN_DIST_TRUCK \n PP < MAX_DIST_ARM\n'
+            elif a == [1,0,0]: return 'LEN >= MIN_LEN \n PP > MIN_DIST_TRUCK \n PP < MAX_DIST_ARM\n'
+            elif a == [1,0,1]: return 'LEN >= MIN_LEN \n PP > MIN_DIST_TRUCK \n PP > MAX_DIST_ARM\n'
+            elif a == [1,1,0]: return 'LEN >= MIN_LEN \n PP < MIN_DIST_TRUCK \n PP < MAX_DIST_ARM\n'
+            elif a == [0,1,1]: return 'LEN <  MIN_LEN \n PP > MIN_DIST_TRUCK \n PP > MAX_DIST_ARM\n'
+            elif a == [1,1,1]: return 'LEN >= MIN_LEN \n PP > MIN_DIST_TRUCK \n PP > MAX_DIST_ARM\n'
+
         for spear, flags in data.items():
-            text = description[flags]
+            text = description(flags)
             text += f'len: {spear.lenght} \n distance2rob: {np.linalg.norm(spear.arm_bot_3d)}'
             midpoint = spear.skeleton[len(spear.skeleton) // 2]
 
