@@ -40,7 +40,7 @@ def assemble(config_path = 'config.yaml'):
     streamer_ip = config['streamer']['ip']
     streamer_port = config['streamer']['port']
 
-    output = Streamer(ip='192.168.1.108', port=5000)
+    #output = Streamer(ip='192.168.1.108', port=5000)
     camera = Camera()
 
     ep = EngineProcessor('/home/andrii/Gus2/networks/yolo_asparagus/model.engine')
