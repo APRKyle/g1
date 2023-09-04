@@ -15,7 +15,7 @@ import yaml
 
 
 def assemble(config_path = 'config.yaml'):
-    with open('config.yaml', 'r') as config_file:
+    with open(config_path, 'r') as config_file:
         config = yaml.safe_load(config_file)
 
 
