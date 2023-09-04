@@ -65,9 +65,9 @@ class Vizualizer:
 
             position = (x, y)
             font = cv2.FONT_HERSHEY_SIMPLEX
-            font_scale = 1
+            font_scale = 0.3
             font_color = (255, 255, 255)
-            font_thickness = 2
+            font_thickness = 0.8
             cv2.putText(image, text, position, font, font_scale, font_color, font_thickness)
 
         return image
