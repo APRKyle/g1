@@ -26,10 +26,10 @@ try:
 
 
 
+            print(data1)
 
 
-            if len(spears) != 0:
-                image = viz.process_test(image, data1)
+            image = viz.process_test(image, data1)
 
         output.Render(image, data)
 
