@@ -104,6 +104,8 @@ class Pather:
 
             #       bot arm transformation and distance check
             botArm, distance2Bot, cameraAcessabilityFlag = self._calculateBotArmDistance(spear)
+            if distance2Bot:
+                return data
 
             # -------------far away spear limits-------------
             if distance2Bot > self.max_reachable_distance:
@@ -128,7 +130,7 @@ class Pather:
         #transformed bot point into robot frame and calculate distance to it
 
         botArm = None
-        distanceToBot = np.inf
+        distanceToBot = None
         cameraAcessabilityFlag = False
         if np.all(spear.bot_3d == 0):
             return botArm, distanceToBot, cameraAcessabilityFlag
