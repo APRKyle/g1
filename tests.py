@@ -48,6 +48,7 @@ try:
 
 
 
+
             if len(spears) != 0:
                 image = viz.process(image, spears)
 
