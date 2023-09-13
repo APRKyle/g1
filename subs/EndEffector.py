@@ -1,6 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 
 class EndEffector:
     def __init__(self, start_pos,dimensions, blade_off,  danger_zone_offsets, approach_y_distance):
@@ -255,6 +253,9 @@ class EndEffector:
 
 
 if __name__ == '__main__':
+    import matplotlib.pyplot as plt
+    from mpl_toolkits.mplot3d import Axes3D
+
     x_start = -30
     y_start = -30
     z_start = 1
