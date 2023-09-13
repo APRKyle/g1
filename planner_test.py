@@ -29,8 +29,6 @@ try:
             print(data)
 
 
-
-
             #image = viz.process_tests(image, data1)
 
         output.renderImage(image)
