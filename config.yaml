@@ -1,3 +1,8 @@
+
+mission:
+  arm_required : False
+  nav_required : False
+
 yolo:
   weights_path: '/home/andrii/Gus2/networks/yolo_asparagus/model.engine'
   iou_threshold: 0.8

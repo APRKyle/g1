@@ -66,6 +66,11 @@ def assemble(config_path = 'config.yaml'):
     max_angle = brute_planner['max_angle']
     resolution = brute_planner['resolution']
 
+    mission = config['mission']
+
+    arm_required = mission['arm_required']
+    nav_required = mission['nav_required']
+
 
     output = Streamer(ip=streamer_ip, port=streamer_port)
     camera = Camera()
@@ -80,7 +85,8 @@ def assemble(config_path = 'config.yaml'):
     pather = Pather(min_lenght=asparagus_min_lenght, min_distance_w_no_angle_correction=min_distance_w_no_angle_correction,
                     max_reachable_distance=max_reachable_distance)
     viz = Vizualizer()
-    coms = Communicator(nav_required=False, arm_required=True)
+
+
 
     endEffector = EndEffector(start_pos =[x_start, y_start, z_start],
                               dimensions = [x_dim, y_dim, z_dim],
@@ -90,8 +96,11 @@ def assemble(config_path = 'config.yaml'):
 
 
     planner = BrutePlanner(end_effector = endEffector, min_angle = min_angle, max_angle = max_angle, resolution = resolution)
-
-    coms.initComs()
+    if arm_required or nav_required:
+        coms = Communicator(nav_required=nav_required, arm_required=arm_required)
+        coms.initComs()
+    else:
+        coms = None
     ep.initalize()
     camera.initCamera()
     output.initStreamer()
