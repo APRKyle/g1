@@ -3,11 +3,15 @@ from subs.Factory import assemble
 import time
 import traceback
 
-ep, prp, pop, asparagusProcessor, pather, viz, coms, camera, output, endEffector, planner = assemble(config_path ='config.yaml')
-print('CLASSES LOADED')
+
+
+
 
 
 try:
+    ep, prp, pop, asparagusProcessor, pather, viz, coms, camera, output, endEffector, planner = assemble(
+        config_path='config.yaml')
+    print('CLASSES LOADED')
     while True:
 
 
@@ -32,6 +36,7 @@ try:
         output.renderImage(image)
 
 except Exception as e:
+    print(e)
     traceback.print_exc()
     ep.deinitialize()
 finally:
