@@ -4,7 +4,7 @@ import numpy as np
 
 class BrutePlanner:
     def __init__(self, end_effector, min_angle = -90, max_angle = 90, resolution = 5):
-        self.ef = ef
+        self.ef = end_effector
         self.min_angle = min_angle
         self.max_angle = max_angle
         self.resolution = resolution
