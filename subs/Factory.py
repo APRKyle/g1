@@ -8,6 +8,8 @@ from subs.AsparagusProcessor import AsparagusProcessor
 from subs.Pather import Pather
 from subs.Visualizer import Vizualizer
 from subs.Communicator import Communicator
+from subs.EndEffector import EndEffector
+from subs.PathPlanning import BrutePlanner
 
 
 import yaml
@@ -40,6 +42,31 @@ def assemble(config_path = 'config.yaml'):
     streamer_ip = config['streamer']['ip']
     streamer_port = config['streamer']['port']
 
+    end_effector = config['end_effector']
+    x_start = end_effector['x_start']
+    y_start = end_effector['y_start']
+    z_start = end_effector['z_start']
+
+    x_dim = end_effector['x_dim']
+    y_dim = end_effector['y_dim']
+    z_dim = end_effector['z_dim']
+
+    blade_x_off = end_effector['blade_x_off']
+    blade_y_off = end_effector['blade_y_off']
+    blade_z_off = end_effector['blade_z_off']
+
+    danger_zone_x = end_effector['danger_zone_x']
+    danger_zone_y = end_effector['danger_zone_y']
+    danger_zone_z = end_effector['danger_zone_z']
+
+    approach_distance = end_effector['approach_distance']
+
+    brute_planner = config['brute_planner']
+    min_angle = brute_planner['min_angle']
+    max_angle = brute_planner['max_angle']
+    resolution = brute_planner['resolution']
+
+
     output = Streamer(ip=streamer_ip, port=streamer_port)
     camera = Camera()
 
@@ -54,13 +81,23 @@ def assemble(config_path = 'config.yaml'):
                     max_reachable_distance=max_reachable_distance)
     viz = Vizualizer()
     coms = Communicator(nav_required=False, arm_required=True)
+
+    endEffector = EndEffector(start_pos =[x_start, y_start, z_start],
+                              dimensions = [x_dim, y_dim, z_dim],
+                              blade_off = [blade_x_off, blade_y_off, blade_z_off],
+                              danger_zone_offsets = [danger_zone_x, danger_zone_y, danger_zone_z],
+                              approach_y_distance = approach_distance)
+
+
+    planner = BrutePlanner(end_effector = endEffector, min_angle = min_angle, max_angle = max_angle, resolution = resolution)
+
     coms.initComs()
     ep.initalize()
     camera.initCamera()
     output.initStreamer()
 
 
-    return ep, prp, pop, asparagusProcessor, pather, viz, coms, camera, output
+    return ep, prp, pop, asparagusProcessor, pather, viz, coms, camera, output, endEffector, planner
 
 
 

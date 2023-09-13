@@ -1,6 +1,3 @@
-# Example YAML Configuration File for a Web Server
-
-# Server Configuration
 yolo:
   weights_path: '/home/andrii/Gus2/networks/yolo_asparagus/model.engine'
   iou_threshold: 0.8
@@ -26,5 +23,32 @@ asparagus:
 streamer:
   ip: 192.168.1.108
   port: 5000
+
+
+end_effector:
+  x_start: -30
+  y_start: -30
+  z_start: 1
+
+  x_dim: 15
+  y_dim: 15
+  z_dim: 15
+
+  blade_x_off: 7.5
+  blade_y_off: 3
+  blade_z_off: 1
+
+  danger_zone_x: 3
+  danger_zone_y: 3
+  danger_zone_z: 0
+
+  approach_distance: 20
+
+brute_planner:
+  min_angle : -45
+  max_angle : 45
+  resolution : 5
+
+
 
 

@@ -47,12 +47,48 @@ class Spear:
                    skeleton = data['skeleton'], skeleton_3d = data['skeleton3d'], pitch=data['pitch'], roll = data['roll'], yaw = data['yaw'])
 
 
+    def plot(self, ax, marker_color = 'g', line_color = 'k'):
+        ax.scatter(self.bot_3d[0], self.bot_3d[1], self.bot_3d[2], color = marker_color, marker = 'o')
+        ax.scatter(self.top_3d[0], self.top_3d[1], self.top_3d[2], color=marker_color, marker='o')
+        ax.scatter(self.skeleton_3d[:, 0], self.skeleton_3d[:, 1], self.skeleton_3d[:, 2], color=marker_color,marker='o')
+        ax.plot(self.bot_3d[0], self.bot_3d[1], self.bot_3d[2], color = line_color)
+        ax.plot(self.top_3d[0], self.top_3d[1], self.top_3d[2], color = line_color)
+        ax.plot(self.skeleton_3d[:, 0], self.skeleton_3d[:, 1], self.skeleton_3d[:, 2], color = line_color)
+
+
 
     def __str__(self):
         return f'{"-"*60} \nSPEAR: \n ' \
                f'Bot 3D: {self.bot_3d}\t Bot 2D: {self.bot_point} \n' \
                f'Top 3D: {self.top_3d}\t Top 2D: {self.top_point} \n' \
                f'Lenght   :{self.lenght}\n'
+
+
+
+
+class SpearsBed:
+    def __init__(self, spears):
+        self.spears = spears
+        self.index = 0
+
+    def __getitem__(self, idx):
+        return self.spears[idx]
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.index < len(self.spears):
+            result = self.spears[self.index]
+            self.index += 1
+            return result
+        else:
+            self.index = 0
+            raise StopIteration
+
+    def __len__(self):
+        return len(self.spears)
+
 
 
 
