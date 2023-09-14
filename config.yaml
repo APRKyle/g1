@@ -26,28 +26,28 @@ asparagus:
 
 
 streamer:
-  ip: 192.168.1.232
+  ip: 192.168.1.108
   port: 5000
 
 
 end_effector:
-  x_start: -30
-  y_start: -30
-  z_start: 1
+  x_start: 0
+  y_start: 0
+  z_start: 0
 
-  x_dim: 15
-  y_dim: 15
-  z_dim: 15
+  x_dim: 100
+  y_dim: 150
+  z_dim: 110
 
-  blade_x_off: 7.5
-  blade_y_off: 3
-  blade_z_off: 1
+  blade_x_off: 50
+  blade_y_off: 75
+  blade_z_off: 10
 
-  danger_zone_x: 3
-  danger_zone_y: 3
+  danger_zone_x: 30
+  danger_zone_y: 30
   danger_zone_z: 0
 
-  approach_distance: 20
+  approach_distance: 100
 
 brute_planner:
   min_angle : -45
