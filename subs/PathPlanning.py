@@ -11,7 +11,7 @@ class BrutePlanner:
         self.n_steps = np.ceil((max_angle - min_angle) / resolution).astype(int)
 
     def _sort_spears(self, spears):
-        sorting_key = lambda x: np.linalg.norm(x.bot_3d - self.ef.blade)
+        sorting_key = lambda x: np.linalg.norm(x.arm_bot_3d - self.ef.blade)
         data = sorted(spears.spears, key=sorting_key)
         return data
 
@@ -20,7 +20,7 @@ class BrutePlanner:
         ideal_angle = 0
 
         for spear_idx, spear_target in enumerate(data):
-            target = spear_target.bot_3d
+            target = spear_target.arm_bot_3d
             self.ef.goto(target, self.min_angle, 'pre')
             b_idx = spear_idx
 
@@ -37,7 +37,7 @@ class BrutePlanner:
                         if idx == b_idx:
                             continue
                         else:
-                            collisions[idx] = self.ef.check_colision(spear.bot_3d)
+                            collisions[idx] = self.ef.check_colision(spear.arm_bot_3d)
 
                     if any(collisions):
                         break

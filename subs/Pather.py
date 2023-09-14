@@ -26,7 +26,10 @@ class Pather:
 
 
 
-
+    def _calc_rob_pickofs(self, spears):
+        for spear in spears:
+            spear.arm_bot_3d = self._transformIntoRobot(spear.bot_3d)
+        return True
 
     def _transformIntoRobot(self, coord):
 
