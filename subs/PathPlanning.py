@@ -24,7 +24,8 @@ class BrutePlanner:
             self.ef.goto(target, self.min_angle, 'pre')
             b_idx = spear_idx
 
-            for _ in range(self.n_steps):
+            for step in range(self.n_steps):
+                print(f'step: {step}')
                 success = False
                 collisions = [False for i in range(len(data))]
                 self.ef.goto(target, self.resolution, 'pre')
