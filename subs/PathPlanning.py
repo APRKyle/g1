@@ -8,7 +8,15 @@ class BrutePlanner:
         self.min_angle = min_angle
         self.max_angle = max_angle
         self.resolution = resolution
-        self.n_steps = np.ceil((max_angle - min_angle) / resolution).astype(int)
+
+        start = np.mean([min_angle, max_angle]).astype(int)
+        self.degrees = np.array([start], dtype=float)
+        n = (max_angle - min_angle) // resolution
+        step = resolution
+        for i in range(n // 2):
+            a = np.array([start - step, start + step], dtype=float)
+            self.degrees = np.concatenate((self.degrees, a))
+            step += resolution
 
     def _sort_spears(self, spears):
         sorting_key = lambda x: np.linalg.norm(x.arm_bot_3d - self.ef.blade)
@@ -16,46 +24,33 @@ class BrutePlanner:
         return data
 
     def process(self, data):
-        success = False
-        ideal_angle = 0
+        data = [np.array([d.arm_bot_3d[0], d.arm_bot_3d[2], d.arm_bot_3d[1]] for d in data)] #swaping axis
+        ideal_angle = None
+        for spear_idx, target in enumerate(data):
 
-        for spear_idx, spear_target in enumerate(data):
-            target = spear_target.arm_bot_3d
-            self.ef.goto(target, self.min_angle, 'pre')
-            b_idx = spear_idx
 
-            for step in range(self.n_steps):
-                print(f'step: {step}')
-                success = False
-                collisions = [False for i in range(len(data))]
-                self.ef.goto(target, self.resolution, 'pre')
+            for idx_a, degree in enumerate(self.degrees):
+                self.ef.goto(target, degree, 'pre')
                 cut_points = np.linspace(self.ef.approach_line[0], self.ef.approach_line[-1])
 
+                success = False
                 for p in cut_points:
-                    self.ef.goto(p, pivot_point='blade')
+                    self.ef.goto(p, angle=degree, pivot_point='blade')
 
-                    for idx, spear in enumerate(data):
-                        if idx == b_idx:
-                            continue
-                        else:
-                            collisions[idx] = self.ef.check_colision(spear.arm_bot_3d)
+                    outside_idxs = self.ef.inside_test(data)
 
-                    if any(collisions):
+                    if len(outside_idxs) - 1 != 0:
+                        success = False
+
                         break
                     else:
-                        pass
-                if not any(collisions):
-                    success = True
-                    ideal_angle = self.ef.angle
-                    best_idx = spear_idx
-                    break
-                else:
-                    ideal_angle = None
-        if success:
-            return ideal_angle, target, best_idx
+                        success = True
+                        ideal_angle = self.ef.angle
+                        continue
+                if success:
+                    return ideal_angle, target, spear_idx
 
-        else:
-            return None, None, None
+
 
 
 if __name__ == '__main__':
