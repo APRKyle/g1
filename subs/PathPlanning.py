@@ -48,6 +48,7 @@ class BrutePlanner:
                     self.ef.goto(p, angle=degree, pivot_point='blade')
 
                     outside_idxs = self.ef.inside_test(data)
+                    print(data)
                     print(f'outside_idx: {outside_idxs}')
                     print(f'len: {len(outside_idxs)}')
 
