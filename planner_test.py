@@ -31,9 +31,10 @@ try:
             spears = pather.filterHD(spears)  # height filter max reach filter
 
             a, target, sid = planner.process(spears)
-            print('Angle - Target')
-            print(f'{a} - {target}')
-            print(spears)
+
+            if a:
+                coms._sendCoordsAngle(target, a)
+                print(f'SENT: {target}    {a}')
             # for s in spears:
             #     print(s.arm_bot_3d)
             #image = viz.process(image, spears)
