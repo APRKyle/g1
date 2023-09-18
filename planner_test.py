@@ -38,7 +38,7 @@ try:
             image = viz.process_tests(image, data)
 
         #output.renderImage(image)
-        output.render(image)
+        output.Render(image)
 
 except Exception as e:
     print(e)
