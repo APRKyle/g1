@@ -40,7 +40,7 @@ end_effector:
   z_dim: 110
 
   blade_x_off: 50
-  blade_y_off: 75
+  blade_y_off: 10
   blade_z_off: 10
 
   danger_zone_x: 30
@@ -49,9 +49,11 @@ end_effector:
 
   approach_distance: 100
 
+
+
 brute_planner:
-  min_angle : -45
-  max_angle : 45
+  min_angle : -90
+  max_angle : 90
   resolution : 5
 
 
