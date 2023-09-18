@@ -55,8 +55,7 @@ class BrutePlanner:
                     else:
                         success = True
                         ideal_angle = self.ef.angle
-                        #real_target = np.array([target[0], target[2], target[1]])
-                        real_target = target
+                        real_target = np.array([target[0], target[2], target[1]])
                         b_idx = spear_idx
                         continue
 
