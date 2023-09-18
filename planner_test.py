@@ -35,7 +35,7 @@ try:
             print(f'{a} - {target}')
             # for s in spears:
             #     print(s.arm_bot_3d)
-            image = viz.process_tests(image, data)
+            image = viz.process(image, data)
 
         #output.renderImage(image)
         output.Render(image, data)
