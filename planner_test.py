@@ -36,7 +36,7 @@ try:
             print(spears)
             # for s in spears:
             #     print(s.arm_bot_3d)
-            image = viz.process(image, spears)
+            #image = viz.process(image, spears)
 
         #output.renderImage(image)
         output.Render(image, data)
