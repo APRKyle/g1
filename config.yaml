@@ -36,11 +36,11 @@ end_effector:
   z_start: 0
 
   x_dim: 100
-  y_dim: 200
+  y_dim: 160
   z_dim: 200
 
   blade_x_off: 50
-  blade_y_off: 10
+  blade_y_off: 140
   blade_z_off: 10
 
   danger_zone_x: 30
