@@ -47,7 +47,7 @@ end_effector:
   danger_zone_y: 30
   danger_zone_z: 0
 
-  approach_distance: 40
+  approach_distance: 100
 
 
 
