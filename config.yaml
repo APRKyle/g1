@@ -28,6 +28,7 @@ asparagus:
 streamer:
   ip: 192.168.1.108
   port: 5000
+  enable: False
 
 
 end_effector:

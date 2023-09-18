@@ -41,6 +41,7 @@ def assemble(config_path = 'config.yaml'):
 
     streamer_ip = config['streamer']['ip']
     streamer_port = config['streamer']['port']
+    streamer_en = config['streamer']['enable']
 
     end_effector = config['end_effector']
     x_start = end_effector['x_start']
@@ -71,8 +72,11 @@ def assemble(config_path = 'config.yaml'):
     arm_required = mission['arm_required']
     nav_required = mission['nav_required']
 
-
-    output = Streamer(ip=streamer_ip, port=streamer_port)
+    if streamer_en:
+        output = Streamer(ip=streamer_ip, port=streamer_port)
+        output.initStreamer()
+    else:
+        output = None
     camera = Camera()
 
     ep = EngineProcessor(yolo_weights_path)
@@ -96,7 +100,6 @@ def assemble(config_path = 'config.yaml'):
 
 
     planner = BrutePlanner(end_effector = endEffector, min_angle = min_angle, max_angle = max_angle, resolution = resolution)
-    print(f'ARM REQUIRED: {arm_required}')
     if arm_required or nav_required:
         coms = Communicator(nav_required=nav_required, arm_required=arm_required)
         coms.initComs()
@@ -104,7 +107,7 @@ def assemble(config_path = 'config.yaml'):
         coms = None
     ep.initalize()
     camera.initCamera()
-    output.initStreamer()
+
 
 
     return ep, prp, pop, asparagusProcessor, pather, viz, coms, camera, output, endEffector, planner

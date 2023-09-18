@@ -40,7 +40,7 @@ try:
                 print(f'SENT: {target}    {a}')
                 time.sleep(5)
 
-        output.Render(image, data)
+        # output.Render(image, data)
 
 except Exception as e:
     print(e)
