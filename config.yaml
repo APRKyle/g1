@@ -37,7 +37,7 @@ end_effector:
 
   x_dim: 100
   y_dim: 160
-  z_dim: 200
+  z_dim: 100
 
   blade_x_off: 50
   blade_y_off: 140
@@ -47,7 +47,7 @@ end_effector:
   danger_zone_y: 30
   danger_zone_z: 0
 
-  approach_distance: 100
+  approach_distance: 40
 
 
 
