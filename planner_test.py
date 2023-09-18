@@ -30,6 +30,7 @@ try:
 
             #print(spears)
             a, target, sid = planner.process(spears)
+            print('Angle - Target')
             print(f'{a} - {target}')
             # for s in spears:
             #     print(s.arm_bot_3d)
