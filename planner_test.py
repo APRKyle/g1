@@ -36,7 +36,7 @@ try:
             print(f' COMS:  {coms.ARM_IS_READY}')
             print(f' TARGET: {target}')
             if a is not None and coms.ARM_IS_READY:
-                coms._sendCoordsAngle(target, a)
+                coms._sendCoordsAngle(target, a*-1)
                 print(f'SENT: {target}    {a}')
                 time.sleep(5)
 
