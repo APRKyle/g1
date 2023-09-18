@@ -32,7 +32,7 @@ class BrutePlanner:
         b_idx = None
         success = False
         for spear_idx, spear_target in enumerate(data):
-            target = spear_target.arm_bot_3d_2
+            target = spear_target
 
             if success:
                 break
