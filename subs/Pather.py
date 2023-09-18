@@ -29,7 +29,7 @@ class Pather:
     def _calc_rob_pickofs(self, spears):
         for spear in spears:
             spear.arm_bot_3d = self._transformIntoRobot(spear.bot_3d)
-            spear.arm_bot_3d_2 = np.array([spear.arm_bot_3d[1][0], spear.arm_bot_3d[1][2], spear.arm_bot_3d[1][1]])
+            spear.arm_bot_3d_2 = np.array([spear.arm_bot_3d[0], spear.arm_bot_3d[2], spear.arm_bot_3d[1]])
         return True
 
     def _transformIntoRobot(self, coord):
