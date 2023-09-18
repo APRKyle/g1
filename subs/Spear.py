@@ -17,6 +17,7 @@ class Spear:
         self.pitch = pitch
         self.yaw = yaw
         self.arm_bot_3d = None
+        self.arm_bot_3d_2 = None
 
 
 

@@ -52,9 +52,16 @@ class EndEffector:
                 [0, 0, 1]
             ])
 
+    import numpy as np
 
     def inside_test(self, points):
+        print(points)
+        """
+        cube3d  =  numpy array of the shape (8,3) with coordinates in the clockwise order. First, the bottom plane is considered, then the top one.
+        points = array of points with shape (N, 3).
 
+        Returns the indices of the points array which are outside the cube3d
+        """
         b1, b2, b3, b4, t1, t2, t3, t4 = self.vertices
 
         dir1 = (t1 - b1)
@@ -85,6 +92,16 @@ class EndEffector:
 
         return outside_indices
 
+
+
+
+    def check_colision(self, point):
+        r = self.inside_test(point)
+        print(r)
+        if len(r) == 0:
+            return True, point
+        else:
+            return False, point
 
 
 

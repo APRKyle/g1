@@ -19,38 +19,48 @@ class BrutePlanner:
             step += resolution
 
     def _sort_spears(self, spears):
-        sorting_key = lambda x: np.linalg.norm(x.arm_bot_3d - self.ef.blade)
-        data = sorted(spears.spears, key=sorting_key)
+        sorting_key = lambda x: np.linalg.norm(x.arm_bot_3d_2 - self.ef.blade)
+        data = sorted(spears, key=sorting_key)
         return data
 
     def process(self, data):
-        data = [np.array([d.arm_bot_3d[0], d.arm_bot_3d[2], d.arm_bot_3d[1]] for d in data)] #swaping axis
-        ideal_angle = None
-        for spear_idx, target in enumerate(data):
+        data = self._sort_spears(data)
+        data = [i.arm_bot_3d_2 for i in data]
 
+        ideal_angle = None
+        real_target = None
+        b_idx = None
+        success = False
+        for spear_idx, spear_target in enumerate(data):
+            target = spear_target
+
+            if success:
+                break
 
             for idx_a, degree in enumerate(self.degrees):
                 self.ef.goto(target, degree, 'pre')
                 cut_points = np.linspace(self.ef.approach_line[0], self.ef.approach_line[-1])
+                if success:
+                    break
 
-                success = False
                 for p in cut_points:
                     self.ef.goto(p, angle=degree, pivot_point='blade')
 
                     outside_idxs = self.ef.inside_test(data)
 
+
                     if len(outside_idxs) - 1 != 0:
                         success = False
-
                         break
                     else:
                         success = True
                         ideal_angle = self.ef.angle
+                        #real_target = np.array([target[0], target[2], target[1]])
+                        real_target = target
+                        b_idx = spear_idx
                         continue
-                if success:
-                    return ideal_angle, target, spear_idx
 
-
+        return ideal_angle, real_target, b_idx
 
 
 if __name__ == '__main__':
