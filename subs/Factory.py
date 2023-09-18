@@ -96,6 +96,7 @@ def assemble(config_path = 'config.yaml'):
 
 
     planner = BrutePlanner(end_effector = endEffector, min_angle = min_angle, max_angle = max_angle, resolution = resolution)
+    print(f'ARM REQUIRED: {arm_required}')
     if arm_required or nav_required:
         coms = Communicator(nav_required=nav_required, arm_required=arm_required)
         coms.initComs()
