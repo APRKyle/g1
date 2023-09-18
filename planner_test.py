@@ -27,8 +27,9 @@ try:
 
             spears, data = asparagusProcessor.process(boxes, masks) #filtered on camera reach and camera distance
             _ = pather._calc_rob_pickofs(spears)
-            a, target, sid = planner.process(spears)
             print(data)
+            a, target, sid = planner.process(spears)
+
             print(a)
             print(target)
             # for s in spears:
