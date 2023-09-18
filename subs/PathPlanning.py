@@ -28,7 +28,7 @@ class BrutePlanner:
         data = [i.arm_bot_3d_2 for i in data]
         print(f'data: {data}')
         if len(data) == 1:
-            return 0, data[0], 0
+            return 0, np.array(data[0][0], data[0][2], data[0][1]), 0
         ideal_angle = None
         real_target = None
         b_idx = None
