@@ -38,7 +38,7 @@ try:
             if a and coms.ARM_IS_READY:
                 coms._sendCoordsAngle(target, a)
                 print(f'SENT: {target}    {a}')
-                time.sleep(2)
+                time.sleep(5)
 
         output.Render(image, data)
 
