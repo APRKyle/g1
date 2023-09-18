@@ -1,6 +1,6 @@
 
 mission:
-  arm_required : False
+  arm_required : True
   nav_required : False
 
 yolo:
