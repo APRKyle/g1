@@ -130,6 +130,7 @@ class Pather:
         return data
 
     def filterHD(self, spears):
+        self._calc_rob_pickofs(spears)
         data = []
         for spear in spears:
             if spear.lenght < self.min_length:

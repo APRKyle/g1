@@ -16,6 +16,7 @@ try:
 
 
         data = {}
+        coms._readSignalFromArm()
         camera.getData()
         image = camera.image
         image_data = prp.process(image)
@@ -31,15 +32,12 @@ try:
             spears = pather.filterHD(spears)  # height filter max reach filter
 
             a, target, sid = planner.process(spears)
-
-            if a:
+            print(f' ANGLE: {a}')
+            if a and coms.ARM_IS_READY:
                 coms._sendCoordsAngle(target, a)
                 print(f'SENT: {target}    {a}')
-            # for s in spears:
-            #     print(s.arm_bot_3d)
-            #image = viz.process(image, spears)
+                time.sleep(2)
 
-        #output.renderImage(image)
         output.Render(image, data)
 
 except Exception as e:
