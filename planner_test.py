@@ -27,11 +27,10 @@ try:
 
             spears, data = asparagusProcessor.process(boxes, masks) #filtered on camera reach and camera distance
             _ = pather._calc_rob_pickofs(spears)
-            for spear in spears:
-                print(f'{spear.arm_bot_3d} - {spear.arm_bot_3d_2}')
+
             #print(spears)
             a, target, sid = planner.process(spears)
-
+            print(f'{a} - {target}')
             # for s in spears:
             #     print(s.arm_bot_3d)
             #image = viz.process_tests(image, data1)

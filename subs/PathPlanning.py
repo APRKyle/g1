@@ -26,7 +26,7 @@ class BrutePlanner:
     def process(self, data):
         data = self._sort_spears(data)
         data = [i.arm_bot_3d_2 for i in data]
-        print(f'planner spears: {data}')
+
         ideal_angle = None
         real_target = None
         b_idx = None
@@ -47,7 +47,8 @@ class BrutePlanner:
                     self.ef.goto(p, angle=degree, pivot_point='blade')
 
                     outside_idxs = self.ef.inside_test(data)
-
+                    print(f'outside_idx: {outside_idxs}')
+                    print(f'len: {len(outside_idxs)}')
 
                     if len(outside_idxs) - 1 != 0:
                         success = False
