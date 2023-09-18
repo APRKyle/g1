@@ -26,7 +26,7 @@ class BrutePlanner:
     def process(self, data):
         data = self._sort_spears(data)
         data = [i.arm_bot_3d_2 for i in data]
-
+        print(data)
         ideal_angle = None
         real_target = None
         b_idx = None
