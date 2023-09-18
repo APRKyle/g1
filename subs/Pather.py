@@ -130,6 +130,12 @@ class Pather:
 
         return data
 
+    def height_filter(self, spears):
+        data = []
+        for spear in spears:
+            if spear.length >= self.min_length:
+                data.append(spear)
+        return data
 
     def _calculateBotArmDistance(self, spear):
         #transformed bot point into robot frame and calculate distance to it

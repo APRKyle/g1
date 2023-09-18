@@ -26,6 +26,7 @@ try:
 
 
             spears, data = asparagusProcessor.process(boxes, masks) #filtered on camera reach and camera distance
+            spears = pather.height_filter(spears)   # height filter
             _ = pather._calc_rob_pickofs(spears)
 
             #print(spears)
