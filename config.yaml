@@ -37,7 +37,7 @@ end_effector:
 
   x_dim: 100
   y_dim: 150
-  z_dim: 110
+  z_dim: 150
 
   blade_x_off: 50
   blade_y_off: 10
