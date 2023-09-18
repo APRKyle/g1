@@ -133,7 +133,7 @@ class Pather:
     def height_filter(self, spears):
         data = []
         for spear in spears:
-            if spear.length >= self.min_length:
+            if spear.lenght >= self.min_length:
                 data.append(spear)
         return data
 
