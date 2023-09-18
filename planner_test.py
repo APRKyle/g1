@@ -34,6 +34,7 @@ try:
             a, target, sid = planner.process(spears)
             print(f' ANGLE: {a}')
             print(f' COMS:  {coms.ARM_IS_READY}')
+            print(f' TARGET: {target}')
             if a and coms.ARM_IS_READY:
                 coms._sendCoordsAngle(target, a)
                 print(f'SENT: {target}    {a}')
