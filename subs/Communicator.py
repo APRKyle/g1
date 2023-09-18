@@ -40,7 +40,7 @@ class Communicator:
             self.ARM_IS_READY = False
     def _sendCoordsAngle(self, cords, angle):
         if cords is not None:
-            value = 'B' + str(int(cords[0])) + ' ' + str(int(cords[1])) + ' ' + str(int(cords[2])) + ' ' + str(angle) + '\r'
+            value = 'B' + str(int(cords[0])) + ' ' + str(int(cords[1])) + ' ' + str(int(cords[2])) + ' ' + str(int(angle)) + '\r'
             self.arduino.write(bytes(value, 'utf-8'))
             self.ARM_IS_READY = False
 
