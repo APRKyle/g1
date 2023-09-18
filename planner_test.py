@@ -30,7 +30,7 @@ try:
             print(spears)
             #print(spears)
             a, target, sid = planner.process(spears)
-
+            print(f'angle: {a}   - {target}')
             # for s in spears:
             #     print(s.arm_bot_3d)
             #image = viz.process_tests(image, data1)
