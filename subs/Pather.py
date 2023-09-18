@@ -79,8 +79,7 @@ class Pather:
         return stop_signal, efficient_spear2d, efficient_spear3d
 
 
-    #function
-    #return dict{spear : approach flag}
+
 
     def _filter_height_distance(self, spears):
 
@@ -130,12 +129,21 @@ class Pather:
 
         return data
 
-    def height_filter(self, spears):
+    def filterHD(self, spears):
         data = []
         for spear in spears:
-            if spear.lenght >= self.min_length:
-                data.append(spear)
+            if spear.lenght < self.min_length:
+                continue
+
+            d = np.linalg.norm(spear.arm_bot_3d)
+            if d > self.max_reachable_distance:
+                continue
+
+
+            data.append(spear)
         return data
+
+
 
     def _calculateBotArmDistance(self, spear):
         #transformed bot point into robot frame and calculate distance to it

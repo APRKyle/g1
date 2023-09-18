@@ -26,10 +26,10 @@ try:
 
 
             spears, data = asparagusProcessor.process(boxes, masks) #filtered on camera reach and camera distance
-            spears = pather.height_filter(spears)   # height filter
-            _ = pather._calc_rob_pickofs(spears)
 
-            #print(spears)
+            _ = pather._calc_rob_pickofs(spears)
+            spears = pather.filterHD(spears)  # height filter max reach filter
+
             a, target, sid = planner.process(spears)
             print('Angle - Target')
             print(f'{a} - {target}')
